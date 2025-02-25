@@ -1,11 +1,13 @@
 /* Paleta de Colores */
 :root {
     --azul-marino: #003366;
+    --azul-marino-claro: #004488;
     --amarillo-estrella: #FFA500;
     --amarillo-oscuro: #CC8400;
     --rojo-coral: #E74C3C;
     --rojo-oscuro: #C0392B;
     --gris-oscuro: #2C3E50;
+    --gris-oscuro-claro: #3d5266;
     --gris-claro: #F4F4F4;
     --blanco: #FFFFFF;
     --negro: #000000;

@@ -288,14 +288,32 @@
     padding: 0.5em 0.8em;
 }
 
+.btn.crear, .btn.admin {
+    color: var(--blanco);
+    height: 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
 .btn.crear {
     background-color: var(--azul-marino);
-    color: var(--blanco);
 }
 
 .btn.admin {
     background-color: var(--gris-oscuro);
-    color: var(--blanco);
+}
+
+.btn.crear i, .btn.admin i {
+    font-size: 14px;
+}
+
+.btn.crear:hover {
+    background-color: var(--azul-marino-claro);
+}
+
+.btn.admin:hover {
+    background-color: var(--gris-oscuro-claro);
 }
 
 .btn-group .btn {
