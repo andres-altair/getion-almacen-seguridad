@@ -23,10 +23,10 @@
             <div class="ms-auto">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="acceso.jsp">Iniciar Sesión</a>
+                        <a class="nav-link" href="acceso">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="registro.jsp">Registrarse</a>
+                        <a class="nav-link" href="registro">Registrarse</a>
                     </li>
                 </ul>
             </div>
