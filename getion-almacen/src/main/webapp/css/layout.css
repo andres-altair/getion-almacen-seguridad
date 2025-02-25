@@ -1,0 +1,23 @@
+/* Estructuras de página */
+
+/* Contenedor Principal */
+.container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    flex: 1;
+}
+
+/* Footer */
+footer {
+    background-color: var(--azul-marino);
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--blanco);
+}
