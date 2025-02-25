@@ -46,5 +46,20 @@ a {
     color: var(--blanco);
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    background-color: var(--amarillo-estrella);
+    color: var(--azul-marino);
+}
+
+/* Estilo específico para el botón de cerrar sesión */
+.cerrar-sesion {
+    transition: all 0.3s ease;
+}
+
+.cerrar-sesion:hover {
+    background-color: var(--amarillo-estrella);
+    color: var(--azul-marino);
 }

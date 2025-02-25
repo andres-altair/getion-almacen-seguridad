@@ -17,276 +17,92 @@
     <title>Panel de Operario</title>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Paleta de Colores */
-        :root {
-            --azul-marino: #003366;
-            --amarillo-estrella: #FFA500;
-            --amarillo-oscuro: #CC8400; /* Para mejorar contraste */
-            --rojo-coral: #E74C3C;
-            --rojo-oscuro: #C0392B;
-            --gris-oscuro: #2C3E50;
-            --gris-claro: #F4F4F4;
-            --blanco: #FFFFFF;
-            --negro: #000000;
-        }
-
-        /* Estilos Generales */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--gris-claro);
-            color: var(--gris-oscuro);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Barra de Navegación */
-        .navbar {
-            background-color: var(--azul-marino);
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            color: var(--blanco);
-            font-size: 24px;
-            text-decoration: none;
-        }
-
-        .navbar-nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--azul-marino); /* Texto azul marino */
-            text-decoration: none;
-            padding: 10px 15px;
-            background-color: var(--blanco); /* Fondo blanco */
-            border: 2px solid var(--blanco); /* Borde blanco */
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background-color: var(--azul-marino); /* Fondo azul marino al pasar el ratón */
-            color: var(--blanco); /* Texto blanco al pasar el ratón */
-        }
-
-       .welcome-text {
-            color: var(--negro); /* Texto negro */
-            font-size: 30px; /* Tamaño más grande */
-            margin-right: 20px;
-            margin-left: 20px;
-        }
-
-        .welcome-text .nombre-usuario {
-            color: var(--amarillo-oscuro); /* Color amarillo oscuro para el nombre */
-            font-weight: bold; /* Opcional: texto en negrita */
-        }
-
-        .logout-icon {
-            color: var(--blanco); /* Icono blanco */
-            font-size: 30px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .logout-icon:hover {
-            color: var(--amarillo-estrella); /* Icono amarillo al pasar el ratón */
-        }
-
-        .img-perfil {
-    width: 64px; /* Ajusta el tamaño según sea necesario */
-    height: 64px; /* Ajusta el tamaño según sea necesario */
-    object-fit: cover; /* Mantiene la proporción de la imagen */
-    border-radius: 50%; /* Asegura que la imagen sea redonda */
-}
-
-        /* Contenedor Principal */
-        .container {
-            margin: 20px auto;
-            width: 90%;
-            max-width: 1200px;
-            flex: 1; /* Para que el contenedor ocupe el espacio restante */
-        }
-
-        h2 {
-            color: var(--azul-marino);
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background-color: var(--blanco);
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .card-title {
-            color: var(--azul-marino);
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .card-text {
-            color: var(--gris-oscuro);
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: var(--azul-marino);
-            color: var(--blanco);
-        }
-
-        .btn-primary:hover {
-            background-color: #002244; /* Azul más oscuro */
-        }
-
-        .d-grid {
-            display: grid;
-            gap: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--azul-marino);
-            color: var(--blanco);
-            text-align: center;
-            padding: 15px 0;
-            margin-top: auto; /* Para que el footer se quede abajo */
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 100%;
-                padding: 10px;
-            }
-            .task-list {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .task-card {
-                margin: 5px 0;
-                padding: 15px;
-            }
-            .form-group {
-                margin-bottom: 15px;
-            }
-            input, select, button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            .navbar {
-                padding: 10px;
-            }
-            .navbar-nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .welcome-text {
-                font-size: 20px;
-                text-align: center;
-                margin: 10px 0;
-            }
-            .btn {
-                width: 100%;
-                margin: 5px 0;
-            }
-            .status-badge {
-                width: 100%;
-                text-align: center;
-                margin: 5px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .task-card {
-                padding: 10px;
-            }
-            .task-title {
-                font-size: 16px;
-            }
-            .task-description {
-                font-size: 14px;
-            }
-            .form-label {
-                font-size: 14px;
-            }
-            .welcome-text {
-                font-size: 18px;
-            }
-            .status-badge {
-                font-size: 12px;
-            }
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/layout.css">
 </head>
 <body>
     <!-- Barra de Navegación -->
-    <div class="navbar">
-        <img src="logo.png" alt="EnvioGo" height="40">
-        <a href="${pageContext.request.contextPath}/operario/..." class="nav-link">Registrar Recepción</a>
-        <a href="${pageContext.request.contextPath}/oprario/..." class="nav-link">Actulizar Estado</a>
-        <a href="${pageContext.request.contextPath}/oprario/..."  class="nav-link">Mantenimiento Almacén</a>
-        <a href="${pageContext.request.contextPath}/oprario/..." class="nav-link">Menú</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <i class="fas fa-sign-out-alt logout-icon" onclick="window.location.href='logout'"></i>
-            </li>
-        </ul>
-    </div>
-    <br><br>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid" height="40">
+        </div>
+        <span class="welcome-text">
+            Bienvenido, <span class="nombre-usuario">${usuarioNombre}</span>
+        </span>
+        <div class="navbar-nav">
+            <a href="../cerrar-sesion" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
+        </div>
+    </nav>
 
     <!-- Contenedor Principal -->
-    <div class="container">
-        <h1>Panel de control del operario</h1>
-        <br><br>
-        <li class="nav-item">
-           <img src="${usuarioFoto}" 
-     class="img-perfil" 
-     alt="Foto de perfil">
-            <span class="welcome-text">Bienvenido  <span class="nombre-usuario">${usuarioNombre}</span></span>
-        </li>
+    <div class="panel-container">
+        <!-- Sección de Estadísticas -->
+        <section class="panel-section">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-box panel-icon"></i>
+                    <h3>Productos en Stock</h3>
+                    <div class="value">150</div>
+                    <div class="label">unidades</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-truck panel-icon"></i>
+                    <h3>Envíos Pendientes</h3>
+                    <div class="value">25</div>
+                    <div class="label">pedidos</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tasks panel-icon"></i>
+                    <h3>Tareas Asignadas</h3>
+                    <div class="value">8</div>
+                    <div class="label">tareas</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Acciones -->
+        <section class="panel-section">
+            <div class="panel-grid">
+                <div class="panel-card">
+                    <i class="fas fa-clipboard-list panel-icon"></i>
+                    <h2>Gestión de Inventario</h2>
+                    <p>Administra el stock y ubicación de productos</p>
+                    <a href="inventario" class="panel-button">
+                        <i class="fas fa-boxes"></i>Ver Inventario
+                    </a>
+                </div>
+                <div class="panel-card">
+                    <i class="fas fa-shipping-fast panel-icon"></i>
+                    <h2>Gestión de Envíos</h2>
+                    <p>Controla los envíos y recepciones</p>
+                    <a href="envios" class="panel-button">
+                        <i class="fas fa-truck-loading"></i>Gestionar Envíos
+                    </a>
+                </div>
+                <div class="panel-card">
+                    <i class="fas fa-tasks panel-icon"></i>
+                    <h2>Tareas Pendientes</h2>
+                    <p>Visualiza y gestiona tus tareas asignadas</p>
+                    <a href="tareas" class="panel-button">
+                        <i class="fas fa-list-check"></i>Ver Tareas
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 EnvioGo. Todos los derechos reservados.</p>
+    <footer class="footer">
+        <p>&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

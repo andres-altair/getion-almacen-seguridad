@@ -44,10 +44,71 @@ footer {
     text-align: center;
     padding: 15px 0;
     margin-top: auto;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    width: 90%;
+    max-width: 1200px;
+    margin-left: 0;
 }
 
 footer p {
     margin: 0;
-    font-size: 14px;
+    font-size: 18px;
     color: var(--blanco);
+}
+
+/* Layout para el Panel de Operario */
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panel-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.panel-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .panel-container {
+        padding: 10px;
+    }
+
+    .panel-card {
+        min-width: 100%;
+    }
+
+    .stat-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-text {
+        font-size: 24px;
+        margin: 10px;
+    }
+
+    .panel-button {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

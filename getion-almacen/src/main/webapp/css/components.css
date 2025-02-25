@@ -2,32 +2,38 @@
 /* Barra de Navegación */
 .navbar {
     background-color: var(--azul-marino);
-    padding: 5px 15px;
+    padding: 0.5rem 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
-.navbar-brand {
-    color: var(--amarillo-oscuro);
-    font-size: 24px;
-    text-decoration: none;
-    pointer-events: none;
+.navbar img {
+    height: 60px;
+    margin-right: 1rem;
+}
+
+.navbar-logo {
+    margin-right: auto;
+    
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-wrap: nowrap;
 }
 
 .navbar-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
     margin-left: auto;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
 }
 
 .nav-link {
@@ -39,11 +45,35 @@
     border-radius: 5px;
     font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .nav-link:hover {
     background-color: var(--azul-marino);
     color: var(--blanco);
+}
+
+.nav-link:last-child {
+    margin-left: auto;
+}
+
+.nav-link i {
+    font-size: 1rem;
+}
+
+.navbar-brand {
+    color: var(--amarillo-oscuro);
+    font-size: 24px;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
 }
 
 .welcome-text {
@@ -101,4 +131,121 @@
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
+}
+
+/* Estilos para el Panel de Operario */
+.welcome-text {
+    color: var(--negro);
+    font-size: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.welcome-text .nombre-usuario {
+    color: var(--amarillo-oscuro);
+    font-weight: bold;
+}
+
+/* Botones y enlaces del panel */
+.panel-button {
+    color: var(--azul-marino);
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: var(--blanco);
+    border: 2px solid var(--blanco);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-button:hover {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+}
+
+.panel-button i {
+    margin-right: 10px;
+}
+
+/* Estilos para las tarjetas del panel */
+.panel-card {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.panel-card h2 {
+    color: var(--azul-marino);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.panel-card p {
+    color: var(--gris-oscuro);
+    margin-bottom: 10px;
+}
+
+/* Estilos para los iconos del panel */
+.panel-icon {
+    font-size: 2em;
+    color: var(--amarillo-estrella);
+    margin-bottom: 15px;
+}
+
+/* Estilos para el contenedor de estadísticas */
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.stat-card {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    color: var(--azul-marino);
+    margin-bottom: 10px;
+}
+
+.stat-card .value {
+    font-size: 2em;
+    color: var(--amarillo-estrella);
+    font-weight: bold;
+}
+
+.stat-card .label {
+    color: var(--gris-oscuro);
+    margin-top: 5px;
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.img-perfil {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--azul-marino);
 }
