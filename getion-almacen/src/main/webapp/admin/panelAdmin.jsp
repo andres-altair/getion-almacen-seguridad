@@ -12,7 +12,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Panel de Administrador</title>
     <!-- Bootstrap CSS -->
@@ -46,62 +46,76 @@
     </nav>
 
     <!-- Contenedor Principal -->
-    <div class="panel-container">
+    <div class="panel-container container-fluid">
         <!-- Información de Usuario -->
-        <div class="user-info">
-            <img src="${usuarioFoto}" class="img-perfil" alt="Foto de perfil">
-            <span class="welcome-text">Bienvenido <span class="nombre-usuario">${usuarioNombre}</span></span>
+        <div class="user-info row">
+            <div class="col-12">
+                <img src="${usuarioFoto}" class="img-perfil" alt="Foto de perfil">
+                <span class="welcome-text">Bienvenido <span class="nombre-usuario">${usuarioNombre}</span></span>
+            </div>
         </div>
         <!-- Sección de Estadísticas -->
         <section class="panel-section">
-            <div class="stats-container">
-                <div class="stat-card">
-                    <i class="fas fa-users panel-icon"></i>
-                    <h3>Usuarios Activos</h3>
-                    <div class="value">124</div>
-                    <div class="label">usuarios</div>
+            <div class="stats-container row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="stat-card">
+                        <i class="fas fa-users panel-icon"></i>
+                        <h3>Usuarios Activos</h3>
+                        <div class="value">124</div>
+                        <div class="label">usuarios</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-shield-alt panel-icon"></i>
-                    <h3>Roles Definidos</h3>
-                    <div class="value">5</div>
-                    <div class="label">roles</div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="stat-card">
+                        <i class="fas fa-shield-alt panel-icon"></i>
+                        <h3>Roles Definidos</h3>
+                        <div class="value">5</div>
+                        <div class="label">roles</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <i class="fas fa-key panel-icon"></i>
-                    <h3>Permisos Totales</h3>
-                    <div class="value">25</div>
-                    <div class="label">permisos</div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="stat-card">
+                        <i class="fas fa-key panel-icon"></i>
+                        <h3>Permisos Totales</h3>
+                        <div class="value">25</div>
+                        <div class="label">permisos</div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Sección de Acciones -->
         <section class="panel-section">
-            <div class="panel-grid">
-                <div class="panel-card">
-                    <i class="fas fa-user-plus panel-icon"></i>
-                    <h2>Gestión de Usuarios</h2>
-                    <p>Administra usuarios, roles y permisos del sistema</p>
-                    <a href="usuarios" class="panel-button">
-                        <i class="fas fa-users"></i> Gestionar Usuarios
-                    </a>
+            <div class="panel-grid row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="panel-card">
+                        <i class="fas fa-user-plus panel-icon"></i>
+                        <h2>Gestión de Usuarios</h2>
+                        <p>Administra usuarios, roles y permisos del sistema</p>
+                        <a href="usuarios" class="panel-button">
+                            <i class="fas fa-users"></i> Gestionar Usuarios
+                        </a>
+                    </div>
                 </div>
-                <div class="panel-card">
-                    <i class="fas fa-shield-alt panel-icon"></i>
-                    <h2>Seguridad del Sistema</h2>
-                    <p>Configura la seguridad y accesos del sistema</p>
-                    <a href="seguridad" class="panel-button">
-                        <i class="fas fa-lock"></i> Gestionar Seguridad
-                    </a>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="panel-card">
+                        <i class="fas fa-shield-alt panel-icon"></i>
+                        <h2>Seguridad del Sistema</h2>
+                        <p>Configura la seguridad y accesos del sistema</p>
+                        <a href="seguridad" class="panel-button">
+                            <i class="fas fa-lock"></i> Gestionar Seguridad
+                        </a>
+                    </div>
                 </div>
-                <div class="panel-card">
-                    <i class="fas fa-cogs panel-icon"></i>
-                    <h2>Configuración</h2>
-                    <p>Ajusta la configuración general del sistema</p>
-                    <a href="configuracion" class="panel-button">
-                        <i class="fas fa-wrench"></i> Configurar Sistema
-                    </a>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="panel-card">
+                        <i class="fas fa-cogs panel-icon"></i>
+                        <h2>Configuración</h2>
+                        <p>Ajusta la configuración general del sistema</p>
+                        <a href="configuracion" class="panel-button">
+                            <i class="fas fa-cog"></i> Configurar Sistema
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
