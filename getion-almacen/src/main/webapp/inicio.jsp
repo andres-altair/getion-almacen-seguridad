@@ -14,26 +14,29 @@
 </head>
 <body>
     <!-- Barra de Navegación -->
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <img src="img/logo.svg" alt="EnvioGo">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-logo">
+                <img src="img/logo.svg" alt="EnvioGo">
+            </div>
+            <a class="navbar-brand" href="#">Sistema de Gestión de Almacén</a>
+            <div class="ms-auto">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="acceso.jsp">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro.jsp">Registrarse</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <a class="navbar-brand" href="#">Sistema de Gestión de Almacén</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="acceso.jsp">Iniciar Sesión</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="registro.jsp">Registrarse</a>
-            </li>
-        </ul>
     </nav>
 
     <!-- Contenedor Principal -->
     <div class="container">
         <h1>Sistema de Gestión de Almacén</h1>
         <p>Gestiona tu almacén de manera eficiente y segura</p>
-        <p>Para iniciar sesión, haz clic en el siguiente enlace:</p>
     </div>
 
     <!-- Carrusel -->
