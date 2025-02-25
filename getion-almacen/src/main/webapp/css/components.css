@@ -249,3 +249,103 @@
     border-radius: 50%;
     border: 3px solid var(--azul-marino);
 }
+
+/* Estilos para Gestión de Usuarios */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table img.rounded-circle {
+    border: 2px solid #dee2e6;
+    transition: transform 0.2s;
+}
+
+.table img.rounded-circle:hover {
+    transform: scale(1.1);
+}
+
+.badge {
+    font-size: 0.85em;
+    padding: 0.5em 0.8em;
+}
+
+.btn.crear {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+}
+
+.btn.admin {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
+}
+
+.btn-group .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-group .btn i {
+    font-size: 1.1rem;
+}
+
+/* Estilos específicos para la navbar de gestión de usuarios */
+.navbar .nav-link.usuarios {
+    color: var(--amarillo-oscuro);
+}
+
+.navbar .nav-link.usuarios:hover {
+    color: var(--amarillo-oscuro);
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table {
+        min-width: 600px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+}
