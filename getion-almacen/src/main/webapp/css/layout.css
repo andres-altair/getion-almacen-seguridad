@@ -6,6 +6,36 @@
     width: 90%;
     max-width: 1200px;
     flex: 1;
+    margin-bottom: 0;
+}
+
+/* Carrusel */
+.carousel {
+    max-height: 500px;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 500px;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.carousel-caption h2 {
+    color: var(--blanco);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.carousel-caption p {
+    color: var(--blanco);
+    font-size: 18px;
 }
 
 /* Footer */
