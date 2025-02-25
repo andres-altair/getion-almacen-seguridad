@@ -17,11 +17,14 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <div class="navbar-logo">
-                <img src="img/logo.svg" alt="EnvioGo">
+                <img src="img/logo.svg" alt="EnvioGo" class="img-fluid">
             </div>
             <a class="navbar-brand" href="#">Sistema de Gestión de Almacén</a>
-            <div class="ms-auto">
-                <ul class="navbar-nav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="acceso">Iniciar Sesión</a>
                     </li>
@@ -34,9 +37,13 @@
     </nav>
 
     <!-- Contenedor Principal -->
-    <div class="container">
-        <h1>Sistema de Gestión de Almacén</h1>
-        <p>Gestiona tu almacén de manera eficiente y segura</p>
+    <div class="container my-4">
+        <div class="row text-center">
+            <div class="col-12">
+                <h1 class="display-4">Sistema de Gestión de Almacén</h1>
+                <p class="lead">Gestiona tu almacén de manera eficiente y segura</p>
+            </div>
+        </div>
     </div>
 
     <!-- Carrusel -->
@@ -52,23 +59,23 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg" class="d-block w-100" alt="">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Gestión Moderna de Almacenes</h2>
-                    <p>Optimiza tus operaciones con nuestra solución integral</p>
+                <div class="carousel-caption">
+                    <h2 class="d-none d-sm-block">Gestión Moderna de Almacenes</h2>
+                    <p class="d-none d-sm-block">Optimiza tus operaciones con nuestra solución integral</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="https://images.pexels.com/photos/7706434/pexels-photo-7706434.jpeg" class="d-block w-100" alt="">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Servicios Logísticos Avanzados</h2>
-                    <p>Control total de tu inventario en tiempo real</p>
+                <div class="carousel-caption">
+                    <h2 class="d-none d-sm-block">Servicios Logísticos Avanzados</h2>
+                    <p class="d-none d-sm-block">Control total de tu inventario en tiempo real</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="https://images.pexels.com/photos/7706444/pexels-photo-7706444.jpeg" class="d-block w-100" alt="">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Tecnología de Última Generación</h2>
-                    <p>Sistemas automatizados para mayor eficiencia</p>
+                <div class="carousel-caption">
+                    <h2 class="d-none d-sm-block">Tecnología de Última Generación</h2>
+                    <p class="d-none d-sm-block">Sistemas automatizados para mayor eficiencia</p>
                 </div>
             </div>
         </div>
@@ -85,8 +92,8 @@
     </div>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
+    <footer class="container-fluid py-3 text-center">
+        <p class="mb-0">&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
     </footer>
     
     <!-- Bootstrap JS -->

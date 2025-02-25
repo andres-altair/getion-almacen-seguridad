@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,50 +18,61 @@
 </head>
 <body>
     <!-- Barra de Navegación -->
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <img src="img/logo.svg" alt="EnvioGo" height="40">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-logo">
+                <img src="img/logo.svg" alt="EnvioGo" class="img-fluid" style="height: 40px;">
+            </div>
+            <a class="navbar-brand" href="#">Iniciar Sesión</a>
+            <a href="inicio.jsp" class="navbar-back ms-auto">
+                <i class="fas fa-home"></i>
+            </a>
         </div>
-        <a class="navbar-brand" href="#">Iniciar Sesión</a>
-        <a href="inicio.jsp" class="navbar-back">
-            <i class="fas fa-home"></i>
-        </a>
     </nav>
-    <br><br>
 
     <!-- Contenedor Principal -->
     <div class="container">
-        <form action="acceso" method="post">
-            <div class="mb-3">
-                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" name="correoElectronico" required>
-            </div>
-            <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" name="contrasena" id="contrasena" required>
-                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="togglePassword('contrasena', this)">
-                        <i class="fas fa-eye" id="eyeIconCrear"></i>
-                    </button>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card shadow-sm my-5">
+                    <div class="card-body p-4">
+                        <form action="acceso" method="post">
+                            <div class="mb-3">
+                                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="contrasena" id="contrasena" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="togglePassword('contrasena', this)">
+                                        <i class="fas fa-eye" id="eyeIconCrear"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="recordar" name="recordar">
+                                <label class="form-check-label" for="recordar">Recordar sesión</label>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            </div>
+                        </form>
+
+                        <c:if test="${not empty requestScope.error}">
+                            <div class="alert alert-danger mt-3" role="alert">
+                                ${requestScope.error}
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="recordar" name="recordar">
-                <label class="form-check-label" for="recordar">Recordar sesión</label>
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-            </div>
-        </form>
-
-        <c:if test="${not empty error}">
-            <div class="error">${error}</div>
-        </c:if>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
+    <footer class="container-fluid py-3 text-center mt-auto">
+        <p class="mb-0">&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
     </footer>
 
     <!-- Bootstrap JS -->
