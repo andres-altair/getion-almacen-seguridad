@@ -35,7 +35,9 @@
 <body>
      <!-- Barra de Navegación -->
     <nav class="navbar">
-        <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid" height="40">
+        <div class="navbar-logo">
+            <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid">
+        </div>
         <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link usuarios">
             <i class="fas fa-users"></i> Gestión de Usuarios
         </a>
