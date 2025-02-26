@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.time.Year" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,8 +93,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="container-fluid py-3 text-center">
-        <p class="mb-0">&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
+    <footer class="container-fluid py-3 text-center mt-auto">
+        <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
     </footer>
     
     <!-- Bootstrap JS -->

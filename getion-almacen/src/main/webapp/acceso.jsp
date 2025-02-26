@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.time.Year" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,7 +73,7 @@
 
     <!-- Footer -->
     <footer class="container-fluid py-3 text-center mt-auto">
-        <p class="mb-0">&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
+        <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
     </footer>
 
     <!-- Bootstrap JS -->

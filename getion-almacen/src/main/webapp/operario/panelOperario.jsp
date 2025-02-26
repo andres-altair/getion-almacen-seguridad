@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.andres.gestionalmacen.dtos.UsuarioDto" %>
 <%@ page import="com.andres.gestionalmacen.utilidades.ImagenUtil" %>
+<%@ page import="java.time.Year" %>
 <%
     // Verificar si los atributos necesarios están presentes
     if (request.getAttribute("usuarioNombre") == null || request.getAttribute("usuarioFoto") == null) {
@@ -13,6 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Panel de Operario</title>
     <!-- FontAwesome para iconos -->
@@ -99,7 +101,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 EnvioGo Sistema de Gestión de Almacén</p>
+        <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
     </footer>
 
     <!-- Bootstrap JS -->

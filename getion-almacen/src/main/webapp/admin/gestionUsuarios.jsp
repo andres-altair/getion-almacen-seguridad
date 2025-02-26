@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.Year" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.andres.gestionalmacen.dtos.UsuarioDto" %>
 <%
@@ -21,6 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gestión de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -327,6 +329,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
+    </footer>
 
     <script>
         function editarUsuario(id, nombre, correo, movil, rolId, fotoBase64) {
