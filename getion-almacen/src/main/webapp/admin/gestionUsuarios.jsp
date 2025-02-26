@@ -47,15 +47,13 @@
 
     <!-- Contenedor Principal -->
     <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="d-flex gap-2">
-                <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="btn admin">
-                    <i class='bx bx-arrow-back'></i> Panel de Control
-                </a>
-                <button class="btn crear" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">
-                    <i class='bx bx-user-plus'></i> Nuevo Usuario
-                </button>
-            </div>
+        <div class="d-flex align-items-center mb-4">
+            <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="btn admin">
+                <i class='bx bx-arrow-back'></i> Panel de Control
+            </a>
+            <button class="btn crear" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">
+                <i class='bx bx-user-plus'></i> Nuevo Usuario
+            </button>
         </div>
 
         <c:if test="${not empty error}">
