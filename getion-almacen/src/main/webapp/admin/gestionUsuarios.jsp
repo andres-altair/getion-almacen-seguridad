@@ -31,23 +31,29 @@
     <link rel="stylesheet" href="../css/layout.css">
 </head>
 <body>
-    <!-- Barra de Navegación -->
-    <div class="navbar">
-        <img src="logo.png" alt="EnvioGo" height="40">
-        <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link usuarios">Gestión de Usuarios</a>
-        <a href="#" class="nav-link">Backup</a>
-        <a href="#" class="nav-link">Incidencia</a>
-        <a href="#" class="nav-link">Menú</a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <i class="fas fa-sign-out-alt logout-icon" onclick="window.location.href='logout'"></i>
-            </li>
-        </ul>
-    </div>
+     <!-- Barra de Navegación -->
+    <nav class="navbar">
+        <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid" height="40">
+        <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link usuarios">
+            <i class="fas fa-users"></i> Gestión de Usuarios
+        </a>
+        <a href="${pageContext.request.contextPath}/admin/backup" class="nav-link">
+            <i class="fas fa-database"></i> Backup
+        </a>
+        <a href="${pageContext.request.contextPath}/admin/incidencias" class="nav-link">
+            <i class="fas fa-exclamation-triangle"></i> Incidencia
+        </a>
+        <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
+            <i class="fas fa-bars"></i> Menú
+        </a>
+        <a href="../cerrar-sesion" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i> 
+        </a>
+    </nav>
 
     <!-- Contenedor Principal -->
     <div class="container mt-4">
-        <div class="d-flex align-items-center mb-4">
+        <div class="d-flex align-items-center gap-3 mb-4">
             <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="btn admin">
                 <i class='bx bx-arrow-back'></i> Panel de Control
             </a>

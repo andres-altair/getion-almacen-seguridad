@@ -41,7 +41,7 @@
             <i class="fas fa-bars"></i> Menú
         </a>
         <a href="../cerrar-sesion" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            <i class="fas fa-sign-out-alt"></i> 
         </a>
     </nav>
 
