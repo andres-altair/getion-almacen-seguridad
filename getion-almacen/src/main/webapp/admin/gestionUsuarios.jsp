@@ -38,21 +38,26 @@
         <div class="navbar-logo">
             <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid">
         </div>
-        <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link usuarios">
-            <i class="fas fa-users"></i> Gestión de Usuarios
-        </a>
-        <a href="${pageContext.request.contextPath}/admin/backup" class="nav-link">
-            <i class="fas fa-database"></i> Backup
-        </a>
-        <a href="${pageContext.request.contextPath}/admin/incidencias" class="nav-link">
-            <i class="fas fa-exclamation-triangle"></i> Incidencia
-        </a>
-        <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
-            <i class="fas fa-bars"></i> Menú
-        </a>
-        <a href="../cerrar-sesion" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i> 
-        </a>
+        <div class="nav-links-container-gestion">
+            <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link usuarios">
+                <i class="fas fa-users"></i> Gestión de Usuarios
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/backup" class="nav-link">
+                <i class="fas fa-database"></i> Backup
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/incidencias" class="nav-link">
+                <i class="fas fa-exclamation-triangle"></i> Incidencia
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
+                <i class="fas fa-bars"></i> Menú
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="nav-link">
+                <i class="fas fa-home"></i> Panel de Control
+            </a>
+            <a href="../cerrar-sesion" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> 
+            </a>
+        </div>
     </nav>
 
     <!-- Contenedor Principal -->

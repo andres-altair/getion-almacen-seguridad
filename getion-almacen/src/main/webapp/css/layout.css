@@ -61,7 +61,12 @@
 .navbar .nav-links-container {
     margin-left: 120px; /* Más espacio para el logo */
     display: flex;
-    gap: 90px; /* Mucho más espacio entre enlaces */
+    gap: 90px; /* Espacio entre enlaces más reducido para gestionUsuarios */
+}
+.navbar .nav-links-container-gestion {
+    margin-left: 120px; /* Más espacio para el logo */
+    display: flex;
+    gap: 40px; /* Espacio entre enlaces más reducido para gestionUsuarios */
 }
 
 .navbar .nav-link:hover {
