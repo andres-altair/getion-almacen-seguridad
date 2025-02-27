@@ -20,17 +20,17 @@
             <div class="navbar-logo">
                 <img src="img/logo.svg" alt="EnvioGo" class="img-fluid">
             </div>
-            <a class="navbar-brand" href="#">Sistema de Gestión de Almacén</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/inicio">Sistema de Gestión de Almacén</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="acceso">Iniciar Sesión</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/acceso">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="registro">Registrarse</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/registro">Registrarse</a>
                     </li>
                 </ul>
             </div>
@@ -39,6 +39,14 @@
 
     <!-- Contenedor Principal -->
     <div class="container my-4">
+        <!-- Mostrar mensaje de error si existe -->
+        <% if (request.getAttribute("error") != null) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= request.getAttribute("error") %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        
         <div class="row text-center">
             <div class="col-12">
                 <h1 class="display-4">Sistema de Gestión de Almacén</h1>
@@ -92,9 +100,10 @@
         </button>
     </div>
 
-    <!-- Footer -->
-    <footer class="container-fluid py-3 text-center mt-auto">
+     <!-- Footer -->
+     <footer class="container-fluid py-3 text-center mt-auto">
         <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
+        
     </footer>
     
     <!-- Bootstrap JS -->
