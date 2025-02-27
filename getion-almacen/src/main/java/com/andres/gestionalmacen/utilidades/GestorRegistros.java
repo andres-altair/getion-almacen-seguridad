@@ -1,9 +1,9 @@
 package com.andres.gestionalmacen.utilidades;
 
+import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -21,14 +21,13 @@ import java.util.Optional;
  * @author andres
  */
 public class GestorRegistros {
+    // Ruta relativa al proyecto
     private static final String DIRECTORIO_REGISTROS = "registros";
     private static final long TAMANIO_MAXIMO = 100 * 1024 * 1024; // 100MB
     private static final int DIAS_RETENCION = 30;
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
     private static final String SUFIJO_ANTIGUO = "_ANTIGUO";
     private static final String ID_SISTEMA = "SISTEMA";
-
-    // Códigos de color ANSI
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -62,10 +61,68 @@ public class GestorRegistros {
         crearDirectorioRegistros();
     }
 
+    public static void inicializar(ServletContext contexto) {
+        // No usamos el contexto, siempre usamos la ruta relativa al proyecto
+        System.out.println("=== Inicializando GestorRegistros ===");
+        crearDirectorioRegistros();
+    }
+
+    private static File obtenerDirectorioLogs() {
+        try {
+            // Ruta directa al directorio src del proyecto
+            File directorioSrc = new File("c:\\Users\\amoliaz\\eclipse-workspace\\getion-almacen-seguridad\\getion-almacen\\src");
+            
+            if (!directorioSrc.exists()) {
+                throw new IOException("No se encuentra el directorio src del proyecto");
+            }
+            
+            // Crear el directorio registros al mismo nivel que src
+            File directorioProyecto = directorioSrc.getParentFile();
+            File directorioRegistros = new File(directorioProyecto, DIRECTORIO_REGISTROS);
+            
+            if (!directorioRegistros.exists()) {
+                boolean creado = directorioRegistros.mkdirs();
+                if (!creado) {
+                    throw new IOException("No se pudo crear el directorio de logs en: " + directorioRegistros.getAbsolutePath());
+                }
+            }
+            
+            if (!directorioRegistros.canWrite()) {
+                throw new IOException("No hay permisos de escritura en: " + directorioRegistros.getAbsolutePath());
+            }
+            
+            System.out.println("Usando directorio de logs: " + directorioRegistros.getAbsolutePath());
+            return directorioRegistros;
+            
+        } catch (Exception e) {
+            System.err.println("Error al obtener directorio de logs: " + e.getMessage());
+            e.printStackTrace();
+            // En caso de error, intentar usar directorio relativo
+            return new File(DIRECTORIO_REGISTROS);
+        }
+    }
+
     private static void crearDirectorioRegistros() {
-        File directorio = new File(DIRECTORIO_REGISTROS);
-        if (!directorio.exists()) {
-            directorio.mkdirs();
+        try {
+            File directorio = obtenerDirectorioLogs();
+            System.out.println("=== Inicializando sistema de logs ===");
+            System.out.println("Directorio de logs: " + directorio.getCanonicalPath());
+            
+            // Crear archivo de inicialización
+            File archivoInit = new File(directorio, "init_" + 
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".log");
+            
+            try (FileWriter writer = new FileWriter(archivoInit)) {
+                writer.write("=== Sistema de Logs Inicializado ===\n");
+                writer.write("Fecha: " + LocalDateTime.now() + "\n");
+                writer.write("Directorio: " + directorio.getCanonicalPath() + "\n");
+                writer.write("Tamaño máximo por archivo: " + (TAMANIO_MAXIMO / 1024 / 1024) + "MB\n");
+                writer.write("Días de retención: " + DIAS_RETENCION + "\n");
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Error al crear directorio de registros: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -161,7 +218,7 @@ public class GestorRegistros {
      */
     private static void verificarYEliminarArchivoAntiguo(String identificador) {
         try {
-            File directorio = new File(DIRECTORIO_REGISTROS);
+            File directorio = obtenerDirectorioLogs();
             
             // Buscar archivo antiguo del usuario (con sufijo _ANTIGUO)
             File[] archivosAntiguos = directorio.listFiles((dir, nombre) -> 
@@ -182,7 +239,7 @@ public class GestorRegistros {
                     System.out.println(ANSI_YELLOW + 
                         "Eliminando archivo antiguo que superó 100MB y tiene más de 30 días: " + 
                         archivoAntiguo.getName() + ANSI_RESET);
-                    Files.delete(archivoAntiguo.toPath());
+                    java.nio.file.Files.delete(archivoAntiguo.toPath());
                 }
             }
         } catch (IOException e) {
@@ -199,7 +256,7 @@ public class GestorRegistros {
      *    - Crear nuevo archivo
      */
     private static String buscarOCrearArchivoRegistro(String identificador) throws IOException {
-        File directorio = new File(DIRECTORIO_REGISTROS);
+        File directorio = obtenerDirectorioLogs();
         
         // 1. Buscar todos los archivos por ID (excluyendo los antiguos)
         File[] archivosUsuario = directorio.listFiles((dir, nombre) -> 
@@ -251,7 +308,7 @@ public class GestorRegistros {
      */
     private static void eliminarArchivoAntiguoExistente(String identificador) {
         try {
-            File directorio = new File(DIRECTORIO_REGISTROS);
+            File directorio = obtenerDirectorioLogs();
             File[] archivosAntiguos = directorio.listFiles((dir, nombre) -> 
                 nombre.startsWith(identificador + "_") && 
                 nombre.contains(SUFIJO_ANTIGUO) &&
@@ -259,7 +316,7 @@ public class GestorRegistros {
 
             if (archivosAntiguos != null) {
                 for (File antiguo : archivosAntiguos) {
-                    Files.delete(antiguo.toPath());
+                    java.nio.file.Files.delete(antiguo.toPath());
                 }
             }
         } catch (IOException e) {
@@ -272,7 +329,7 @@ public class GestorRegistros {
         String nombreArchivo = identificador + "_" + timestamp + 
                              (esAntiguo ? SUFIJO_ANTIGUO : "") + 
                              "_registro.txt";
-        return DIRECTORIO_REGISTROS + File.separator + nombreArchivo;
+        return new File(obtenerDirectorioLogs(), nombreArchivo).getPath();
     }
 
     /**

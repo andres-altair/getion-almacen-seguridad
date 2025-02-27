@@ -1,0 +1,11 @@
+[2025-02-27T21:06:47.8704545] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+[2025-02-27T21:06:47.8726165] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+[2025-02-27T21:06:49.0160432] [32m[INFO][0m [32m[FILTRO] Nueva petición recibida: /getion-almacen/[0m
+[2025-02-27T21:06:49.0180481] [33m[ADVERTENCIA][0m [33mAcceso a JSP bloqueado: /getion-almacen/ - IP: 127.0.0.1[0m
+[2025-02-27T21:06:49.0194786] [32m[INFO][0m [32m[FILTRO] Redirigiendo a /inicio[0m
+[2025-02-27T21:06:49.1399167] [32m[INFO][0m InicioServlet inicializado - Punto de entrada principal
+[2025-02-27T21:06:49.1417744] [36m[DEBUG][0m Mostrando página de inicio
+[2025-02-27T21:08:29.8830994] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+[2025-02-27T21:08:29.8840945] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+[2025-02-27T21:08:30.5868882] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+[2025-02-27T21:08:30.5889159] [32m[INFO][0m [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
