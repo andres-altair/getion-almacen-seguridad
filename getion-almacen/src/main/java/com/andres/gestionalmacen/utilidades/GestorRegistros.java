@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -62,9 +63,39 @@ public class GestorRegistros {
     }
 
     public static void inicializar(ServletContext contexto) {
-        // No usamos el contexto, siempre usamos la ruta relativa al proyecto
         System.out.println("=== Inicializando GestorRegistros ===");
-        crearDirectorioRegistros();
+        
+        File directorioLogs = obtenerDirectorioLogs();
+        if (directorioLogs == null) {
+            System.err.println("Error al obtener el directorio de logs");
+            return;
+        }
+
+        // Limpiar archivos antiguos
+        File[] archivos = directorioLogs.listFiles((dir, name) -> name.startsWith("SISTEMA_"));
+        if (archivos != null) {
+            Arrays.sort(archivos, Comparator.comparingLong(File::lastModified).reversed());
+            
+            // Mantener solo el archivo actual y el antiguo
+            for (int i = 2; i < archivos.length; i++) {
+                archivos[i].delete();
+            }
+
+            // Verificar el archivo antiguo
+            if (archivos.length > 1) {
+                File archivoAntiguo = archivos[1];
+                
+                // Verificar si el archivo antiguo supera los 100MB o tiene más de 30 días
+                long edadArchivo = ChronoUnit.DAYS.between(
+                    LocalDateTime.ofInstant(Instant.ofEpochMilli(archivoAntiguo.lastModified()), ZoneId.systemDefault()),
+                    LocalDateTime.now()
+                );
+                
+                if (archivoAntiguo.length() > TAMANIO_MAXIMO || edadArchivo > DIAS_RETENCION) {
+                    archivoAntiguo.delete();
+                }
+            }
+        }
     }
 
     private static File obtenerDirectorioLogs() {
