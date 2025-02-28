@@ -3,17 +3,13 @@
     <!-- Configuración básica usando user.dir -->
     <property name="LOG_DIR" value="${user.dir}/registros" />
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n"/>
-    <timestamp key="timestamp" datePattern="yyyyMMdd_HHmmss"/>
     
     <!-- Appender para archivos del sistema -->
     <appender name="SISTEMA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <prudent>true</prudent>
         <append>true</append>
-        <file>${LOG_DIR}/SISTEMA_%d{yyyyMMdd_HHmmss}_registro.txt</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/SISTEMA_%d{yyyyMMdd_HHmmss}_registro.txt</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        <file>${LOG_DIR}/SISTEMA_registro.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/SISTEMA_registro_%i.txt</fileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <maxFileSize>100MB</maxFileSize>
@@ -25,13 +21,10 @@
     
     <!-- Appender para archivos de usuario -->
     <appender name="USER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <prudent>true</prudent>
         <append>true</append>
-        <file>${LOG_DIR}/%X{userId}_%d{yyyyMMdd_HHmmss}_registro.txt</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/%X{userId}_%d{yyyyMMdd_HHmmss}_registro.txt</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        <file>${LOG_DIR}/USER_%X{userId}_registro.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/USER_%X{userId}_registro_%i.txt</fileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <maxFileSize>100MB</maxFileSize>

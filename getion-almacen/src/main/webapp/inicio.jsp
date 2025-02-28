@@ -5,20 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <title>Sistema de Gestión de Almacén</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 </head>
 <body>
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <div class="navbar-logo">
-                <img src="img/logo.svg" alt="EnvioGo" class="img-fluid">
+                <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
             </div>
             <a class="navbar-brand" href="${pageContext.request.contextPath}/inicio">Sistema de Gestión de Almacén</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

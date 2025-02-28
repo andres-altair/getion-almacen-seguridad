@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Panel de Administrador</title>
     <!-- Bootstrap CSS -->
@@ -22,15 +22,15 @@
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Estilos propios -->
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 </head>
 <body>
     <!-- Barra de Navegación -->
     <nav class="navbar">
         <div class="navbar-logo">
-            <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid">
+            <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
         </div>
         <div class="nav-links-container">
             <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link">
@@ -45,7 +45,7 @@
             <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
                 <i class="fas fa-bars"></i> Menú
             </a>
-            <a href="../cerrar-sesion" class="nav-link">
+            <a href="${pageContext.request.contextPath}/cerrar-sesion" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i> 
             </a>
         </div>
@@ -98,7 +98,7 @@
                         <i class="fas fa-user-plus panel-icon"></i>
                         <h2>Gestión de Usuarios</h2>
                         <p>Administra usuarios, roles y permisos del sistema</p>
-                        <a href="usuarios" class="panel-button">
+                        <a href="${pageContext.request.contextPath}/admin/usuarios" class="panel-button">
                             <i class="fas fa-users"></i> Gestionar Usuarios
                         </a>
                     </div>
@@ -108,7 +108,7 @@
                         <i class="fas fa-shield-alt panel-icon"></i>
                         <h2>Seguridad del Sistema</h2>
                         <p>Configura la seguridad y accesos del sistema</p>
-                        <a href="seguridad" class="panel-button">
+                        <a href="${pageContext.request.contextPath}/admin/seguridad" class="panel-button">
                             <i class="fas fa-lock"></i> Gestionar Seguridad
                         </a>
                     </div>
@@ -118,7 +118,7 @@
                         <i class="fas fa-cogs panel-icon"></i>
                         <h2>Configuración</h2>
                         <p>Ajusta la configuración general del sistema</p>
-                        <a href="configuracion" class="panel-button">
+                        <a href="${pageContext.request.contextPath}/admin/configuracion" class="panel-button">
                             <i class="fas fa-cog"></i> Configurar Sistema
                         </a>
                     </div>

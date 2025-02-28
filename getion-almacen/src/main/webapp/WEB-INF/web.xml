@@ -17,6 +17,20 @@
         <url-pattern>*.jsp</url-pattern>
     </filter-mapping>
     
+    <!-- Configuración para recursos estáticos -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/css/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/js/*</url-pattern>
+    </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>inicio.jsp</welcome-file>
     </welcome-file-list>
