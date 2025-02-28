@@ -1,390 +1,85 @@
 package com.andres.gestionalmacen.utilidades;
 
 import jakarta.servlet.ServletContext;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 /**
- * Gestor de registros para el sistema de almacén.
- * Se encarga de crear y gestionar archivos de registro para:
- * - Usuarios individuales: <idUsuario>_<fecha>_registro.txt
- * - Sistema: SISTEMA_<fecha>_registro.txt
- * 
- * @author andres
+ * Gestor de registros que se integra con logback.xml para el manejo de logs.
+ * Los logs se guardan en la carpeta 'registros' en la raíz del proyecto.
+ * - Sistema: SISTEMA_[fecha]_registro.txt
+ * - Usuario: [userId]_[fecha]_registro.txt
  */
 public class GestorRegistros {
-    // Ruta relativa al proyecto
-    private static final String DIRECTORIO_REGISTROS = "registros";
-    private static final long TAMANIO_MAXIMO = 100 * 1024 * 1024; // 100MB
-    private static final int DIAS_RETENCION = 30;
-    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-    private static final String SUFIJO_ANTIGUO = "_ANTIGUO";
-    private static final String ID_SISTEMA = "SISTEMA";
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_CYAN = "\u001B[36m";
-    private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    private static final String ANSI_BOLD = "\u001B[1m";
+    private static ServletContext contextoServlet;
+    
+    // Loggers específicos que coinciden con los nombres en logback.xml
+    private static final Logger loggerSistema = LoggerFactory.getLogger("com.andres.gestionalmacen.sistema");
+    private static final Logger loggerUsuarios = LoggerFactory.getLogger("com.andres.gestionalmacen.usuarios");
 
     /**
-     * Niveles de registro disponibles con sus respectivos colores
+     * Inicializa el sistema de logs.
+     * @param contexto El contexto del servlet
      */
-    public enum NivelRegistro {
-        DEBUG(ANSI_CYAN + "[DEBUG]" + ANSI_RESET),
-        INFO(ANSI_GREEN + "[INFO]" + ANSI_RESET),
-        WARNING(ANSI_YELLOW + "[ADVERTENCIA]" + ANSI_RESET),
-        ERROR(ANSI_RED + ANSI_BOLD + "[ERROR]" + ANSI_RESET),
-        FATAL(ANSI_RED_BACKGROUND + ANSI_BOLD + "[FATAL]" + ANSI_RESET);
-
-        private final String etiqueta;
-
-        NivelRegistro(String etiqueta) {
-            this.etiqueta = etiqueta;
-        }
-
-        public String getEtiqueta() {
-            return etiqueta;
-        }
-    }
-
-    static {
-        crearDirectorioRegistros();
-    }
-
     public static void inicializar(ServletContext contexto) {
-        System.out.println("=== Inicializando GestorRegistros ===");
-        
-        File directorioLogs = obtenerDirectorioLogs();
-        if (directorioLogs == null) {
-            System.err.println("Error al obtener el directorio de logs");
-            return;
-        }
-
-        // Limpiar archivos antiguos
-        File[] archivos = directorioLogs.listFiles((dir, name) -> name.startsWith("SISTEMA_"));
-        if (archivos != null) {
-            Arrays.sort(archivos, Comparator.comparingLong(File::lastModified).reversed());
-            
-            // Mantener solo el archivo actual y el antiguo
-            for (int i = 2; i < archivos.length; i++) {
-                archivos[i].delete();
-            }
-
-            // Verificar el archivo antiguo
-            if (archivos.length > 1) {
-                File archivoAntiguo = archivos[1];
-                
-                // Verificar si el archivo antiguo supera los 100MB o tiene más de 30 días
-                long edadArchivo = ChronoUnit.DAYS.between(
-                    LocalDateTime.ofInstant(Instant.ofEpochMilli(archivoAntiguo.lastModified()), ZoneId.systemDefault()),
-                    LocalDateTime.now()
-                );
-                
-                if (archivoAntiguo.length() > TAMANIO_MAXIMO || edadArchivo > DIAS_RETENCION) {
-                    archivoAntiguo.delete();
-                }
-            }
-        }
+        contextoServlet = contexto;
+        // No necesitamos crear directorios ni archivos
+        // logback.xml se encarga de todo eso
+        sistemaInfo("Sistema de logs inicializado");
     }
 
-    private static File obtenerDirectorioLogs() {
-        try {
-            // Ruta directa al directorio src del proyecto
-            File directorioSrc = new File("c:\\Users\\amoliaz\\eclipse-workspace\\getion-almacen-seguridad\\getion-almacen\\src");
-            
-            if (!directorioSrc.exists()) {
-                throw new IOException("No se encuentra el directorio src del proyecto");
-            }
-            
-            // Crear el directorio registros al mismo nivel que src
-            File directorioProyecto = directorioSrc.getParentFile();
-            File directorioRegistros = new File(directorioProyecto, DIRECTORIO_REGISTROS);
-            
-            if (!directorioRegistros.exists()) {
-                boolean creado = directorioRegistros.mkdirs();
-                if (!creado) {
-                    throw new IOException("No se pudo crear el directorio de logs en: " + directorioRegistros.getAbsolutePath());
-                }
-            }
-            
-            if (!directorioRegistros.canWrite()) {
-                throw new IOException("No hay permisos de escritura en: " + directorioRegistros.getAbsolutePath());
-            }
-            
-            System.out.println("Usando directorio de logs: " + directorioRegistros.getAbsolutePath());
-            return directorioRegistros;
-            
-        } catch (Exception e) {
-            System.err.println("Error al obtener directorio de logs: " + e.getMessage());
-            e.printStackTrace();
-            // En caso de error, intentar usar directorio relativo
-            return new File(DIRECTORIO_REGISTROS);
-        }
-    }
-
-    private static void crearDirectorioRegistros() {
-        try {
-            File directorio = obtenerDirectorioLogs();
-            System.out.println("=== Inicializando sistema de logs ===");
-            System.out.println("Directorio de logs: " + directorio.getCanonicalPath());
-            
-            // Crear archivo de inicialización
-            File archivoInit = new File(directorio, "init_" + 
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".log");
-            
-            try (FileWriter writer = new FileWriter(archivoInit)) {
-                writer.write("=== Sistema de Logs Inicializado ===\n");
-                writer.write("Fecha: " + LocalDateTime.now() + "\n");
-                writer.write("Directorio: " + directorio.getCanonicalPath() + "\n");
-                writer.write("Tamaño máximo por archivo: " + (TAMANIO_MAXIMO / 1024 / 1024) + "MB\n");
-                writer.write("Días de retención: " + DIAS_RETENCION + "\n");
-            }
-            
-        } catch (IOException e) {
-            System.err.println("Error al crear directorio de registros: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Métodos específicos para logs del sistema
-     */
+    // Métodos para logs del sistema - van al archivo SISTEMA_[fecha]_registro.txt
     public static void sistemaDebug(String mensaje) {
-        registrar(ID_SISTEMA, mensaje, NivelRegistro.DEBUG);
+        loggerSistema.debug(mensaje);
     }
 
     public static void sistemaInfo(String mensaje) {
-        registrar(ID_SISTEMA, mensaje, NivelRegistro.INFO);
+        loggerSistema.info(mensaje);
     }
 
     public static void sistemaWarning(String mensaje) {
-        registrar(ID_SISTEMA, mensaje, NivelRegistro.WARNING);
+        loggerSistema.warn(mensaje);
     }
 
     public static void sistemaError(String mensaje) {
-        registrar(ID_SISTEMA, mensaje, NivelRegistro.ERROR);
+        loggerSistema.error(mensaje);
     }
 
-    public static void sistemaFatal(String mensaje) {
-        registrar(ID_SISTEMA, mensaje, NivelRegistro.FATAL);
-    }
-
-    /**
-     * Registra un mensaje de depuración (Cyan)
-     */
+    // Métodos para logs de usuario - van al archivo [userId]_[fecha]_registro.txt
     public static void debug(Long idUsuario, String mensaje) {
-        registrar(idUsuario.toString(), mensaje, NivelRegistro.DEBUG);
+        try {
+            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            loggerUsuarios.debug(mensaje);
+        } finally {
+            MDC.remove("userId");
+        }
     }
 
-    /**
-     * Registra un mensaje informativo (Verde)
-     */
     public static void info(Long idUsuario, String mensaje) {
-        registrar(idUsuario.toString(), mensaje, NivelRegistro.INFO);
+        try {
+            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            loggerUsuarios.info(mensaje);
+        } finally {
+            MDC.remove("userId");
+        }
     }
 
-    /**
-     * Registra una advertencia (Amarillo)
-     */
     public static void warning(Long idUsuario, String mensaje) {
-        registrar(idUsuario.toString(), mensaje, NivelRegistro.WARNING);
+        try {
+            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            loggerUsuarios.warn(mensaje);
+        } finally {
+            MDC.remove("userId");
+        }
     }
 
-    /**
-     * Registra un error (Rojo)
-     */
     public static void error(Long idUsuario, String mensaje) {
-        registrar(idUsuario.toString(), mensaje, NivelRegistro.ERROR);
-    }
-
-    /**
-     * Registra un error fatal (Fondo Rojo)
-     */
-    public static void fatal(Long idUsuario, String mensaje) {
-        registrar(idUsuario.toString(), mensaje, NivelRegistro.FATAL);
-    }
-
-    /**
-     * Registra un mensaje con el nivel y color especificado
-     */
-    public static synchronized void registrar(String identificador, String mensaje, NivelRegistro nivel) {
         try {
-            // Primero verificar si hay que eliminar archivo antiguo
-            verificarYEliminarArchivoAntiguo(identificador);
-            
-            // Buscar o crear archivo para escribir
-            String rutaArchivo = buscarOCrearArchivoRegistro(identificador);
-            
-            // Escribir el mensaje
-            try (FileWriter escritor = new FileWriter(rutaArchivo, true)) {
-                LocalDateTime ahora = LocalDateTime.now();
-                String mensajeFormateado = String.format("[%s] %s %s%n", 
-                    ahora.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                    nivel.getEtiqueta(),
-                    mensaje);
-                escritor.write(mensajeFormateado);
-                
-                // También mostrar en consola
-                System.out.print(mensajeFormateado);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            loggerUsuarios.error(mensaje);
+        } finally {
+            MDC.remove("userId");
         }
-    }
-
-    /**
-     * Verifica y elimina el archivo antiguo si han pasado más de 30 días
-     * Solo se aplica a archivos que superaron los 100MB
-     */
-    private static void verificarYEliminarArchivoAntiguo(String identificador) {
-        try {
-            File directorio = obtenerDirectorioLogs();
-            
-            // Buscar archivo antiguo del usuario (con sufijo _ANTIGUO)
-            File[] archivosAntiguos = directorio.listFiles((dir, nombre) -> 
-                nombre.startsWith(identificador + "_") && 
-                nombre.contains(SUFIJO_ANTIGUO) &&
-                nombre.endsWith("_registro.txt"));
-
-            if (archivosAntiguos != null && archivosAntiguos.length > 0) {
-                File archivoAntiguo = archivosAntiguos[0]; // Solo debe haber uno
-                
-                // Obtener la fecha del archivo
-                LocalDateTime fechaArchivo = obtenerFechaArchivo(archivoAntiguo.getName());
-                LocalDateTime ahora = LocalDateTime.now();
-                
-                // Si han pasado más de 30 días, eliminar
-                if (fechaArchivo != null && 
-                    ChronoUnit.DAYS.between(fechaArchivo, ahora) > DIAS_RETENCION) {
-                    System.out.println(ANSI_YELLOW + 
-                        "Eliminando archivo antiguo que superó 100MB y tiene más de 30 días: " + 
-                        archivoAntiguo.getName() + ANSI_RESET);
-                    java.nio.file.Files.delete(archivoAntiguo.toPath());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Busca el archivo de registro para un usuario siguiendo este flujo:
-     * 1. Buscar archivos por ID de usuario
-     * 2. Si encuentra varios, usar el más reciente por fecha
-     * 3. Si el archivo está lleno (>=100MB):
-     *    - Marcar como antiguo
-     *    - Crear nuevo archivo
-     */
-    private static String buscarOCrearArchivoRegistro(String identificador) throws IOException {
-        File directorio = obtenerDirectorioLogs();
-        
-        // 1. Buscar todos los archivos por ID (excluyendo los antiguos)
-        File[] archivosUsuario = directorio.listFiles((dir, nombre) -> 
-            nombre.startsWith(identificador + "_") && 
-            !nombre.contains(SUFIJO_ANTIGUO) &&
-            nombre.endsWith("_registro.txt"));
-
-        // Si no hay archivos, crear nuevo
-        if (archivosUsuario == null || archivosUsuario.length == 0) {
-            return crearNuevoArchivoRegistro(identificador, false);
-        }
-
-        // 2. Si hay varios archivos, encontrar el más reciente por fecha
-        Optional<File> archivoMasReciente = Arrays.stream(archivosUsuario)
-                .max((f1, f2) -> {
-                    String fecha1 = extraerFechaDeNombreArchivo(f1.getName());
-                    String fecha2 = extraerFechaDeNombreArchivo(f2.getName());
-                    return fecha1.compareTo(fecha2);
-                });
-
-        // Si encontramos un archivo
-        if (archivoMasReciente.isPresent()) {
-            File archivo = archivoMasReciente.get();
-            
-            // 3. Verificar si está lleno (>=100MB)
-            if (archivo.length() >= TAMANIO_MAXIMO) {
-                // Marcar como antiguo (eliminar el antiguo anterior si existe)
-                eliminarArchivoAntiguoExistente(identificador);
-                
-                // Renombrar el actual como antiguo
-                String nombreAntiguo = archivo.getName().replace("_registro.txt", SUFIJO_ANTIGUO + "_registro.txt");
-                File archivoAntiguo = new File(directorio, nombreAntiguo);
-                archivo.renameTo(archivoAntiguo);
-                
-                // Crear nuevo archivo actual
-                return crearNuevoArchivoRegistro(identificador, false);
-            }
-            
-            // Si no está lleno, usar el existente
-            return archivo.getPath();
-        }
-
-        // Si por alguna razón no se encontró el archivo, crear nuevo
-        return crearNuevoArchivoRegistro(identificador, false);
-    }
-
-    /**
-     * Elimina el archivo antiguo existente de un usuario si existe
-     */
-    private static void eliminarArchivoAntiguoExistente(String identificador) {
-        try {
-            File directorio = obtenerDirectorioLogs();
-            File[] archivosAntiguos = directorio.listFiles((dir, nombre) -> 
-                nombre.startsWith(identificador + "_") && 
-                nombre.contains(SUFIJO_ANTIGUO) &&
-                nombre.endsWith("_registro.txt"));
-
-            if (archivosAntiguos != null) {
-                for (File antiguo : archivosAntiguos) {
-                    java.nio.file.Files.delete(antiguo.toPath());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String crearNuevoArchivoRegistro(String identificador, boolean esAntiguo) {
-        String timestamp = LocalDateTime.now().format(FORMATO_FECHA);
-        String nombreArchivo = identificador + "_" + timestamp + 
-                             (esAntiguo ? SUFIJO_ANTIGUO : "") + 
-                             "_registro.txt";
-        return new File(obtenerDirectorioLogs(), nombreArchivo).getPath();
-    }
-
-    /**
-     * Convierte la fecha del nombre del archivo a LocalDateTime
-     * Formato esperado: <idUsuario>_yyyyMMdd_HHmmss_registro.txt
-     */
-    private static LocalDateTime obtenerFechaArchivo(String nombreArchivo) {
-        try {
-            String fechaStr = extraerFechaDeNombreArchivo(nombreArchivo);
-            return LocalDateTime.parse(fechaStr, FORMATO_FECHA);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
-     * Extrae la fecha del nombre del archivo de registro
-     * Formato del archivo: <idUsuario>_<fecha>_registro.txt
-     */
-    private static String extraerFechaDeNombreArchivo(String nombreArchivo) {
-        String[] partes = nombreArchivo.split("_");
-        if (partes.length >= 2) {
-            return partes[1]; // Retorna la parte de la fecha
-        }
-        return "";
     }
 }

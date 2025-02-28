@@ -1,0 +1,9 @@
+2025-02-28 14:09:25 [main] INFO  - Sistema de logs inicializado
+2025-02-28 14:09:25 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-02-28 14:09:25 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-02-28 14:09:25 [http-nio-8080-exec-2] INFO  - [32m[FILTRO] Nueva petición recibida: /getion-almacen/[0m
+2025-02-28 14:09:25 [http-nio-8080-exec-2] WARN  - [33mAcceso a JSP bloqueado: /getion-almacen/ - IP: 127.0.0.1[0m
+2025-02-28 14:09:25 [http-nio-8080-exec-2] INFO  - [32m[FILTRO] Redirigiendo a /inicio[0m
+2025-02-28 14:09:25 [http-nio-8080-exec-3] INFO  - Sistema de logs inicializado
+2025-02-28 14:09:25 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-02-28 14:09:26 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio

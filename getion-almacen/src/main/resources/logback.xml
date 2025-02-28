@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- Configuración básica usando user.dir -->
+    <property name="LOG_DIR" value="${user.dir}/registros" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n"/>
+    <timestamp key="timestamp" datePattern="yyyyMMdd_HHmmss"/>
+    
+    <!-- Appender para archivos del sistema -->
+    <appender name="SISTEMA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <append>true</append>
+        <file>${LOG_DIR}/SISTEMA_%d{yyyyMMdd_HHmmss}_registro.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/SISTEMA_%d{yyyyMMdd_HHmmss}_registro.txt</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- Appender para archivos de usuario -->
+    <appender name="USER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <append>true</append>
+        <file>${LOG_DIR}/%X{userId}_%d{yyyyMMdd_HHmmss}_registro.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/%X{userId}_%d{yyyyMMdd_HHmmss}_registro.txt</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- Appender para consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger para sistema -->
+    <logger name="com.andres.gestionalmacen.sistema" level="DEBUG" additivity="false">
+        <appender-ref ref="SISTEMA_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <!-- Logger para usuarios -->
+    <logger name="com.andres.gestionalmacen.usuarios" level="DEBUG">
+        <appender-ref ref="USER_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="SISTEMA_FILE" />
+    </root>
+</configuration>
