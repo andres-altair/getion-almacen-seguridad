@@ -16,3 +16,12 @@
 2025-02-28 16:10:26 [http-nio-8080-exec-2] INFO  - [32m[FILTRO] Redirigiendo a /inicio[0m
 2025-02-28 16:10:26 [http-nio-8080-exec-3] INFO  - Sistema de logs inicializado
 2025-02-28 16:10:26 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-02-28 21:45:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-02-28 21:45:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-02-28 22:42:55 [main] INFO  - Sistema de logs inicializado
+2025-02-28 22:42:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-02-28 22:42:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-02-28 22:42:56 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-02-28 22:42:56 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-02-28 22:43:00 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
+2025-02-28 22:43:33 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio

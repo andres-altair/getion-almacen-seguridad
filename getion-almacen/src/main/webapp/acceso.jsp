@@ -6,16 +6,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <title>Sistema de Gestión de Almacén - Iniciar Sesión</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -23,10 +23,10 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <div class="navbar-logo">
-                <img src="img/logo.svg" alt="EnvioGo" class="img-fluid">
+                <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
             </div>
-            <a class="navbar-brand" href="#">Iniciar Sesión</a>
-            <a href="inicio" class="btn home-btn ms-auto">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/acceso">Iniciar Sesión</a>
+            <a href="${pageContext.request.contextPath}/inicio" class="btn home-btn ms-auto">
                 <i class="fas fa-home"></i> Inicio
             </a>
         </div>
@@ -38,7 +38,7 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-sm my-5">
                     <div class="card-body p-4">
-                        <form action="acceso" method="post">
+                        <form action="${pageContext.request.contextPath}/acceso" method="post">
                             <div class="mb-3">
                                 <label for="correoElectronico" class="form-label">Correo Electrónico</label>
                                 <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" required>

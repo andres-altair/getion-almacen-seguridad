@@ -13,12 +13,17 @@ import java.io.IOException;
 import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
 @WebServlet("/acceso")
 public class AccesoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Registrar el acceso
+        GestorRegistros.sistemaInfo("Acceso a página de acceso");
+        
+        // Redirigir al JSP
         request.getRequestDispatcher("/acceso.jsp").forward(request, response);
     }
 
