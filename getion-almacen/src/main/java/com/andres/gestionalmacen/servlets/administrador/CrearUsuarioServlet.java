@@ -4,6 +4,7 @@ import com.andres.gestionalmacen.dtos.CrearUsuDto;
 import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -26,50 +27,53 @@ public class CrearUsuarioServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-             // Verificar sesión y rol (código existente)
-            HttpSession session = peticion.getSession(false);
-            System.out.println("Sesión: " + (session != null ? "existe" : "no existe"));
-            
+            // Verificar sesión y permisos
+            HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("usuario") == null) {
-                System.out.println("GestionUsuariosServlet.doGet - No hay sesión activa o usuario no encontrado en sesión");
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
+                GestorRegistros.sistemaWarning("Intento de crear usuario sin sesión válida desde IP: " 
+                    + request.getRemoteAddr());
+                response.sendRedirect(request.getContextPath() + "/acceso.jsp");
                 return;
             }
             
-            UsuarioDto usuarioActual = (UsuarioDto) session.getAttribute("usuario");
-            System.out.println("Usuario en sesión: " + usuarioActual.getNombreCompleto());
-            System.out.println("Rol del usuario: " + usuarioActual.getRolId());
-            
-            if (usuarioActual.getRolId() != 1) {
-                System.out.println("GestionUsuariosServlet.doGet - Usuario no es admin: " + usuarioActual.getRolId());
-                respuesta.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
+            UsuarioDto adminActual = (UsuarioDto) session.getAttribute("usuario");
+            if (adminActual.getRolId() != 1) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "Intento no autorizado de crear usuario. Rol actual: " + adminActual.getRolId());
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
                 return;
             }
 
-            
             // Obtener datos del formulario
-            String nombreCompleto = peticion.getParameter("nombreCompleto");
-            String correoElectronico = peticion.getParameter("correoElectronico");
-            String movil = peticion.getParameter("movil");
-            String contrasena = peticion.getParameter("contrasena");
-            Long rolId = Long.valueOf(peticion.getParameter("rolId"));
+            String nombreCompleto = request.getParameter("nombreCompleto");
+            String correoElectronico = request.getParameter("correoElectronico");
+            String movil = request.getParameter("movil");
+            String contrasena = request.getParameter("contrasena");
+            Long rolId = Long.valueOf(request.getParameter("rolId"));
+            
+            GestorRegistros.info(adminActual.getId(), 
+                "Iniciando creación de usuario: " + correoElectronico + " con rol: " + rolId);
+
             String contrasenaEncriptada = EncriptarUtil.hashPassword(contrasena);
 
             // Procesar la foto si existe
-            Part fotoPart = peticion.getPart("foto");
+            Part fotoPart = request.getPart("foto");
             byte[] fotoBytes = null;
             if (fotoPart != null && fotoPart.getSize() > 0) {
                 fotoBytes = fotoPart.getInputStream().readAllBytes();
                 try {
-                    // Verificar que sea una imagen válida
                     String nombreArchivo = fotoPart.getSubmittedFileName();
                     ImagenUtil.verificarImagen(fotoBytes, nombreArchivo);
+                    GestorRegistros.debug(adminActual.getId(), 
+                        "Foto procesada correctamente para usuario: " + correoElectronico);
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Error de validación de imagen: " + e.getMessage());
-                    peticion.getSession().setAttribute("error", "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
-                    respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+                    GestorRegistros.warning(adminActual.getId(), 
+                        "Error al procesar foto para usuario " + correoElectronico + ": " + e.getMessage());
+                    request.getSession().setAttribute("error", 
+                        "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
+                    response.sendRedirect(request.getContextPath() + "/admin/usuarios");
                     return;
                 }
             }
@@ -85,15 +89,24 @@ public class CrearUsuarioServlet extends HttpServlet {
 
             // Guardar el usuario
             usuarioServicio.crearUsuario(nuevoUsuario);
+            GestorRegistros.info(adminActual.getId(), 
+                "Usuario creado exitosamente: " + correoElectronico);
 
             // Redirigir de vuelta a la lista con mensaje de éxito
-            peticion.getSession().setAttribute("mensaje", "Usuario creado con éxito");
-            respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+            request.getSession().setAttribute("mensaje", "Usuario creado con éxito");
+            response.sendRedirect(request.getContextPath() + "/admin/usuarios");
 
         } catch (Exception e) {
-            e.printStackTrace();
-            peticion.getSession().setAttribute("error", "Error al crear usuario: " + e.getMessage());
-            respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+            try {
+                UsuarioDto admin = (UsuarioDto) request.getSession().getAttribute("usuario");
+                GestorRegistros.error(admin.getId(), 
+                    "Error al crear usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error al crear usuario - IP: " + request.getRemoteAddr() 
+                    + " - Error: " + e.getMessage());
+            }
+            request.getSession().setAttribute("error", "Error al crear usuario: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/admin/usuarios");
         }
     }
 }

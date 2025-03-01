@@ -2,6 +2,7 @@ package com.andres.gestionalmacen.servlets.administrador;
 
 import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,12 +25,19 @@ public class EliminarUsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        System.out.println("\n=== Procesando solicitud de eliminación de usuario ===");
-        
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null) {
-            System.err.println("Error: Sesión no válida");
+            GestorRegistros.sistemaWarning("Intento de eliminar usuario sin sesión válida desde IP: " 
+                + request.getRemoteAddr());
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sesión no válida");
+            return;
+        }
+
+        UsuarioDto adminActual = (UsuarioDto) session.getAttribute("usuario");
+        if (adminActual.getRolId() != 1) {
+            GestorRegistros.warning(adminActual.getId(), 
+                "Intento no autorizado de eliminar usuario. Rol actual: " + adminActual.getRolId());
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
             return;
         }
 
@@ -39,37 +47,48 @@ public class EliminarUsuarioServlet extends HttpServlet {
             String confirmacionId = request.getParameter("confirmacionId");
             
             if (idStr == null || idStr.trim().isEmpty()) {
+                GestorRegistros.warning(adminActual.getId(), "Intento de eliminación sin proporcionar ID");
                 throw new Exception("ID de usuario no proporcionado");
             }
             
             if (confirmacionId == null || !confirmacionId.equals(idStr)) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "ID de confirmación no coincide para eliminación. ID: " + idStr);
                 throw new Exception("El ID de confirmación no coincide");
             }
 
             Long id = Long.parseLong(idStr);
-            System.out.println("ID a eliminar: " + id);
+            GestorRegistros.info(adminActual.getId(), "Iniciando eliminación del usuario con ID: " + id);
 
             // Verificar que no se está intentando eliminar al usuario actual
-            UsuarioDto usuarioActual = (UsuarioDto) session.getAttribute("usuario");
-            if (usuarioActual.getId().equals(id)) {
+            if (adminActual.getId().equals(id)) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "Intento de eliminar la propia cuenta del administrador");
                 throw new Exception("No puedes eliminar tu propia cuenta");
             }
 
             // Intentar eliminar el usuario
             usuarioServicio.eliminarUsuario(id);
+            GestorRegistros.info(adminActual.getId(), "Usuario eliminado exitosamente. ID: " + id);
 
-            // Si llegamos aquí, la eliminación fue exitosa
             // Redirigir a la página de gestión de usuarios
             response.sendRedirect(request.getContextPath() + "/admin/usuarios");
             
         } catch (NumberFormatException e) {
-            System.err.println("Error: ID de usuario inválido - " + e.getMessage());
+            GestorRegistros.error(adminActual.getId(), 
+                "Error al parsear ID de usuario para eliminación: " + e.getMessage());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de usuario inválido");
             
         } catch (Exception e) {
-            System.err.println("Error al eliminar usuario: " + e.getMessage());
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar usuario: " + e.getMessage());
+            try {
+                GestorRegistros.error(adminActual.getId(), 
+                    "Error al eliminar usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error al eliminar usuario - IP: " + request.getRemoteAddr() 
+                    + " - Error: " + e.getMessage());
+            }
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 
+                "Error al eliminar usuario: " + e.getMessage());
         }
     }
 }

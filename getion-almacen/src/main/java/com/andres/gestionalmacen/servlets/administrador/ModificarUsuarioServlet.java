@@ -3,6 +3,7 @@ package com.andres.gestionalmacen.servlets.administrador;
 import com.andres.gestionalmacen.dtos.CrearUsuDto;
 import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -25,60 +26,47 @@ public class ModificarUsuarioServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            System.out.println("\n=== ModificarUsuarioServlet.doPost - Iniciando ===");
-            
             // Verificar sesión y rol
-            HttpSession session = peticion.getSession(false);
-            System.out.println("Sesión encontrada: " + (session != null));
-            
+            HttpSession session = request.getSession(false);
             if (session == null) {
-                System.out.println("No hay sesión activa");
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
+                GestorRegistros.sistemaWarning("Intento de modificar usuario sin sesión válida desde IP: " 
+                    + request.getRemoteAddr());
+                response.sendRedirect(request.getContextPath() + "/acceso.jsp");
                 return;
             }
 
-            UsuarioDto usuarioActual = (UsuarioDto) session.getAttribute("usuario");
-            System.out.println("Usuario en sesión: " + (usuarioActual != null ? 
-                "ID=" + usuarioActual.getId() + ", Nombre=" + usuarioActual.getNombreCompleto() + 
-                ", Rol=" + usuarioActual.getRolId() : "null"));
-            
-            if (usuarioActual == null) {
-                System.out.println("No hay usuario en la sesión");
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
+            UsuarioDto adminActual = (UsuarioDto) session.getAttribute("usuario");
+            if (adminActual == null) {
+                GestorRegistros.sistemaWarning("Intento de modificar usuario sin usuario en sesión desde IP: " 
+                    + request.getRemoteAddr());
+                response.sendRedirect(request.getContextPath() + "/acceso.jsp");
                 return;
             }
             
-            if (usuarioActual.getRolId() != 1) {
-                System.out.println("Usuario no es administrador: " + usuarioActual.getRolId());
-                respuesta.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
+            if (adminActual.getRolId() != 1) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "Intento no autorizado de modificar usuario. Rol actual: " + adminActual.getRolId());
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
                 return;
             }
 
-            System.out.println("Verificación de sesión y rol exitosa");
-
-            System.out.println("Recibiendo petición para modificar usuario");
             // Obtener datos del formulario
-            String idParam = peticion.getParameter("id");
-            System.out.println("ID recibido: " + idParam);
-            
+            String idParam = request.getParameter("id");
             if (idParam == null || idParam.trim().isEmpty()) {
+                GestorRegistros.warning(adminActual.getId(), "Intento de modificar usuario sin proporcionar ID");
                 throw new ServletException("ID de usuario no proporcionado");
             }
             
             long id = Long.parseLong(idParam);
-            String nombreCompleto = peticion.getParameter("nombreCompleto");
-            String correoElectronico = peticion.getParameter("correoElectronico");
-            String movil = peticion.getParameter("movil");
-            Long rolId = Long.parseLong(peticion.getParameter("rolId"));
-            
-            System.out.println("Datos recibidos:");
-            System.out.println("- ID: " + id);
-            System.out.println("- Nombre: " + nombreCompleto);
-            System.out.println("- Correo: " + correoElectronico);
-            System.out.println("- Móvil: " + movil);
-            System.out.println("- Rol ID: " + rolId);
+            String nombreCompleto = request.getParameter("nombreCompleto");
+            String correoElectronico = request.getParameter("correoElectronico");
+            String movil = request.getParameter("movil");
+            Long rolId = Long.parseLong(request.getParameter("rolId"));
+
+            GestorRegistros.info(adminActual.getId(), 
+                "Iniciando modificación del usuario ID: " + id + ", Email: " + correoElectronico);
 
             // Crear DTO para actualización
             CrearUsuDto usuarioActualizar = new CrearUsuDto();
@@ -88,43 +76,57 @@ public class ModificarUsuarioServlet extends HttpServlet {
             usuarioActualizar.setMovil(movil);
 
             // Procesar la foto si existe
-            Part fotoPart = peticion.getPart("foto");
+            Part fotoPart = request.getPart("foto");
             if (fotoPart != null && fotoPart.getSize() > 0) {
-                System.out.println("Procesando foto nueva");
+                GestorRegistros.debug(adminActual.getId(), "Procesando nueva foto para usuario ID: " + id);
                 byte[] fotoBytes = fotoPart.getInputStream().readAllBytes();
                 try {
-                    // Verificar que sea una imagen válida
                     String nombreArchivo = fotoPart.getSubmittedFileName();
                     ImagenUtil.verificarImagen(fotoBytes, nombreArchivo);
                     usuarioActualizar.setFoto(fotoBytes);
+                    GestorRegistros.debug(adminActual.getId(), 
+                        "Foto procesada correctamente para usuario ID: " + id);
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Error de validación de imagen: " + e.getMessage());
-                    peticion.getSession().setAttribute("error", "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
-                    respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+                    GestorRegistros.warning(adminActual.getId(), 
+                        "Error al procesar foto para usuario " + id + ": " + e.getMessage());
+                    request.getSession().setAttribute("error", 
+                        "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
+                    response.sendRedirect(request.getContextPath() + "/admin/usuarios");
                     return;
                 }
-            } else {
-                System.out.println("No se recibió nueva foto");
             }
 
             // Actualizar el usuario
-            System.out.println("Actualizando usuario en la base de datos...");
             usuarioServicio.actualizarUsuario(id, usuarioActualizar);
+            GestorRegistros.info(adminActual.getId(), 
+                "Usuario modificado exitosamente. ID: " + id + ", Email: " + correoElectronico);
 
             // Redirigir de vuelta a la lista con mensaje de éxito
-            System.out.println("Usuario actualizado exitosamente");
-            peticion.getSession().setAttribute("mensaje", "Usuario actualizado con éxito");
-            respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+            request.getSession().setAttribute("mensaje", "Usuario actualizado con éxito");
+            response.sendRedirect(request.getContextPath() + "/admin/usuarios");
 
         } catch (IllegalArgumentException e) {
-            System.out.println("Error de validación: " + e.getMessage());
-            peticion.getSession().setAttribute("error", "Error al validar la imagen: " + e.getMessage());
-            respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+            try {
+                UsuarioDto admin = (UsuarioDto) request.getSession().getAttribute("usuario");
+                GestorRegistros.error(admin.getId(), 
+                    "Error de validación al modificar usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error de validación al modificar usuario - IP: " 
+                    + request.getRemoteAddr());
+            }
+            request.getSession().setAttribute("error", "Error al validar la imagen: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/admin/usuarios");
         } catch (Exception e) {
-            System.out.println("Error al actualizar usuario: " + e.getMessage());
-            e.printStackTrace();
-            peticion.getSession().setAttribute("error", "Error al actualizar usuario: " + e.getMessage());
-            respuesta.sendRedirect(peticion.getContextPath() + "/admin/usuarios");
+            try {
+                UsuarioDto admin = (UsuarioDto) request.getSession().getAttribute("usuario");
+                GestorRegistros.error(admin.getId(), 
+                    "Error al modificar usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error al modificar usuario - IP: " + request.getRemoteAddr() 
+                    + " - Error: " + e.getMessage());
+            }
+            request.getSession().setAttribute("error", "Error al actualizar usuario: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/admin/usuarios");
         }
     }
 }

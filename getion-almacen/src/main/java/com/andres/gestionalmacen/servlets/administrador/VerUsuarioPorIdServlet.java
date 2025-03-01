@@ -2,8 +2,8 @@ package com.andres.gestionalmacen.servlets.administrador;
 
 import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
-
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-@WebServlet("/admin/usuarios/verId")
+@WebServlet("/admin/verUsuarioId")
 public class VerUsuarioPorIdServlet extends HttpServlet {
 
     private final UsuarioServicio usuarioServicio;
@@ -27,82 +27,114 @@ public class VerUsuarioPorIdServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
         try {
-
-             // Verificar sesión y rol (código existente)
-            HttpSession session = peticion.getSession(false);
-            System.out.println("Sesión: " + (session != null ? "existe" : "no existe"));
-            
+            // Verificar sesión y permisos
+            HttpSession session = request.getSession(false);
             if (session == null || session.getAttribute("usuario") == null) {
-                System.out.println("GestionUsuariosServlet.doGet - No hay sesión activa o usuario no encontrado en sesión");
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
-                return;
-            }
-            
-            UsuarioDto usuarioActual = (UsuarioDto) session.getAttribute("usuario");
-            System.out.println("Usuario en sesión: " + usuarioActual.getNombreCompleto());
-            System.out.println("Rol del usuario: " + usuarioActual.getRolId());
-            
-            if (usuarioActual.getRolId() != 1) {
-                System.out.println("GestionUsuariosServlet.doGet - Usuario no es admin: " + usuarioActual.getRolId());
-                respuesta.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
-                return;
-            }
-            // Validar que el ID no esté vacío
-            String usuarioIdStr = peticion.getParameter("usuarioId");
-            System.out.println("ID recibido en el servlet: " + usuarioIdStr); // Agregar este log
-
-            System.out.println("Servlet VerUsuarioPorId llamado");
-            System.out.println("Parámetros recibidos: " + peticion.getParameterMap().keySet());
-            System.out.println("ID recibido en el servlet: " + peticion.getParameter("usuarioId"));
-            
-            if (usuarioIdStr == null || usuarioIdStr.trim().isEmpty()) {
-                System.err.println("ID de usuario vacío o nulo");
-                respuesta.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de usuario no proporcionado");
+                GestorRegistros.sistemaWarning("Intento de ver usuario específico sin sesión válida desde IP: " 
+                    + request.getRemoteAddr());
+                response.sendRedirect(request.getContextPath() + "/acceso");
                 return;
             }
 
-            try {
-                Long userId = Long.parseLong(usuarioIdStr.trim());
-                UsuarioDto usuario = usuarioServicio.obtenerUsuarioPorId(userId);
+            UsuarioDto adminActual = (UsuarioDto) session.getAttribute("usuario");
+            if (adminActual.getRolId() != 1) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "Intento no autorizado de ver usuario específico. Rol actual: " + adminActual.getRolId());
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Acceso denegado");
+                return;
+            }
 
-                if (usuario != null) {
-                    respuesta.setContentType("application/json");
-                    respuesta.setCharacterEncoding("UTF-8");
+            // Obtener ID del usuario a ver
+            String idStr = request.getParameter("id");
+            if (idStr == null || idStr.trim().isEmpty()) {
+                GestorRegistros.warning(adminActual.getId(), "Intento de ver usuario sin proporcionar ID");
+                response.sendRedirect(request.getContextPath() + "/admin/usuarios");
+                return;
+            }
 
+            Long userId = Long.parseLong(idStr);
+            GestorRegistros.info(adminActual.getId(), "Acceso a detalles del usuario con ID: " + userId);
+
+            // Obtener datos del usuario
+            UsuarioDto usuario = usuarioServicio.obtenerUsuarioPorId(userId);
+
+            if (usuario != null) {
+                GestorRegistros.debug(adminActual.getId(), "Datos del usuario " + userId + " cargados correctamente");
+                
+                // Procesar foto si existe
+                if (usuario.getFoto() != null) {
+                    byte[] fotoConMime = ImagenUtil.asegurarMimeTypeImagen(usuario.getFoto());
+                    if (fotoConMime != null) {
+                        String fotoStr = new String(fotoConMime, StandardCharsets.UTF_8);
+                        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
+                            .add("id", usuario.getId())
+                            .add("nombreCompleto", usuario.getNombreCompleto())
+                            .add("correoElectronico", usuario.getCorreoElectronico())
+                            .add("movil", usuario.getMovil() != null ? usuario.getMovil() : "")
+                            .add("rolId", usuario.getRolId())
+                            .add("foto", fotoStr);
+                        JsonObject jsonUsuario = jsonBuilder.build();
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(jsonUsuario.toString());
+                        GestorRegistros.debug(adminActual.getId(), "Foto del usuario " + userId + " procesada correctamente");
+                    } else {
+                        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
+                            .add("id", usuario.getId())
+                            .add("nombreCompleto", usuario.getNombreCompleto())
+                            .add("correoElectronico", usuario.getCorreoElectronico())
+                            .add("movil", usuario.getMovil() != null ? usuario.getMovil() : "")
+                            .add("rolId", usuario.getRolId())
+                            .addNull("foto");
+                        JsonObject jsonUsuario = jsonBuilder.build();
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(jsonUsuario.toString());
+                        GestorRegistros.warning(adminActual.getId(), "No se pudo procesar la foto del usuario " + userId);
+                    }
+                } else {
                     JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                         .add("id", usuario.getId())
                         .add("nombreCompleto", usuario.getNombreCompleto())
                         .add("correoElectronico", usuario.getCorreoElectronico())
                         .add("movil", usuario.getMovil() != null ? usuario.getMovil() : "")
-                        .add("rolId", usuario.getRolId());
-
-                    // Procesar la foto con MIME type
-                    if (usuario.getFoto() != null) {
-                        byte[] fotoConMime = ImagenUtil.asegurarMimeTypeImagen(usuario.getFoto());
-                        if (fotoConMime != null) {
-                            String fotoBase64 = new String(fotoConMime, StandardCharsets.UTF_8);
-                            jsonBuilder.add("foto", fotoBase64);
-                        }
-                    } else {
-                        jsonBuilder.addNull("foto");
-                    }
-
+                        .add("rolId", usuario.getRolId())
+                        .addNull("foto");
                     JsonObject jsonUsuario = jsonBuilder.build();
-                    respuesta.getWriter().write(jsonUsuario.toString());
-                } else {
-                    respuesta.sendError(HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(jsonUsuario.toString());
                 }
-            } catch (NumberFormatException e) {
-                System.err.println("Error al convertir ID: " + usuarioIdStr);
-                respuesta.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de usuario inválido");
+
+            } else {
+                GestorRegistros.warning(adminActual.getId(), "Usuario con ID " + userId + " no encontrado");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
             }
 
+        } catch (NumberFormatException e) {
+            // Error al parsear el ID
+            try {
+                UsuarioDto admin = (UsuarioDto) request.getSession().getAttribute("usuario");
+                GestorRegistros.error(admin.getId(), "Error al parsear ID de usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error al parsear ID de usuario - IP: " + request.getRemoteAddr());
+            }
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de usuario inválido");
+            
         } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error en VerUsuarioPorIdServlet: " + e.getMessage());
-            respuesta.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al obtener datos del usuario");
+            // Error general
+            try {
+                UsuarioDto admin = (UsuarioDto) request.getSession().getAttribute("usuario");
+                GestorRegistros.error(admin.getId(), "Error al ver detalles de usuario: " + e.getMessage());
+            } catch (Exception ex) {
+                GestorRegistros.sistemaError("Error al ver detalles de usuario: " + e.getMessage() 
+                    + " - IP: " + request.getRemoteAddr());
+            }
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al obtener datos del usuario");
         }
     }
 }

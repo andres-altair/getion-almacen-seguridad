@@ -28,9 +28,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/layout.css">
+       <!-- Estilos propios -->
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 </head>
 <body>
      <!-- Barra de Navegación -->
@@ -51,10 +52,7 @@
             <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
                 <i class="fas fa-bars"></i> Menú
             </a>
-            <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="nav-link">
-                <i class="fas fa-home"></i> Panel de Control
-            </a>
-            <a href="../cerrar-sesion" class="nav-link">
+            <a href="${pageContext.request.contextPath}/cerrarSesion" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i> 
             </a>
         </div>
@@ -63,7 +61,7 @@
     <!-- Contenedor Principal -->
     <div class="container mt-4">
         <div class="d-flex align-items-center gap-3 mb-4">
-            <a href="${pageContext.request.contextPath}/admin/panel.jsp" class="btn admin">
+            <a href="${pageContext.request.contextPath}/admin/panel" class="btn admin">
                 <i class='bx bx-arrow-back'></i> Panel de Control
             </a>
             <button class="btn crear" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">

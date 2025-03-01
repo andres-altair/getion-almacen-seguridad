@@ -1,111 +1,27 @@
-
-2025-03-01 12:11:51 [main] INFO  - Sistema de logs inicializado
-2025-03-01 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:11:52 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 12:11:52 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 12:12:31 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
-2025-03-01 12:12:32 [http-nio-8080-exec-6] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 12:12:33 [http-nio-8080-exec-6] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 12:16:40 [main] INFO  - Sistema de logs inicializado
-2025-03-01 12:16:40 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:16:40 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:16:41 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 12:16:41 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 12:17:15 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:17:15 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:19:07 [main] INFO  - Sistema de logs inicializado
-2025-03-01 12:19:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:19:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:19:08 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 12:19:08 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 12:28:03 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:28:03 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:28:39 [main] INFO  - Sistema de logs inicializado
-2025-03-01 12:28:39 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:28:39 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:28:39 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 12:28:39 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 12:29:17 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
-2025-03-01 12:29:39 [http-nio-8080-exec-8] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 12:29:41 [http-nio-8080-exec-8] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 12:32:26 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
-2025-03-01 12:32:37 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
-2025-03-01 12:32:42 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 12:32:59 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
-2025-03-01 12:33:02 [http-nio-8080-exec-9] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 12:33:04 [http-nio-8080-exec-9] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 12:33:05 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
-2025-03-01 12:33:42 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
-2025-03-01 12:34:06 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
-2025-03-01 12:34:08 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 12:34:10 [http-nio-8080-exec-3] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 12:34:10 [http-nio-8080-exec-8] INFO  - Acceso a página de inicio
-2025-03-01 12:36:22 [http-nio-8080-exec-1] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 12:36:23 [http-nio-8080-exec-1] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 12:39:49 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:39:49 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 12:39:50 [Catalina-utility-2] INFO  - Sistema de logs inicializado
-2025-03-01 12:39:50 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:39:50 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 12:40:15 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
-2025-03-01 12:40:17 [http-nio-8080-exec-5] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 12:40:20 [http-nio-8080-exec-5] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 12:40:20 [http-nio-8080-exec-10] INFO  - Sistema de logs inicializado
-2025-03-01 12:40:20 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
-2025-03-01 12:40:50 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio
-2025-03-01 12:40:54 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
-2025-03-01 12:40:56 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
-2025-03-01 12:40:56 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
-2025-03-01 12:40:57 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
-2025-03-01 12:40:57 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio
-2025-03-01 12:42:30 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
-2025-03-01 12:42:44 [http-nio-8080-exec-15] INFO  - Acceso a página de inicio
-2025-03-01 12:42:47 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
-2025-03-01 12:42:47 [http-nio-8080-exec-16] INFO  - Acceso a página de inicio
-2025-03-01 12:42:49 [http-nio-8080-exec-17] INFO  - Acceso a página de acceso
-2025-03-01 12:42:50 [http-nio-8080-exec-19] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 12:42:50 [http-nio-8080-exec-19] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 12:44:08 [http-nio-8080-exec-15] INFO  - Acceso a página de inicio
-2025-03-01 12:45:35 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
-2025-03-01 12:46:23 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
-2025-03-01 12:46:36 [http-nio-8080-exec-15] INFO  - Acceso a página de inicio
-2025-03-01 12:46:37 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
-2025-03-01 12:46:37 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
-2025-03-01 12:48:32 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
-2025-03-01 13:04:05 [http-nio-8080-exec-16] INFO  - Acceso a página de acceso
-2025-03-01 13:04:08 [http-nio-8080-exec-11] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:04:10 [http-nio-8080-exec-11] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 13:04:11 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
-2025-03-01 13:04:47 [main] INFO  - Sistema de logs inicializado
-2025-03-01 13:04:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 13:04:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 13:04:54 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 13:04:54 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 13:05:08 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
-2025-03-01 13:05:09 [http-nio-8080-exec-7] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:05:12 [http-nio-8080-exec-7] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 13:05:13 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
-2025-03-01 13:05:31 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 13:05:41 [http-nio-8080-exec-3] INFO  - Acceso a página de acceso
-2025-03-01 13:05:42 [http-nio-8080-exec-4] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:05:45 [http-nio-8080-exec-4] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 13:05:45 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
-2025-03-01 13:06:03 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
-2025-03-01 13:06:38 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 13:09:41 [http-nio-8080-exec-1] INFO  - Acceso a página de acceso
-2025-03-01 13:09:45 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:09:47 [http-nio-8080-exec-10] ERROR - Error en el proceso de acceso para usuario gif?@gmail.com: Error durante la autenticación: Error en la autenticación: 401 - {"error":"Contraseña incorrecta"}
-2025-03-01 13:18:55 [http-nio-8080-exec-6] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:18:57 [http-nio-8080-exec-6] ERROR - Error en el proceso de acceso para usuario gif?@gmail.com: Error durante la autenticación: Error en la autenticación: 401 - {"error":"Contraseña incorrecta"}
-2025-03-01 13:19:09 [http-nio-8080-exec-7] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:19:11 [http-nio-8080-exec-7] ERROR - Error en el proceso de acceso para usuario gif?@gmail.com: Error durante la autenticación: Error en la autenticación: 401 - {"error":"Contraseña incorrecta"}
-2025-03-01 13:19:11 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
-2025-03-01 13:19:13 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 13:19:13 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 13:19:15 [Catalina-utility-2] INFO  - Sistema de logs inicializado
-2025-03-01 13:19:15 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 13:19:15 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 13:19:32 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
-2025-03-01 13:19:53 [http-nio-8080-exec-8] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 13:19:54 [http-nio-8080-exec-8] ERROR - Error en el proceso de acceso para usuario gif?@gmail.com: Error durante la autenticación: Error en la autenticación: 401 - {"error":"Contraseña incorrecta"}
+2025-03-01 19:17:19 [main] INFO  - Sistema de logs inicializado
+2025-03-01 19:17:19 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 19:17:19 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 19:17:20 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 19:17:20 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 19:17:28 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-01 19:18:07 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
+2025-03-01 19:18:35 [http-nio-8080-exec-8] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-01 19:18:36 [http-nio-8080-exec-8] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-01 19:22:29 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
+2025-03-01 19:24:20 [http-nio-8080-exec-2] INFO  - Acceso a página de acceso
+2025-03-01 19:24:21 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-01 19:24:22 [http-nio-8080-exec-3] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-01 19:27:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 19:27:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 19:27:36 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-01 19:27:36 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 19:27:36 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 19:27:45 [http-nio-8080-exec-4] WARN  - Intento de acceso a gestión de usuarios sin sesión válida desde IP: 127.0.0.1
+2025-03-01 19:27:49 [http-nio-8080-exec-6] INFO  - Sistema de logs inicializado
+2025-03-01 19:27:49 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
+2025-03-01 19:27:50 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
+2025-03-01 19:27:51 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-01 19:27:52 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-01 19:28:22 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
+2025-03-01 19:29:44 [http-nio-8080-exec-13] WARN  - Intento de acceso al panel de administración sin sesión válida desde IP: 127.0.0.1
+2025-03-01 19:29:44 [http-nio-8080-exec-14] INFO  - Acceso a página de acceso
