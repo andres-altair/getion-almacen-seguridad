@@ -37,7 +37,7 @@ public class VerTodosUsuariosServlet extends HttpServlet {
             if (session == null || session.getAttribute("usuario") == null) {
                 GestorRegistros.sistemaWarning("Intento de acceso a gestión de usuarios sin sesión válida desde IP: " 
                     + peticion.getRemoteAddr());
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
+                respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
                 return;
             }
             
@@ -58,9 +58,6 @@ public class VerTodosUsuariosServlet extends HttpServlet {
             // Obtener y mostrar lista de usuarios
             List<UsuarioDto> usuarios = usuarioServicio.obtenerUsuarios();
             if (usuarios != null) {
-                GestorRegistros.debug(usuarioActual.getId(), 
-                    "Lista de usuarios cargada correctamente. Total usuarios: " + usuarios.size());
-                
                 // Crear un mapa para almacenar las fotos convertidas
                 Map<Long, String> fotosBase64 = new HashMap<>();
                 

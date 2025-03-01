@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import com.andres.gestionalmacen.dtos.UsuarioDto;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
-
 
 @WebServlet("/operario/panel")
 public class PanelOperarioServlet extends HttpServlet {
@@ -20,50 +20,49 @@ public class PanelOperarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
         HttpSession sesion = peticion.getSession(false);
-        System.out.println("PanelOperarioServlet - Session exists: " + (sesion != null));
         
-        if (sesion != null && sesion.getAttribute("usuario") != null) {
-            System.out.println("PanelOperarioServlet - Usuario exists in session");
-            UsuarioDto usuario = (UsuarioDto) sesion.getAttribute("usuario");
-            System.out.println("PanelOperarioServlet - Usuario nombre: " + usuario.getNombreCompleto());
+        if (sesion == null || sesion.getAttribute("usuario") == null) {
+            GestorRegistros.sistemaWarning("Intento de acceso al panel de operario sin sesión válida desde IP: " 
+                + peticion.getRemoteAddr());
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
+            return;
+        }
+
+        UsuarioDto usuario = (UsuarioDto) sesion.getAttribute("usuario");
+        
+        if (usuario.getRolId() != 3) { // Verificar si es operario
+            GestorRegistros.warning(usuario.getId(), 
+                "Intento no autorizado de acceso al panel de operario. Rol actual: " + usuario.getRolId());
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
+            return;
+        }
+
+        try {
+            // Preparar los datos de manera segura
+            String nombreCompleto = usuario.getNombreCompleto();
+            String fotoBase64 = null;
             
-            if (usuario.getRolId() == 3) { // Verificar si es gerente
-                System.out.println("PanelOperarioServlet - Usuario es operario");
-                
-                 try {
-                    // Preparar los datos de manera segura
-                    String nombreCompleto = usuario.getNombreCompleto();
-                    String fotoBase64 = null;
-                    
-                    // Procesar la foto con MIME type
-                    if (usuario.getFoto() != null) {
-                        byte[] fotoConMime = ImagenUtil.asegurarMimeTypeImagen(usuario.getFoto());
-                        if (fotoConMime != null) {
-                            fotoBase64 = new String(fotoConMime, StandardCharsets.UTF_8);
-                        }
-                    }
-                    
-                    System.out.println("PanelAdminServlet - Nombre completo: " + nombreCompleto);
-                    System.out.println("PanelAdminServlet - Foto convertida: " + (fotoBase64 != null));
-                    
-                    // Establecer atributos con valores por defecto si son null
-                    peticion.setAttribute("usuarioNombre", nombreCompleto != null ? nombreCompleto : "Usuario");
-                    peticion.setAttribute("usuarioFoto", fotoBase64 != null ? fotoBase64 : "https://via.placeholder.com/32");
-                    
-                    System.out.println("PanelAdminServlet - Atributos establecidos correctamente");
-                    peticion.getRequestDispatcher("/admin/panelAdmin.jsp").forward(peticion, respuesta);
-                } catch (Exception e) {
-                    System.out.println("Error al procesar datos de usuario: " + e.getMessage());
-                    e.printStackTrace();
-                    respuesta.sendRedirect("../acceso.jsp");
+            // Procesar la foto con MIME type
+            if (usuario.getFoto() != null) {
+                byte[] fotoConMime = ImagenUtil.asegurarMimeTypeImagen(usuario.getFoto());
+                if (fotoConMime != null) {
+                    fotoBase64 = new String(fotoConMime, StandardCharsets.UTF_8);
+                } else {
+                    GestorRegistros.warning(usuario.getId(), "No se pudo procesar la foto de perfil");
                 }
-            } else {
-                System.out.println("PanelOperarioServlet - Usuario no es operario");
-                respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
             }
-        } else {
-            System.out.println("PanelGerenteServlet - No hay sesión activa");
-            respuesta.sendRedirect(peticion.getContextPath() + "/acceso.jsp");
+            
+            // Establecer atributos con valores por defecto si son null
+            peticion.setAttribute("usuarioNombre", nombreCompleto != null ? nombreCompleto : "Usuario");
+            peticion.setAttribute("usuarioFoto", fotoBase64 != null ? fotoBase64 : "https://via.placeholder.com/32");
+            
+            GestorRegistros.info(usuario.getId(), "Panel de operario cargado exitosamente");
+            peticion.getRequestDispatcher("/operario/panelOperario.jsp").forward(peticion, respuesta);
+            
+        } catch (Exception e) {
+            GestorRegistros.error(usuario.getId(), 
+                "Error al cargar el panel de operario: " + e.getMessage());
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
         }
     }
 }

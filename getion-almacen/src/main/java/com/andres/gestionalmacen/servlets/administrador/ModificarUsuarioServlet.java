@@ -65,9 +65,6 @@ public class ModificarUsuarioServlet extends HttpServlet {
             String movil = request.getParameter("movil");
             Long rolId = Long.parseLong(request.getParameter("rolId"));
 
-            GestorRegistros.info(adminActual.getId(), 
-                "Iniciando modificación del usuario ID: " + id + ", Email: " + correoElectronico);
-
             // Crear DTO para actualización
             CrearUsuDto usuarioActualizar = new CrearUsuDto();
             usuarioActualizar.setNombreCompleto(nombreCompleto);
@@ -78,14 +75,11 @@ public class ModificarUsuarioServlet extends HttpServlet {
             // Procesar la foto si existe
             Part fotoPart = request.getPart("foto");
             if (fotoPart != null && fotoPart.getSize() > 0) {
-                GestorRegistros.debug(adminActual.getId(), "Procesando nueva foto para usuario ID: " + id);
                 byte[] fotoBytes = fotoPart.getInputStream().readAllBytes();
                 try {
                     String nombreArchivo = fotoPart.getSubmittedFileName();
                     ImagenUtil.verificarImagen(fotoBytes, nombreArchivo);
                     usuarioActualizar.setFoto(fotoBytes);
-                    GestorRegistros.debug(adminActual.getId(), 
-                        "Foto procesada correctamente para usuario ID: " + id);
                 } catch (IllegalArgumentException e) {
                     GestorRegistros.warning(adminActual.getId(), 
                         "Error al procesar foto para usuario " + id + ": " + e.getMessage());
@@ -98,8 +92,7 @@ public class ModificarUsuarioServlet extends HttpServlet {
 
             // Actualizar el usuario
             usuarioServicio.actualizarUsuario(id, usuarioActualizar);
-            GestorRegistros.info(adminActual.getId(), 
-                "Usuario modificado exitosamente. ID: " + id + ", Email: " + correoElectronico);
+            GestorRegistros.info(adminActual.getId(), "Usuario modificado exitosamente. ID: " + id );
 
             // Redirigir de vuelta a la lista con mensaje de éxito
             request.getSession().setAttribute("mensaje", "Usuario actualizado con éxito");

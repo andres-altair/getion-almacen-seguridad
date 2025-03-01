@@ -11,3 +11,8 @@
 2025-03-01 13:05:45 [http-nio-8080-exec-4] INFO  - Acceso exitoso al sistema
 2025-03-01 13:05:45 [http-nio-8080-exec-4] INFO  - Redirigiendo a: /gerente/panel
 2025-03-01 13:06:03 [http-nio-8080-exec-8] INFO  - Cierre de sesión
+2025-03-01 22:14:32 [http-nio-8080-exec-1] INFO  - Acceso exitoso al sistema
+2025-03-01 22:14:32 [http-nio-8080-exec-1] INFO  - Redirigiendo a: /gerente/panel
+2025-03-01 22:14:32 [http-nio-8080-exec-5] DEBUG - Acceso al panel de gerente - Usuario: gif?
+2025-03-01 22:14:33 [http-nio-8080-exec-5] DEBUG - Foto de perfil procesada correctamente
+2025-03-01 22:14:33 [http-nio-8080-exec-5] INFO  - Panel de gerente cargado exitosamente

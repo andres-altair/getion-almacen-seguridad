@@ -34,7 +34,7 @@ public class CrearUsuarioServlet extends HttpServlet {
             if (session == null || session.getAttribute("usuario") == null) {
                 GestorRegistros.sistemaWarning("Intento de crear usuario sin sesión válida desde IP: " 
                     + request.getRemoteAddr());
-                response.sendRedirect(request.getContextPath() + "/acceso.jsp");
+                response.sendRedirect(request.getContextPath() + "/acceso");
                 return;
             }
             

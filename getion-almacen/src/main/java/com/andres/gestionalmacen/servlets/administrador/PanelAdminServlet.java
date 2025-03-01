@@ -39,7 +39,6 @@ public class PanelAdminServlet extends HttpServlet {
                         if (fotoConMime != null) {
                             String fotoStr = new String(fotoConMime, StandardCharsets.UTF_8);
                             fotoBase64 = fotoStr;
-                            GestorRegistros.debug(usuario.getId(), "Foto de perfil procesada correctamente");
                         } else {
                             GestorRegistros.warning(usuario.getId(), "No se pudo procesar la foto de perfil");
                         }
@@ -50,7 +49,6 @@ public class PanelAdminServlet extends HttpServlet {
                     String fotoSrc = fotoBase64 != null ? fotoBase64 : "https://via.placeholder.com/32";
                     peticion.setAttribute("usuarioFoto", fotoSrc);
                     
-                    GestorRegistros.debug(usuario.getId(), "Datos del panel de administración cargados correctamente");
                     peticion.getRequestDispatcher("/admin/panelAdmin.jsp").forward(peticion, respuesta);
                     
                 } catch (Exception e) {

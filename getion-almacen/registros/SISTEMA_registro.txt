@@ -25,3 +25,18 @@
 2025-03-01 19:28:22 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
 2025-03-01 19:29:44 [http-nio-8080-exec-13] WARN  - Intento de acceso al panel de administración sin sesión válida desde IP: 127.0.0.1
 2025-03-01 19:29:44 [http-nio-8080-exec-14] INFO  - Acceso a página de acceso
+2025-03-01 19:36:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 19:36:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 19:36:42 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-01 19:36:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 19:36:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 22:14:11 [main] INFO  - Sistema de logs inicializado
+2025-03-01 22:14:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 22:14:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 22:14:11 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 22:14:11 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 22:14:26 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-03-01 22:14:27 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
+2025-03-01 22:14:30 [http-nio-8080-exec-1] INFO  - Intento de acceso para usuario: gif?@gmail.com
+2025-03-01 22:14:32 [http-nio-8080-exec-1] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
+2025-03-01 22:14:33 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio
