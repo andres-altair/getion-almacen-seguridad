@@ -1,0 +1,2 @@
+2025-03-01 12:29:40 [http-nio-8080-exec-8] INFO  - Acceso exitoso al sistema
+2025-03-01 12:29:41 [http-nio-8080-exec-8] INFO  - Redirigiendo a: /admin/panel

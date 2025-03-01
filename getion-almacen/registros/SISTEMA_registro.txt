@@ -1,37 +1,31 @@
-2025-02-28 16:09:15 [Catalina-utility-1] INFO  - Sistema de logs inicializado
-2025-02-28 16:09:15 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:09:15 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:09:22 [http-nio-8080-exec-5] INFO  - Sistema de logs inicializado
-2025-02-28 16:09:22 [http-nio-8080-exec-5] INFO  - Acceso a página de inicio
-2025-02-28 16:09:53 [main] INFO  - Sistema de logs inicializado
-2025-02-28 16:09:53 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:09:53 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:10:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-02-28 16:10:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-02-28 16:10:26 [main] INFO  - Sistema de logs inicializado
-2025-02-28 16:10:26 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:10:26 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 16:10:26 [http-nio-8080-exec-2] INFO  - [32m[FILTRO] Nueva petición recibida: /getion-almacen/[0m
-2025-02-28 16:10:26 [http-nio-8080-exec-2] WARN  - [33mAcceso a JSP bloqueado: /getion-almacen/ - IP: 127.0.0.1[0m
-2025-02-28 16:10:26 [http-nio-8080-exec-2] INFO  - [32m[FILTRO] Redirigiendo a /inicio[0m
-2025-02-28 16:10:26 [http-nio-8080-exec-3] INFO  - Sistema de logs inicializado
-2025-02-28 16:10:26 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
-2025-02-28 21:45:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-02-28 21:45:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-02-28 22:42:55 [main] INFO  - Sistema de logs inicializado
-2025-02-28 22:42:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 22:42:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-02-28 22:42:56 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-02-28 22:42:56 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-02-28 22:43:00 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
-2025-02-28 22:43:33 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio
-2025-03-01 11:35:47 [main] INFO  - Sistema de logs inicializado
-2025-03-01 11:35:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 11:35:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 11:35:48 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 11:35:48 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 11:37:22 [http-nio-8080-exec-1] INFO  - Acceso a página de acceso
-2025-03-01 11:37:45 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 11:37:47 [http-nio-8080-exec-3] INFO  - Acceso exitoso al sistema
-2025-03-01 11:37:47 [http-nio-8080-exec-3] INFO  - Usuario palomitasverdes73@gmail.com (ID: 4) accedió exitosamente. Rol: 1
-2025-03-01 11:37:47 [http-nio-8080-exec-3] INFO  - Redirigiendo a: /admin/panel
+
+2025-03-01 12:11:51 [main] INFO  - Sistema de logs inicializado
+2025-03-01 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:11:52 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 12:11:52 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 12:12:31 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-01 12:12:32 [http-nio-8080-exec-6] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-01 12:12:33 [http-nio-8080-exec-6] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-01 12:16:40 [main] INFO  - Sistema de logs inicializado
+2025-03-01 12:16:40 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:16:40 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:16:41 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 12:16:41 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 12:17:15 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 12:17:15 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 12:19:07 [main] INFO  - Sistema de logs inicializado
+2025-03-01 12:19:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:19:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:19:08 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 12:19:08 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 12:28:03 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 12:28:03 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-01 12:28:39 [main] INFO  - Sistema de logs inicializado
+2025-03-01 12:28:39 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:28:39 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-01 12:28:39 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-01 12:28:39 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-01 12:29:17 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
+2025-03-01 12:29:39 [http-nio-8080-exec-8] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-01 12:29:41 [http-nio-8080-exec-8] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1

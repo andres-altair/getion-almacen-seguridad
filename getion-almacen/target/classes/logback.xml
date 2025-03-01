@@ -10,6 +10,8 @@
         <file>${LOG_DIR}/SISTEMA_registro.txt</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>${LOG_DIR}/SISTEMA_registro_%i.txt</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>2</maxIndex>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <maxFileSize>100MB</maxFileSize>
@@ -19,19 +21,38 @@
         </encoder>
     </appender>
     
-    <!-- Appender para archivos de usuario -->
-    <appender name="USER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <append>true</append>
-        <file>${LOG_DIR}/USER_%X{userId}_registro.txt</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/USER_%X{userId}_registro_%i.txt</fileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>100MB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
-        </encoder>
+    <!-- Appender para archivos de usuario usando SiftingAppender -->
+    <appender name="USER_FILE" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>userId</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${userId}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <append>true</append>
+                <file>${LOG_DIR}/USER_${userId}_registro.txt</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <fileNamePattern>${LOG_DIR}/USER_${userId}_registro_%i.txt</fileNamePattern>
+                    <minIndex>1</minIndex>
+                    <maxIndex>2</maxIndex>
+                </rollingPolicy>
+                <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <maxFileSize>100MB</maxFileSize>
+                </triggeringPolicy>
+                <encoder>
+                    <pattern>${LOG_PATTERN}</pattern>
+                </encoder>
+                <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+                    <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                        <expression>
+                            return !("unknown".equals(userId) || "undefined".equals(userId));
+                        </expression>
+                    </evaluator>
+                    <OnMismatch>DENY</OnMismatch>
+                    <OnMatch>ACCEPT</OnMatch>
+                </filter>
+            </appender>
+        </sift>
     </appender>
     
     <!-- Appender para consola -->
@@ -48,7 +69,7 @@
     </logger>
     
     <!-- Logger para usuarios -->
-    <logger name="com.andres.gestionalmacen.usuarios" level="DEBUG">
+    <logger name="com.andres.gestionalmacen.usuarios" level="DEBUG" additivity="false">
         <appender-ref ref="USER_FILE" />
         <appender-ref ref="CONSOLE" />
     </logger>

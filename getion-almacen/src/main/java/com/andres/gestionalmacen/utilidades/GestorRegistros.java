@@ -47,9 +47,18 @@ public class GestorRegistros {
     }
 
     // Métodos para logs de usuario - van al archivo [userId]_[fecha]_registro.txt
+    private static boolean isValidUserId(Long idUsuario) {
+        return idUsuario != null && idUsuario > 0;
+    }
+
     public static void debug(Long idUsuario, String mensaje) {
+        if (!isValidUserId(idUsuario)) {
+            sistemaDebug(mensaje);
+            return;
+        }
         try {
-            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            // Usar userId como discriminador para el SiftingAppender
+            MDC.put("userId", String.valueOf(idUsuario));
             loggerUsuarios.debug(mensaje);
         } finally {
             MDC.remove("userId");
@@ -57,8 +66,13 @@ public class GestorRegistros {
     }
 
     public static void info(Long idUsuario, String mensaje) {
+        if (!isValidUserId(idUsuario)) {
+            sistemaInfo(mensaje);
+            return;
+        }
         try {
-            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            // Usar userId como discriminador para el SiftingAppender
+            MDC.put("userId", String.valueOf(idUsuario));
             loggerUsuarios.info(mensaje);
         } finally {
             MDC.remove("userId");
@@ -66,8 +80,13 @@ public class GestorRegistros {
     }
 
     public static void warning(Long idUsuario, String mensaje) {
+        if (!isValidUserId(idUsuario)) {
+            sistemaWarning(mensaje);
+            return;
+        }
         try {
-            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            // Usar userId como discriminador para el SiftingAppender
+            MDC.put("userId", String.valueOf(idUsuario));
             loggerUsuarios.warn(mensaje);
         } finally {
             MDC.remove("userId");
@@ -75,8 +94,13 @@ public class GestorRegistros {
     }
 
     public static void error(Long idUsuario, String mensaje) {
+        if (!isValidUserId(idUsuario)) {
+            sistemaError(mensaje);
+            return;
+        }
         try {
-            MDC.put("userId", idUsuario != null ? idUsuario.toString() : "sistema");
+            // Usar userId como discriminador para el SiftingAppender
+            MDC.put("userId", String.valueOf(idUsuario));
             loggerUsuarios.error(mensaje);
         } finally {
             MDC.remove("userId");
