@@ -85,7 +85,9 @@ public class AccesoServlet extends HttpServlet {
             } else {
                 // Log de acceso fallido
                 GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
-                request.setAttribute("error", "Credenciales incorrectas");
+                
+                // Establecer mensaje de error y atributos para mantener el email
+                request.setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
                 request.getRequestDispatcher("/acceso.jsp").forward(request, response);
             }
         } catch (Exception e) {
@@ -96,7 +98,9 @@ public class AccesoServlet extends HttpServlet {
             if (errorMessage.contains("500")) {
                 errorMessage = "Error en el servidor. Por favor, inténtelo más tarde.";
             }
+            // Establecer mensaje de error y mantener el email
             request.setAttribute("error", errorMessage);
+            request.setAttribute("correoElectronico", correoElectronico);
             request.getRequestDispatcher("/acceso.jsp").forward(request, response);
         }
     }

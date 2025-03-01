@@ -41,7 +41,8 @@
                         <form action="${pageContext.request.contextPath}/acceso" method="post">
                             <div class="mb-3">
                                 <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" required>
+                                <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" 
+                                       value="${requestScope.correoElectronico}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="contrasena" class="form-label">Contraseña</label>

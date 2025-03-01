@@ -21,29 +21,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/layout.css">
+     <!-- Estilos propios -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 </head>
 <body>
     <!-- Barra de Navegación -->
     <nav class="navbar">
         <div class="navbar-logo">
-            <img src="../img/logo.svg" alt="EnvioGo" class="img-fluid" height="40">
+            <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
         </div>
-        <span class="welcome-text">
-            Bienvenido, <span class="nombre-usuario">${usuarioNombre}</span>
-        </span>
-        <div class="navbar-nav">
-            <a href="../cerrar-sesion" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        <div class="nav-links-container">
+            <a href="${pageContext.request.contextPath}/gerente/inventario" class="nav-link">
+                <i class="fas fa-users"></i> Gestión Inventario
+            </a>
+            <a href="${pageContext.request.contextPath}/gerente/reporte" class="nav-link">
+                <i class="fas fa-database"></i> Reporte
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/tarea" class="nav-link">
+                <i class="fas fa-exclamation-triangle"></i> Asignar Tarea
+            </a>
+            <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
+                <i class="fas fa-bars"></i> Menú
+            </a>
+            <a href="${pageContext.request.contextPath}/cerrarSesion" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> 
             </a>
         </div>
     </nav>
 
     <!-- Contenedor Principal -->
-    <div class="panel-container">
+   <div class="panel-container container-fluid">
+    <!-- Información de Usuario -->
+    <div class="user-info row">
+        <div class="col-12">
+            <img src="${usuarioFoto}" class="img-perfil" alt="Foto de perfil">
+            <span class="welcome-text">Bienvenido <span class="nombre-usuario">${usuarioNombre}</span></span>
+        </div>
+    </div>
+
         <!-- Sección de Estadísticas -->
         <section class="panel-section">
             <div class="stats-container">
@@ -97,12 +114,14 @@
                 </div>
             </div>
         </section>
-    </div>
+        </div>
 
-    <!-- Footer -->
+
+      <!-- Footer -->
     <footer class="footer">
         <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
     </footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

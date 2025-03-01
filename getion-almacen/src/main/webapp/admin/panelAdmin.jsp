@@ -45,7 +45,7 @@
             <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
                 <i class="fas fa-bars"></i> Menú
             </a>
-            <a href="${pageContext.request.contextPath}/cerrar-sesion" class="nav-link">
+            <a href="${pageContext.request.contextPath}/cerrarSesion" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i> 
             </a>
         </div>
