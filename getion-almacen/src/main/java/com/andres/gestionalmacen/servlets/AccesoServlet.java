@@ -29,16 +29,15 @@ public class AccesoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
         String correoElectronico = request.getParameter("correoElectronico");
         String contrasena = request.getParameter("contrasena");
         boolean recordar = request.getParameter("recordar") != null;
 
-        System.out.println("Intento de login para: " + correoElectronico);
+        // Log del intento de acceso
+        GestorRegistros.sistemaInfo("Intento de acceso para usuario: " + correoElectronico);
 
         // Hashear la contraseña
         String contrasenaHasheada = EncriptarUtil.hashPassword(contrasena);
-        System.out.println("Contraseña hasheada: " + contrasenaHasheada);
         
         // Crear una instancia de UsuarioServicio
         UsuarioServicio usuarioServicio = new UsuarioServicio();
@@ -48,8 +47,9 @@ public class AccesoServlet extends HttpServlet {
             UsuarioDto usuarioDto = usuarioServicio.validarCredenciales(correoElectronico, contrasenaHasheada);
             
             if (usuarioDto != null) {
-                System.out.println("Login exitoso para: " + correoElectronico);
-                System.out.println("Rol del usuario: " + usuarioDto.getRolId());
+                // Log de acceso exitoso
+                GestorRegistros.info(usuarioDto.getId(), "Acceso exitoso al sistema");
+                GestorRegistros.sistemaInfo("Usuario con ID: " + usuarioDto.getId() + " accedió exitosamente. Rol: " + usuarioDto.getRolId());
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuarioDto);
@@ -58,32 +58,40 @@ public class AccesoServlet extends HttpServlet {
                     Cookie cookie = new Cookie("usuario", correoElectronico);
                     cookie.setMaxAge(60 * 60 * 24 * 30); // 30 días
                     response.addCookie(cookie);
+                    GestorRegistros.info(usuarioDto.getId(), "Se ha activado la opción 'recordar usuario'");
                 }
 
                 // Redirigir según el rol
+                String destino;
                 switch (usuarioDto.getRolId().intValue()) {
                     case 1: // Admin
-                        response.sendRedirect(request.getContextPath() + "/admin/panel");
+                        destino = "/admin/panel";
                         break;
                     case 2: // Gerente
-                        response.sendRedirect(request.getContextPath() + "/gerente/panel");
+                        destino = "/gerente/panel";
                         break;
                     case 3: // Operador
-                        response.sendRedirect(request.getContextPath() + "/operario/panel");
+                        destino = "/operario/panel";
                         break;
                     default:
-                        System.out.println("Rol no válido: " + usuarioDto.getRolId());
+                        GestorRegistros.warning(usuarioDto.getId(), "Intento de acceso con rol no válido: " + usuarioDto.getRolId());
                         request.setAttribute("error", "Rol no válido");
                         request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+                        return;
                 }
+                GestorRegistros.info(usuarioDto.getId(), "Redirigiendo a: " + destino);
+                response.sendRedirect(request.getContextPath() + destino);
+                
             } else {
-                System.out.println("Login fallido: usuario no encontrado");
+                // Log de acceso fallido
+                GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
                 request.setAttribute("error", "Credenciales incorrectas");
                 request.getRequestDispatcher("/acceso.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            System.err.println("Error en login: " + e.getMessage());
-            e.printStackTrace();
+            // Log de error
+            GestorRegistros.sistemaError("Error en el proceso de acceso para usuario " + correoElectronico + ": " + e.getMessage());
+            
             String errorMessage = e.getMessage();
             if (errorMessage.contains("500")) {
                 errorMessage = "Error en el servidor. Por favor, inténtelo más tarde.";
