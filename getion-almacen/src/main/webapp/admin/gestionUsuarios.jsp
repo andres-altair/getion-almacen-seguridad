@@ -182,10 +182,6 @@
                             <input type="text" class="form-control" name="nombreCompleto" required>
                         </div>
                         <div class="mb-3">
-                            <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" name="correoElectronico" required>
-                        </div>
-                        <div class="mb-3">
                             <label for="movil" class="form-label">Móvil</label>
                             <input type="tel" class="form-control" name="movil" 
                                    required 
@@ -194,6 +190,10 @@
                                    placeholder="Ej: 612345678 +34612345678"
                                    title="Introduce un número de móvil válido (entre 9 y 15 dígitos)">
                             <div class="form-text">Formato: 612345678 (entre 9 y 15 dígitos)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" name="correoElectronico" required>
                         </div>
                         <div class="mb-3">
                             <label for="contrasena" class="form-label">Contraseña</label>

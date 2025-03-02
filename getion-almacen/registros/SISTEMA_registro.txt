@@ -1,42 +1,25 @@
-2025-03-01 19:17:19 [main] INFO  - Sistema de logs inicializado
-2025-03-01 19:17:19 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 19:17:19 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 19:17:20 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 19:17:20 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 19:17:28 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
-2025-03-01 19:18:07 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
-2025-03-01 19:18:35 [http-nio-8080-exec-8] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 19:18:36 [http-nio-8080-exec-8] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 19:22:29 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
-2025-03-01 19:24:20 [http-nio-8080-exec-2] INFO  - Acceso a página de acceso
-2025-03-01 19:24:21 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 19:24:22 [http-nio-8080-exec-3] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 19:27:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 19:27:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 19:27:36 [Catalina-utility-2] INFO  - Sistema de logs inicializado
-2025-03-01 19:27:36 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 19:27:36 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 19:27:45 [http-nio-8080-exec-4] WARN  - Intento de acceso a gestión de usuarios sin sesión válida desde IP: 127.0.0.1
-2025-03-01 19:27:49 [http-nio-8080-exec-6] INFO  - Sistema de logs inicializado
-2025-03-01 19:27:49 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
-2025-03-01 19:27:50 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
-2025-03-01 19:27:51 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
-2025-03-01 19:27:52 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
-2025-03-01 19:28:22 [http-nio-8080-exec-11] INFO  - Acceso a página de inicio
-2025-03-01 19:29:44 [http-nio-8080-exec-13] WARN  - Intento de acceso al panel de administración sin sesión válida desde IP: 127.0.0.1
-2025-03-01 19:29:44 [http-nio-8080-exec-14] INFO  - Acceso a página de acceso
-2025-03-01 19:36:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 19:36:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
-2025-03-01 19:36:42 [Catalina-utility-2] INFO  - Sistema de logs inicializado
-2025-03-01 19:36:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 19:36:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 22:14:11 [main] INFO  - Sistema de logs inicializado
-2025-03-01 22:14:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 22:14:11 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
-2025-03-01 22:14:11 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
-2025-03-01 22:14:11 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
-2025-03-01 22:14:26 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
-2025-03-01 22:14:27 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
-2025-03-01 22:14:30 [http-nio-8080-exec-1] INFO  - Intento de acceso para usuario: gif?@gmail.com
-2025-03-01 22:14:32 [http-nio-8080-exec-1] INFO  - Usuario con ID: 8 accedió exitosamente. Rol: 2
-2025-03-01 22:14:33 [http-nio-8080-exec-4] INFO  - Acceso a página de inicio
+2025-03-02 12:33:09 [main] INFO  - Sistema de logs inicializado
+2025-03-02 12:33:09 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-02 12:33:09 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-02 12:33:10 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-02 12:33:10 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-02 12:33:14 [http-nio-8080-exec-3] INFO  - Acceso a página de registro 
+2025-03-02 12:33:14 [http-nio-8080-exec-4] INFO  - Acceso a página de registro 
+2025-03-02 12:34:02 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-02 12:34:02 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-02 12:34:03 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-02 12:34:03 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-02 12:34:03 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-02 12:34:04 [http-nio-8080-exec-3] INFO  - Acceso a página de registro 
+2025-03-02 12:34:05 [http-nio-8080-exec-8] INFO  - Acceso a página de registro 
+2025-03-02 12:35:27 [http-nio-8080-exec-11] INFO  - Usuario registrado exitosamente: rrrrrrrrrr@gmail.com
+2025-03-02 12:35:27 [http-nio-8080-exec-12] INFO  - Acceso a página de acceso
+2025-03-02 12:35:35 [http-nio-8080-exec-6] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-02 12:35:36 [http-nio-8080-exec-6] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-02 12:37:03 [http-nio-8080-exec-14] WARN  - Intento de acceso a gestión de usuarios sin sesión válida desde IP: 0:0:0:0:0:0:0:1
+2025-03-02 12:37:03 [http-nio-8080-exec-11] INFO  - Acceso a página de acceso
+2025-03-02 12:37:07 [http-nio-8080-exec-15] INFO  - Sistema de logs inicializado
+2025-03-02 12:37:07 [http-nio-8080-exec-15] INFO  - Acceso a página de inicio
+2025-03-02 12:37:28 [http-nio-8080-exec-16] INFO  - Acceso a página de acceso
+2025-03-02 12:37:29 [http-nio-8080-exec-18] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-02 12:37:29 [http-nio-8080-exec-18] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1

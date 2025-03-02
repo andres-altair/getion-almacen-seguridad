@@ -66,8 +66,6 @@ public class CrearUsuarioServlet extends HttpServlet {
                 try {
                     String nombreArchivo = fotoPart.getSubmittedFileName();
                     ImagenUtil.verificarImagen(fotoBytes, nombreArchivo);
-                    GestorRegistros.debug(adminActual.getId(), 
-                        "Foto procesada correctamente para usuario: " + correoElectronico);
                 } catch (IllegalArgumentException e) {
                     GestorRegistros.warning(adminActual.getId(), 
                         "Error al procesar foto para usuario " + correoElectronico + ": " + e.getMessage());

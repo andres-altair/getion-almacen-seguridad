@@ -1,57 +1,14 @@
-2025-03-01 12:29:40 [http-nio-8080-exec-8] INFO  - Acceso exitoso al sistema
-2025-03-01 12:29:41 [http-nio-8080-exec-8] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 12:36:23 [http-nio-8080-exec-1] INFO  - Acceso exitoso al sistema
-2025-03-01 12:36:23 [http-nio-8080-exec-1] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 12:42:50 [http-nio-8080-exec-19] INFO  - Acceso exitoso al sistema
-2025-03-01 12:42:50 [http-nio-8080-exec-19] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 13:32:45 [http-nio-8080-exec-13] INFO  - Acceso exitoso al sistema
-2025-03-01 13:32:46 [http-nio-8080-exec-13] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 19:18:36 [http-nio-8080-exec-8] INFO  - Acceso exitoso al sistema
-2025-03-01 19:18:36 [http-nio-8080-exec-8] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 19:18:36 [http-nio-8080-exec-10] INFO  - Acceso al panel de administración
-2025-03-01 19:18:36 [http-nio-8080-exec-10] DEBUG - Foto de perfil procesada correctamente
-2025-03-01 19:18:36 [http-nio-8080-exec-10] DEBUG - Datos del panel de administración cargados correctamente
-2025-03-01 19:18:51 [http-nio-8080-exec-1] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:18:55 [http-nio-8080-exec-1] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:18:57 [http-nio-8080-exec-9] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:19:01 [http-nio-8080-exec-9] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:19:51 [http-nio-8080-exec-3] INFO  - Iniciando creación de usuario: eeeee73@gmail.com con rol: 1
-2025-03-01 19:19:51 [http-nio-8080-exec-3] DEBUG - Foto procesada correctamente para usuario: eeeee73@gmail.com
-2025-03-01 19:19:53 [http-nio-8080-exec-3] INFO  - Usuario creado exitosamente: eeeee73@gmail.com
-2025-03-01 19:19:53 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:19:56 [http-nio-8080-exec-3] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 13
-2025-03-01 19:19:56 [http-nio-8080-exec-4] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:19:59 [http-nio-8080-exec-4] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 13
-2025-03-01 19:20:57 [http-nio-8080-exec-6] INFO  - Iniciando modificación del usuario ID: 24, Email: eeeee73@gmail.com
-2025-03-01 19:20:57 [http-nio-8080-exec-6] DEBUG - Procesando nueva foto para usuario ID: 24
-2025-03-01 19:20:57 [http-nio-8080-exec-6] DEBUG - Foto procesada correctamente para usuario ID: 24
-2025-03-01 19:21:00 [http-nio-8080-exec-6] INFO  - Usuario modificado exitosamente. ID: 24, Email: eeeee73@gmail.com
-2025-03-01 19:21:00 [http-nio-8080-exec-6] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:21:07 [http-nio-8080-exec-6] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 13
-2025-03-01 19:21:07 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:21:14 [http-nio-8080-exec-5] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 13
-2025-03-01 19:21:43 [http-nio-8080-exec-7] INFO  - Iniciando eliminación del usuario con ID: 24
-2025-03-01 19:21:44 [http-nio-8080-exec-7] INFO  - Usuario eliminado exitosamente. ID: 24
-2025-03-01 19:21:44 [http-nio-8080-exec-8] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:21:47 [http-nio-8080-exec-8] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:21:48 [http-nio-8080-exec-10] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:21:51 [http-nio-8080-exec-10] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:24:22 [http-nio-8080-exec-3] INFO  - Acceso exitoso al sistema
-2025-03-01 19:24:22 [http-nio-8080-exec-3] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 19:24:22 [http-nio-8080-exec-4] INFO  - Acceso al panel de administración
-2025-03-01 19:24:22 [http-nio-8080-exec-4] DEBUG - Foto de perfil procesada correctamente
-2025-03-01 19:24:22 [http-nio-8080-exec-4] DEBUG - Datos del panel de administración cargados correctamente
-2025-03-01 19:24:24 [http-nio-8080-exec-6] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:24:28 [http-nio-8080-exec-6] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:24:28 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:24:32 [http-nio-8080-exec-5] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:27:52 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
-2025-03-01 19:27:52 [http-nio-8080-exec-10] INFO  - Redirigiendo a: /admin/panel
-2025-03-01 19:27:52 [http-nio-8080-exec-1] INFO  - Acceso al panel de administración
-2025-03-01 19:27:52 [http-nio-8080-exec-1] DEBUG - Foto de perfil procesada correctamente
-2025-03-01 19:27:52 [http-nio-8080-exec-1] DEBUG - Datos del panel de administración cargados correctamente
-2025-03-01 19:28:01 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:28:05 [http-nio-8080-exec-7] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:28:05 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
-2025-03-01 19:28:09 [http-nio-8080-exec-5] DEBUG - Lista de usuarios cargada correctamente. Total usuarios: 12
-2025-03-01 19:28:22 [http-nio-8080-exec-3] INFO  - Cierre de sesión
+2025-03-02 12:35:36 [http-nio-8080-exec-6] INFO  - Acceso exitoso al sistema
+2025-03-02 12:35:36 [http-nio-8080-exec-6] INFO  - Redirigiendo a: /admin/panel
+2025-03-02 12:35:36 [http-nio-8080-exec-2] INFO  - Acceso al panel de administración
+2025-03-02 12:35:37 [http-nio-8080-exec-9] INFO  - Acceso a la gestión de usuarios
+2025-03-02 12:35:42 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
+2025-03-02 12:37:07 [http-nio-8080-exec-12] INFO  - Cierre de sesión
+2025-03-02 12:37:29 [http-nio-8080-exec-18] INFO  - Acceso exitoso al sistema
+2025-03-02 12:37:29 [http-nio-8080-exec-18] INFO  - Redirigiendo a: /admin/panel
+2025-03-02 12:37:29 [http-nio-8080-exec-20] INFO  - Acceso al panel de administración
+2025-03-02 12:37:31 [http-nio-8080-exec-13] INFO  - Acceso a la gestión de usuarios
+2025-03-02 12:37:34 [http-nio-8080-exec-19] INFO  - Acceso a la gestión de usuarios
+2025-03-02 12:37:35 [http-nio-8080-exec-11] INFO  - Acceso al panel de administración
+2025-03-02 12:37:59 [http-nio-8080-exec-15] INFO  - Acceso a la gestión de usuarios
+2025-03-02 12:38:03 [http-nio-8080-exec-17] INFO  - Acceso a la gestión de usuarios
