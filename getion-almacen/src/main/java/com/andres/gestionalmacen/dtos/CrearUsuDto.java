@@ -39,13 +39,20 @@ public class CrearUsuDto {
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
+	public boolean isCorreoConfirmado() {
+		return correoConfirmado;
+	}
+	public void setCorreoConfirmado(boolean correoConfirmado) {
+		this.correoConfirmado = correoConfirmado;
+	}
 	private String nombreCompleto;
     private String movil;
     private String correoElectronico;
     private Long rolId;
     private String	contrasena;
     private byte[] foto;
+	private boolean correoConfirmado;
   
 
-
+	
 }

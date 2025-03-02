@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import com.andres.gestionalmacen.dtos.CrearUsuDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
+import com.andres.gestionalmacen.utilidades.EmailUtil;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
@@ -28,16 +30,14 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                GestorRegistros.sistemaInfo("Acceso a página de registro ");
+        GestorRegistros.sistemaInfo("Acceso a página de registro");
         request.getRequestDispatcher("/registro.jsp").forward(request, response);
-        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            
             // Obtener datos del formulario
             String nombreCompleto = request.getParameter("nombreCompleto");
             String correoElectronico = request.getParameter("correoElectronico");
@@ -75,16 +75,23 @@ public class RegistroServlet extends HttpServlet {
 
             // Guardar el usuario
             usuarioServicio.crearUsuario(nuevoUsuario);
-            GestorRegistros.sistemaInfo("Usuario registrado exitosamente: " + correoElectronico);
 
+            // Generar y enviar confirmación por correo
+            String token = generarToken(correoElectronico);
+            EmailUtil.enviarCorreoConfirmacion(correoElectronico, token);
+            
             // Redirigir con mensaje de éxito
-            request.getSession().setAttribute("mensaje", "Registro completado con éxito. Por favor, inicie sesión.");
+            request.getSession().setAttribute("mensaje", "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.");
             response.sendRedirect(request.getContextPath() + "/acceso");
 
         } catch (Exception e) {
-            GestorRegistros.sistemaError("Error en el registro de usuario - IP: " + request.getRemoteAddr() + " - Error: " + e.getMessage());
+            GestorRegistros.sistemaError("Error en el registro de usuario - Error: " + e.getMessage());
             request.getSession().setAttribute("error", "Error en el registro: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/registro");
         }
+    }
+
+    private String generarToken(String correoElectronico) {
+        return Base64.getEncoder().encodeToString((correoElectronico + ":" + System.currentTimeMillis()).getBytes());
     }
 }

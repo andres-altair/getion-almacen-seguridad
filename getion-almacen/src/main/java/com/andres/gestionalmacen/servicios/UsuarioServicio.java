@@ -2,6 +2,7 @@ package com.andres.gestionalmacen.servicios;
 
 import com.andres.gestionalmacen.dtos.CrearUsuDto;
 import com.andres.gestionalmacen.dtos.UsuarioDto;
+import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,25 @@ public class UsuarioServicio {
         }
     }
 
+    public void confirmarCorreo(String email) {
+        try {
+            URL url = URI.create(API_BASE_URL + "/confirmar-correo/" + email).toURL();
+            HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            
+            int responseCode = conexion.getResponseCode();
+            if (responseCode != 200) {
+                throw new RuntimeException("Error al confirmar correo: " + responseCode);
+            }
+            
+            GestorRegistros.sistemaInfo("Correo confirmado para: " + email);
+        } catch (Exception e) {
+            GestorRegistros.sistemaError("Error al confirmar correo: " + e.getMessage());
+            throw new RuntimeException("Error al confirmar correo", e);
+        }
+    }
+
     public List<UsuarioDto> obtenerUsuarios() throws Exception {
         System.out.println("\n=== UsuarioServicio.obtenerUsuarios - Iniciando ===");
         try {
@@ -158,12 +179,24 @@ public class UsuarioServicio {
         }
     }
 
-    public CrearUsuDto crearUsuario(CrearUsuDto usuario) throws Exception {
+    public CrearUsuDto crearUsuario(CrearUsuDto usuarioDTO) throws Exception {
         try {
-            String jsonBody = objetoMapeador.writeValueAsString(usuario);
+            // Si el usuario es creado desde el panel de administrador (rol 1), se marca como confirmado automáticamente
+            if (usuarioDTO.getRolId() == 1L || usuarioDTO.getRolId() == 2L || usuarioDTO.getRolId() == 3L) {
+                usuarioDTO.setCorreoConfirmado(true);
+            } else {
+                // Si es un registro normal (rol 4), necesita confirmación
+                usuarioDTO.setCorreoConfirmado(false);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            
+            String usuarioJson = objectMapper.writeValueAsString(usuarioDTO);
             System.out.println("Enviando petición para crear usuario:");
             System.out.println("URL: " + API_BASE_URL);
-            System.out.println("Body: " + jsonBody);
+            System.out.println("Body: " + usuarioJson);
             
             URL url = URI.create(API_BASE_URL).toURL();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -174,7 +207,7 @@ public class UsuarioServicio {
             
             // Enviar el JSON
             try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonBody.getBytes("UTF-8");
+                byte[] input = usuarioJson.getBytes("UTF-8");
                 os.write(input, 0, input.length);
             }
 

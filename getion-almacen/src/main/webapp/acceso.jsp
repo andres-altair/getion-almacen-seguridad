@@ -71,6 +71,10 @@
                 </div>
             </div>
         </div>
+        <!-- Añadir esto justo antes del cierre del div container -->
+        <div class="links">
+            <a href="${pageContext.request.contextPath}/reenviar-confirmacion">¿No recibiste el correo de confirmación?</a>
+        </div>
     </div>
 
     <!-- Footer -->
