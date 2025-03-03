@@ -75,3 +75,5 @@
 2025-03-03 10:45:07 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
 2025-03-03 10:45:08 [http-nio-8080-exec-13] INFO  - Acceso a página de registro
 2025-03-03 10:45:08 [http-nio-8080-exec-17] INFO  - Acceso a página de registro
+2025-03-03 10:47:13 [http-nio-8080-exec-21] INFO  - Acceso a página de registro
+2025-03-03 10:47:13 [http-nio-8080-exec-23] INFO  - Acceso a página de registro
