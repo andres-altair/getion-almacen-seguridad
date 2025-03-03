@@ -199,8 +199,8 @@
                             <label for="contrasena" class="form-label">Contraseña</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" name="contrasena" id="contrasena" required>
-                                <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="togglePassword('contrasena', this)">
-                                    <i class="fas fa-eye" id="eyeIconCrear"></i>
+                                <button class="btn btn-outline-secondary" type="button" id="botonMostrarContrasena" onclick="mostrarContrasena('contrasena', this)">
+                                    <i class="fas fa-eye" id="iconoOjo"></i>
                                 </button>
                             </div>
                         </div>
@@ -277,9 +277,9 @@
                             <label for="foto" class="form-label">Foto</label>
                             <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="mostrarVistaPreviaModificar(event)">
                             <!-- Vista previa de la imagen -->
-                            <div id="fotoPreview" class="mt-2">
+                            <div id="contenedorFoto" class="mt-2">
                                 <img id="imagenActual" src="" alt="Foto actual" style="max-width: 100px; display: none;" class="img-thumbnail">
-                                <img id="vistaPreviaModificar" src="#" alt="Vista previa de la imagen" style="max-width: 100px; display: none;" class="img-thumbnail">
+                                <img id="vistaPreviaModificar" src="#" alt="Vista previa" style="max-width: 100px; display: none;" class="img-thumbnail">
                             </div>
                         </div>
                         
@@ -340,149 +340,9 @@
         <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
     </footer>
 
-    <script>
-        function editarUsuario(id, nombre, correo, movil, rolId, fotoBase64) {
-            console.log("ID recibido:", id);
-            document.getElementById('usuarioId').value = id;
-            document.getElementById('nombreCompleto').value = nombre;
-            document.getElementById('correoElectronico').value = correo;
-            
-            // Validar longitud del móvil antes de asignarlo
-            if (movil && movil.length > 15) {
-                movil = movil.substring(0, 15);
-                console.log("Móvil truncado a 15 caracteres:", movil);
-            }
-            document.getElementById('movil').value = movil;
-            
-            document.getElementById('rolId').value = rolId;
-
-            // Manejo de la foto
-            const imagenActual = document.getElementById('imagenActual');
-            if (fotoBase64) {
-                imagenActual.src = fotoBase64;
-                imagenActual.style.display = 'block'; // Mostrar la imagen si existe
-            } else {
-                imagenActual.src = ""; // Limpiar la imagen si no hay foto
-                imagenActual.style.display = 'none'; // Ocultar el contenedor si no hay foto
-            }
-        }
-        
-        // Evento para el modal de eliminación
-        document.getElementById('modalEliminarUsuario').addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const usuarioId = button.getAttribute('data-usuario-id');
-            
-            document.getElementById('usuarioIdEliminar').value = usuarioId;
-            document.getElementById('idUsuarioAEliminar').textContent = usuarioId;
-            
-            // Resetear el formulario
-            document.getElementById('confirmacionId').value = '';
-            document.getElementById('btnConfirmarEliminar').disabled = true;
-        });
-
-        // Validación en tiempo real del ID de confirmación
-        document.getElementById('confirmacionId').addEventListener('input', function(event) {
-            const idAEliminar = document.getElementById('usuarioIdEliminar').value;
-            const idConfirmacion = this.value;
-            const btnConfirmar = document.getElementById('btnConfirmarEliminar');
-            
-            if (idConfirmacion === idAEliminar) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
-                btnConfirmar.disabled = false;
-            } else {
-                this.classList.remove('is-valid');
-                this.classList.add('is-invalid');
-                btnConfirmar.disabled = true;
-            }
-        });
-
-        // Validación final antes de enviar
-        document.getElementById('formEliminarUsuario').addEventListener('submit', function(event) {
-            const idAEliminar = document.getElementById('usuarioIdEliminar').value;
-            const idConfirmacion = document.getElementById('confirmacionId').value;
-            
-            if (idAEliminar !== idConfirmacion) {
-                event.preventDefault();
-                document.getElementById('confirmacionId').classList.add('is-invalid');
-            } else {
-                // Mostrar mensaje de carga
-                document.getElementById('btnConfirmarEliminar').disabled = true;
-                document.getElementById('btnConfirmarEliminar').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Eliminando...';
-            }
-        });
-      
-
-        // Función para alternar la visibilidad de la contraseña
-        function togglePassword(inputId, button) {
-            const passwordInput = document.getElementById(inputId); // Obtener el campo de contraseña
-            const eyeIcon = button.querySelector('i'); // Obtener el ícono del ojo
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text"; // Mostrar contraseña
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash"); // Cambiar ícono a "ojo tachado"
-            } else {
-                passwordInput.type = "password"; // Ocultar contraseña
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye"); // Cambiar ícono a "ojo"
-            }
-        }
-        
-     // Función para mostrar la vista previa de la imagen
-        function mostrarVistaPrevia(event) {
-            const input = event.target; // Obtener el input de tipo file
-            const vistaPrevia = document.getElementById('vistaPrevia'); // Obtener el elemento img
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader(); // Crear un FileReader
-
-                // Cuando el archivo se cargue, actualizar la vista previa
-                reader.onload = function (e) {
-                    vistaPrevia.src = e.target.result; // Establecer la imagen
-                    vistaPrevia.style.display = 'block'; // Mostrar la imagen
-                };
-
-                reader.readAsDataURL(input.files[0]); // Leer el archivo como URL
-            } else {
-                vistaPrevia.src = "#"; // Limpiar la vista previa
-                vistaPrevia.style.display = 'none'; // Ocultar la imagen
-            }
-        }
-        // Función para mostrar la vista previa de la imagen en el modal de modificar
-        function mostrarVistaPreviaModificar(event) {
-            const input = event.target; // Obtener el input de tipo file
-            const vistaPrevia = document.getElementById('vistaPreviaModificar'); // Obtener el elemento img de vista previa
-            const imagenActual = document.getElementById('imagenActual'); // Obtener el elemento img de la imagen actual
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader(); // Crear un FileReader
-
-                // Cuando el archivo se cargue, actualizar la vista previa
-                reader.onload = function (e) {
-                    vistaPrevia.src = e.target.result; // Establecer la imagen
-                    vistaPrevia.style.display = 'block'; // Mostrar la vista previa
-                    imagenActual.style.display = 'none'; // Ocultar la imagen actual
-                };
-
-                reader.readAsDataURL(input.files[0]); // Leer el archivo como URL
-            } else {
-                vistaPrevia.src = "#"; // Limpiar la vista previa
-                vistaPrevia.style.display = 'none'; // Ocultar la vista previa
-                imagenActual.style.display = 'block'; // Mostrar la imagen actual
-            }
-        }
-        setTimeout(function() {
-        var alerta = document.getElementById('alertaError');
-        if (alerta) {
-            // Cierra la alerta usando Bootstrap
-            var bsAlert = new bootstrap.Alert(alerta);
-            bsAlert.close();
-        }
-    }, 6000);
-    </script>
-
     <!-- Bootstrap y Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="${pageContext.request.contextPath}/js/gestionUsuarios.js"></script>
 </body>
 </html>
