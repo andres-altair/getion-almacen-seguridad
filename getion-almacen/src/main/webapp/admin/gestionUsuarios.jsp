@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gestión de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -210,6 +210,7 @@
                                 <option value="1">Administrador</option>
                                 <option value="2">Gestor de almacén</option>
                                 <option value="3">Operario de almacén</option>
+                                <option value="4">Usuario</option>
                             </select>
                         </div>
                         <div class="mb-3">

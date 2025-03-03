@@ -102,3 +102,17 @@
 2025-03-03 11:39:26 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
 2025-03-03 11:39:34 [http-nio-8080-exec-3] INFO  - Sistema de logs inicializado
 2025-03-03 11:39:34 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-03-03 11:50:55 [main] INFO  - Sistema de logs inicializado
+2025-03-03 11:50:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-03 11:50:55 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-03 11:50:56 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-03 11:50:56 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-03 11:50:59 [http-nio-8080-exec-3] INFO  - Acceso a página de acceso
+2025-03-03 11:51:03 [http-nio-8080-exec-5] INFO  - Acceso a página de inicio
+2025-03-03 11:51:04 [http-nio-8080-exec-6] INFO  - Acceso a página de registro
+2025-03-03 11:51:04 [http-nio-8080-exec-7] INFO  - Acceso a página de registro
+2025-03-03 11:51:07 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
+2025-03-03 11:51:08 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-03 11:51:09 [http-nio-8080-exec-1] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-03 11:51:10 [http-nio-8080-exec-1] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-03 11:51:22 [http-nio-8080-exec-7] INFO  - Acceso a página de inicio
