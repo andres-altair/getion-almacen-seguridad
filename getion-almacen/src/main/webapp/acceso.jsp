@@ -84,22 +84,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Función para alternar la visibilidad de la contraseña
-        function togglePassword(inputId, button) {
-            const passwordInput = document.getElementById(inputId); // Obtener el campo de contraseña
-            const eyeIcon = button.querySelector('i'); // Obtener el ícono del ojo
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text"; // Mostrar contraseña
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash"); // Cambiar ícono a "ojo tachado"
-            } else {
-                passwordInput.type = "password"; // Ocultar contraseña
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye"); // Cambiar ícono a "ojo"
-            }
-        }
-    </script>
+    <!-- Custom JS -->
+    <script src="${pageContext.request.contextPath}/js/acceso.js"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@
                                 <label for="contrasena" class="form-label">Contraseña</label>
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="contrasena" id="contrasena" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="togglePassword('contrasena', this)">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="verContasena('contrasena', this)">
                                         <i class="fas fa-eye" id="eyeIconCrear"></i>
                                     </button>
                                 </div>
@@ -98,40 +98,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Función para alternar la visibilidad de la contraseña
-        function togglePassword(inputId, button) {
-            const passwordInput = document.getElementById(inputId);
-            const eyeIcon = button.querySelector('i');
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
-        }
-
-        // Función para mostrar vista previa de la imagen
-        function mostrarVistaPrevia(event) {
-            const vistaPrevia = document.getElementById('vistaPrevia');
-            const file = event.target.files[0];
-            
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    vistaPrevia.src = e.target.result;
-                    vistaPrevia.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                vistaPrevia.src = '#';
-                vistaPrevia.style.display = 'none';
-            }
-        }
-    </script>
+    <!-- Custom JS -->
+    <script src="${pageContext.request.contextPath}/js/registro.js"></script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+2025-03-03 09:56:36 [http-nio-8080-exec-8] INFO  - Acceso exitoso al sistema
+2025-03-03 09:56:36 [http-nio-8080-exec-8] INFO  - Redirigiendo a: /operario/panel
+2025-03-03 09:56:36 [http-nio-8080-exec-7] INFO  - Panel de operario cargado exitosamente
+2025-03-03 10:00:25 [http-nio-8080-exec-1] INFO  - Cierre de sesión

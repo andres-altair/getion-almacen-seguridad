@@ -12,3 +12,15 @@
 2025-03-02 12:37:35 [http-nio-8080-exec-11] INFO  - Acceso al panel de administración
 2025-03-02 12:37:59 [http-nio-8080-exec-15] INFO  - Acceso a la gestión de usuarios
 2025-03-02 12:38:03 [http-nio-8080-exec-17] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:53:01 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
+2025-03-03 09:53:01 [http-nio-8080-exec-10] INFO  - Redirigiendo a: /admin/panel
+2025-03-03 09:53:01 [http-nio-8080-exec-1] INFO  - Acceso al panel de administración
+2025-03-03 09:53:17 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:53:21 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:53:33 [http-nio-8080-exec-6] INFO  - Acceso al panel de administración
+2025-03-03 09:54:24 [http-nio-8080-exec-9] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:54:27 [http-nio-8080-exec-10] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:56:02 [http-nio-8080-exec-1] INFO  - Iniciando creación de usuario: 123456@gmail.com con rol: 3
+2025-03-03 09:56:03 [http-nio-8080-exec-1] INFO  - Usuario creado exitosamente: 123456@gmail.com
+2025-03-03 09:56:03 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-03 09:56:07 [http-nio-8080-exec-2] INFO  - Acceso a la gestión de usuarios
