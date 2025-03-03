@@ -93,3 +93,12 @@
 2025-03-03 11:34:34 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
 2025-03-03 11:39:09 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
 2025-03-03 11:39:09 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-03 11:39:11 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-03 11:39:11 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-03 11:39:11 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-03 11:39:21 [http-nio-8080-exec-8] WARN  - Intento de acceso a gestión de usuarios sin sesión válida desde IP: 0:0:0:0:0:0:0:1
+2025-03-03 11:39:22 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
+2025-03-03 11:39:25 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-03 11:39:26 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-03 11:39:34 [http-nio-8080-exec-3] INFO  - Sistema de logs inicializado
+2025-03-03 11:39:34 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
