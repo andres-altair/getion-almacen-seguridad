@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Reenviar Confirmación</title>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
