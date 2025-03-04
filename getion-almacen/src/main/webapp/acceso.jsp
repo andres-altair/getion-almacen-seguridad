@@ -73,7 +73,7 @@
         </div>
         <!-- Añadir esto justo antes del cierre del div container -->
         <div class="links">
-            <a href="${pageContext.request.contextPath}/reenviar-confirmacion">¿No recibiste el correo de confirmación?</a>
+            <a href="${pageContext.request.contextPath}/reenviarConfirmacion">¿No recibiste el correo de confirmación?</a>
         </div>
     </div>
 

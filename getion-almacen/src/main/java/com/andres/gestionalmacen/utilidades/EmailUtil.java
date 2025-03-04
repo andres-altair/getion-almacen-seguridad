@@ -71,7 +71,7 @@ public class EmailUtil {
             String contenido = String.format(
                 "Hola,<br/><br/>" +
                 "Gracias por registrarte. Por favor, confirma tu correo electrónico haciendo clic en el siguiente enlace:<br/><br/>" +
-                "<a href='http://localhost:8080/gestion-almacen/confirmar-correo?token=%s'>Confirmar correo electrónico</a><br/><br/>" +
+                "<a href='http://localhost:8080/gestion-almacen/confirmarCorreo?token=%s'>Confirmar correo electrónico</a><br/><br/>" +
                 "Este enlace expirará en %d horas.<br/><br/>" +
                 "Si no has creado una cuenta, puedes ignorar este mensaje.<br/><br/>" +
                 "Saludos,<br/>El equipo de Gestión de Almacén", 

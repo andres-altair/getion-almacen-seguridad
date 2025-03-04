@@ -11,7 +11,7 @@ import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EmailUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
-@WebServlet("/confirmar-correo")
+@WebServlet("/confirmarCorreo")
 public class ConfirmacionCorreoServlet extends HttpServlet {
     
     @Override
@@ -29,7 +29,7 @@ public class ConfirmacionCorreoServlet extends HttpServlet {
             if (!EmailUtil.validarToken(token)) {
                 request.getSession().setAttribute("error", 
                     "El enlace de confirmación ha expirado o no es válido. Por favor, solicita uno nuevo.");
-                response.sendRedirect(request.getContextPath() + "/reenviar-confirmacion");
+                response.sendRedirect(request.getContextPath() + "/reenviarConfirmacion");
                 return;
             }
 
@@ -46,7 +46,7 @@ public class ConfirmacionCorreoServlet extends HttpServlet {
             GestorRegistros.sistemaError("Error en confirmación de correo: " + e.getMessage());
             request.getSession().setAttribute("error", 
                 "Error al confirmar el correo. Por favor, inténtalo más tarde.");
-            response.sendRedirect(request.getContextPath() + "/acceso");
+            response.sendRedirect(request.getContextPath() + "/reenviarConfirmacion");
         }
     }
 }

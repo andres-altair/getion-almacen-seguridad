@@ -10,13 +10,13 @@ import java.io.IOException;
 import com.andres.gestionalmacen.utilidades.EmailUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
-@WebServlet("/reenviar-confirmacion")
+@WebServlet("/reenviarConfirmacion")
 public class ReenviarConfirmacionServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/reenviar-confirmacion.jsp").forward(request, response);
+        request.getRequestDispatcher("/reenviarConfirmacion.jsp").forward(request, response);
     }
 
     @Override

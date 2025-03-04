@@ -98,7 +98,7 @@ public class UsuarioServicio {
 
     public void confirmarCorreo(String email) {
         try {
-            URL url = URI.create(API_BASE_URL + "/confirmar-correo/" + email).toURL();
+            URL url = URI.create(API_BASE_URL + "/confirmarCorreo/" + email).toURL();
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("POST");
             conexion.setRequestProperty("Content-Type", "application/json");

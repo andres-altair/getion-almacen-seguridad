@@ -17,7 +17,7 @@
             </div>
         <% } %>
         
-        <form action="${pageContext.request.contextPath}/reenviar-confirmacion" method="post">
+        <form action="${pageContext.request.contextPath}/reenviarConfirmacion" method="post">
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <input type="email" id="email" name="email" required>
