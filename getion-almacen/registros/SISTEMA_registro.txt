@@ -150,3 +150,7 @@
 2025-03-04 22:40:33 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
 2025-03-04 22:40:38 [http-nio-8080-exec-10] INFO  - Sistema de logs inicializado
 2025-03-04 22:40:38 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
+2025-03-04 22:43:26 [http-nio-8080-exec-14] INFO  - Acceso a página de acceso
+2025-03-04 22:43:27 [http-nio-8080-exec-18] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-04 22:43:29 [http-nio-8080-exec-18] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-04 22:43:37 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
