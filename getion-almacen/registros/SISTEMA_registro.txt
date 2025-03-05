@@ -332,3 +332,9 @@
 2025-03-05 10:54:47 [http-nio-8080-exec-1] INFO  - Acceso a página de registro
 2025-03-05 10:55:15 [http-nio-8080-exec-3] INFO  - Correo de confirmación enviado a: biday37246@egvoo.com
 2025-03-05 10:55:15 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
+2025-03-05 10:56:11 [http-nio-8080-exec-4] INFO  - Correo de confirmación enviado a: biday37246@egvoo.com
+2025-03-05 10:56:11 [http-nio-8080-exec-4] INFO  - Correo de confirmación reenviado a: biday37246@egvoo.com
+2025-03-05 10:56:11 [http-nio-8080-exec-3] INFO  - Acceso a página de acceso
+2025-03-05 10:56:23 [http-nio-8080-exec-6] INFO  - Correo confirmado para: biday37246@egvoo.com
+2025-03-05 10:56:23 [http-nio-8080-exec-6] INFO  - Correo confirmado exitosamente: biday37246@egvoo.com
+2025-03-05 10:56:23 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
