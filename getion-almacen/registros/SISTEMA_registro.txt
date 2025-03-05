@@ -382,3 +382,14 @@
 2025-03-05 12:13:27 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
 2025-03-05 12:14:21 [http-nio-8080-exec-3] INFO  - Contraseña actualizada para: kinag22478@hartaria.com
 2025-03-05 12:14:21 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-05 12:20:25 [http-nio-8080-exec-7] INFO  - Acceso a página de inicio
+2025-03-05 12:20:27 [http-nio-8080-exec-8] INFO  - Acceso a página de registro
+2025-03-05 12:20:27 [http-nio-8080-exec-9] INFO  - Acceso a página de registro
+2025-03-05 12:20:44 [http-nio-8080-exec-10] INFO  - Correo de confirmación enviado a: lagebe8380@lassora.com
+2025-03-05 12:20:44 [http-nio-8080-exec-2] INFO  - Acceso a página de acceso
+2025-03-05 12:21:23 [http-nio-8080-exec-5] INFO  - Correo confirmado para: lagebe8380@lassora.com
+2025-03-05 12:21:23 [http-nio-8080-exec-5] INFO  - Correo confirmado exitosamente: lagebe8380@lassora.com
+2025-03-05 12:21:23 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
+2025-03-05 12:21:58 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-05 12:22:42 [http-nio-8080-exec-5] INFO  - Contraseña actualizada para: lagebe8380@lassora.com
+2025-03-05 12:22:42 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
