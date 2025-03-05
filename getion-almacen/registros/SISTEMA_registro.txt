@@ -365,3 +365,20 @@
 2025-03-05 11:06:23 [http-nio-8080-exec-5] INFO  - Correo confirmado para: nonopac607@lassora.com
 2025-03-05 11:06:23 [http-nio-8080-exec-5] INFO  - Correo confirmado exitosamente: nonopac607@lassora.com
 2025-03-05 11:06:23 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
+2025-03-05 12:11:51 [main] INFO  - Sistema de logs inicializado
+2025-03-05 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 12:11:51 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 12:11:51 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 12:11:51 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 12:11:56 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 12:12:05 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
+2025-03-05 12:12:16 [http-nio-8080-exec-4] INFO  - Acceso a página de registro
+2025-03-05 12:12:16 [http-nio-8080-exec-7] INFO  - Acceso a página de registro
+2025-03-05 12:13:00 [http-nio-8080-exec-10] INFO  - Correo de confirmación enviado a: kinag22478@hartaria.com
+2025-03-05 12:13:00 [http-nio-8080-exec-1] INFO  - Acceso a página de acceso
+2025-03-05 12:13:10 [http-nio-8080-exec-2] INFO  - Correo confirmado para: kinag22478@hartaria.com
+2025-03-05 12:13:10 [http-nio-8080-exec-2] INFO  - Correo confirmado exitosamente: kinag22478@hartaria.com
+2025-03-05 12:13:10 [http-nio-8080-exec-3] INFO  - Acceso a página de acceso
+2025-03-05 12:13:27 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 12:14:21 [http-nio-8080-exec-3] INFO  - Contraseña actualizada para: kinag22478@hartaria.com
+2025-03-05 12:14:21 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
