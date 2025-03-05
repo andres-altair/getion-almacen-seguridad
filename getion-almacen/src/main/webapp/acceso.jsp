@@ -12,6 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Sign-In API -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
@@ -59,6 +61,25 @@
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                                <!-- Botón de Google -->
+                                <div class="d-grid mt-3">
+                                    <div id="g_id_onload"
+                                         data-client_id="503302730974-grs94tgi74gh28k0a9qh5qv52chp1c8v.apps.googleusercontent.com"
+                                         data-context="signin"
+                                         data-ux_mode="popup"
+                                         data-callback="handleCredentialResponse"
+                                         data-auto_prompt="false">
+                                    </div>
+                                    <div class="g_id_signin"
+                                         data-type="standard"
+                                         data-shape="rectangular"
+                                         data-theme="outline"
+                                         data-text="signin_with"
+                                         data-size="large"
+                                         data-logo_alignment="left"
+                                         data-width="100%">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <div class="links">
@@ -97,5 +118,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="${pageContext.request.contextPath}/js/acceso.js"></script>
+    <script>
+        function handleCredentialResponse(response) {
+            // Enviar el token ID al servidor
+            fetch('${pageContext.request.contextPath}/google-signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'credential=' + response.credential
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '${pageContext.request.contextPath}/inicio';
+                } else {
+                    alert('Error al iniciar sesión con Google');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al procesar la solicitud');
+            });
+        }
+    </script>
 </body>
 </html>
