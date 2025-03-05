@@ -96,4 +96,42 @@ public class EmailUtil {
         String nuevoToken = generarToken(email);
         enviarCorreoConfirmacion(email, nuevoToken);
     }
+
+    public static void enviarCorreoRecuperacionContasena(String email, String token) {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(FROM_EMAIL, PASSWORD);
+            }
+        });
+
+        String contexto = System.getProperty("server.context");
+        String contenido = String.format(
+            "Hola,<br/><br/>" +
+            "Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace:<br/><br/>" +
+            "<a href='http://localhost:8080/gestion-almacen/restablecerContrasena?token=%s'>Restablecer contraseña</a><br/><br/>" +
+            "Este enlace expirará en %d horas.<br/><br/>" +
+            "Si no solicitaste esto, ignora este mensaje.<br/><br/>" +
+            "Saludos,<br/>El equipo de Gestión de Almacén", 
+            token, TOKEN_EXPIRATION_HOURS);
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(FROM_EMAIL));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("Restablecer contraseña - Gestión Almacén");
+
+            message.setContent(contenido, "text/html; charset=utf-8");
+
+            Transport.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error al enviar el correo de recuperación: " + e.getMessage(), e);
+        }
+    }
 }

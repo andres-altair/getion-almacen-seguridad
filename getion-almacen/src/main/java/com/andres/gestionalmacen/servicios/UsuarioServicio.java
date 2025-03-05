@@ -428,4 +428,40 @@ public class UsuarioServicio {
             throw new Exception("Error al obtener usuario por ID: " + e.getMessage(), e);
         }
     }
+
+    public void actualizarContrasena(String email, String nuevaContrasena) {
+        try {
+            Map<String, String> datos = new HashMap<>();
+            datos.put("email", email);
+            datos.put("nuevaContrasena", nuevaContrasena);
+            
+            String jsonDatos = objetoMapeador.writeValueAsString(datos);
+            
+            URL url = URI.create(API_BASE_URL + "/actualizarContrasena").toURL();
+            HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+            conexion.setRequestMethod("POST");
+            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setDoOutput(true);
+            
+            try (OutputStream os = conexion.getOutputStream()) {
+                os.write(jsonDatos.getBytes("UTF-8"));
+            }
+            
+            int responseCode = conexion.getResponseCode();
+            if (responseCode != 200) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                }
+                throw new RuntimeException("Error al actualizar contraseña: " + response.toString());
+            }
+            
+            GestorRegistros.sistemaInfo("Contraseña actualizada para: " + email);
+        } catch (Exception e) {
+            GestorRegistros.sistemaError("Error al actualizar contraseña: " + e.getMessage());
+            throw new RuntimeException("Error al actualizar contraseña", e);
+        }
+    }
 }

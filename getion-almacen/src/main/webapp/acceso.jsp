@@ -61,6 +61,10 @@
                                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                             </div>
                         </form>
+                        <div class="links">
+                            <a href="${pageContext.request.contextPath}/recuperarContrasena">¿Olvidaste tu contraseña?</a>
+                            <a href="${pageContext.request.contextPath}/reenviarConfirmacion">¿No recibiste el correo de confirmación?</a>
+                        </div>
 
                         <c:if test="${not empty sessionScope.mensaje}">
                             <div class="alert alert-success mt-3" role="alert">
