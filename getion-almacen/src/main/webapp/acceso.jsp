@@ -62,6 +62,13 @@
                             </div>
                         </form>
 
+                        <c:if test="${not empty sessionScope.mensaje}">
+                            <div class="alert alert-success mt-3" role="alert">
+                                ${sessionScope.mensaje}
+                                <% session.removeAttribute("mensaje"); %>
+                            </div>
+                        </c:if>
+
                         <c:if test="${not empty requestScope.error}">
                             <div class="alert alert-danger mt-3" role="alert">
                                 ${requestScope.error}
