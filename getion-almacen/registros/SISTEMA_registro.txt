@@ -154,3 +154,141 @@
 2025-03-04 22:43:27 [http-nio-8080-exec-18] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
 2025-03-04 22:43:29 [http-nio-8080-exec-18] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
 2025-03-04 22:43:37 [http-nio-8080-exec-12] INFO  - Acceso a página de inicio
+2025-03-05 08:32:08 [main] INFO  - Sistema de logs inicializado
+2025-03-05 08:32:08 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 08:32:08 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 08:32:08 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 08:32:08 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 08:32:15 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 08:32:18 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 08:32:20 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 08:32:30 [http-nio-8080-exec-8] INFO  - Acceso a página de inicio
+2025-03-05 08:32:48 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
+2025-03-05 09:18:29 [http-nio-8080-exec-4] WARN  - Intento de acceso al panel de administración sin sesión válida desde IP: 0:0:0:0:0:0:0:1
+2025-03-05 09:18:29 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
+2025-03-05 09:18:30 [http-nio-8080-exec-8] INFO  - Acceso a página de inicio
+2025-03-05 09:18:32 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-05 09:18:37 [http-nio-8080-exec-4] INFO  - Acceso a página de registro
+2025-03-05 09:18:38 [http-nio-8080-exec-9] INFO  - Acceso a página de registro
+2025-03-05 09:19:43 [http-nio-8080-exec-5] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 09:19:43 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
+2025-03-05 09:25:23 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:25:23 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:25:25 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-05 09:25:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:25:25 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:32:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:32:40 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:32:42 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:32:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:32:42 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:33:03 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:33:03 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:33:04 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-05 09:33:04 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:33:04 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:33:35 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:33:35 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:33:35 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:33:35 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:33:35 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:34:27 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:34:27 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:34:29 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-05 09:34:29 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:34:29 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:38:04 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:38:04 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:38:04 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:38:05 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:38:05 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:38:31 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 09:38:33 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 09:38:34 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 09:38:40 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-03-05 09:38:52 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
+2025-03-05 09:39:03 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
+2025-03-05 09:39:04 [http-nio-8080-exec-1] INFO  - Acceso a página de registro
+2025-03-05 09:39:04 [http-nio-8080-exec-3] INFO  - Acceso a página de registro
+2025-03-05 09:39:33 [http-nio-8080-exec-6] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 09:39:33 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 09:42:23 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:42:23 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:42:23 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:42:23 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:42:23 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:43:13 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
+2025-03-05 09:43:29 [http-nio-8080-exec-4] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 09:43:30 [http-nio-8080-exec-4] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 09:43:37 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
+2025-03-05 09:43:50 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
+2025-03-05 09:43:54 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-03-05 09:43:56 [http-nio-8080-exec-1] INFO  - Acceso a página de registro
+2025-03-05 09:43:56 [http-nio-8080-exec-6] INFO  - Acceso a página de registro
+2025-03-05 09:44:27 [http-nio-8080-exec-10] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 09:44:27 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
+2025-03-05 09:48:18 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:48:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:48:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:48:19 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:48:19 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:48:21 [http-nio-8080-exec-3] INFO  - Acceso a página de acceso
+2025-03-05 09:48:22 [http-nio-8080-exec-4] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 09:48:23 [http-nio-8080-exec-4] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 09:48:32 [http-nio-8080-exec-7] INFO  - Acceso a página de inicio
+2025-03-05 09:48:45 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:48:46 [http-nio-8080-exec-5] INFO  - Acceso a página de inicio
+2025-03-05 09:48:48 [http-nio-8080-exec-6] INFO  - Acceso a página de registro
+2025-03-05 09:48:48 [http-nio-8080-exec-7] INFO  - Acceso a página de registro
+2025-03-05 09:49:24 [http-nio-8080-exec-9] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 09:49:24 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-05 09:51:34 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:51:34 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:51:34 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:51:34 [http-nio-8080-exec-1] INFO  - Sistema de logs inicializado
+2025-03-05 09:51:34 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
+2025-03-05 09:54:07 [main] INFO  - Sistema de logs inicializado
+2025-03-05 09:54:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:54:07 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:54:08 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 09:54:08 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 09:54:39 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:54:39 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-05 09:54:40 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-05 09:54:40 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:54:40 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 09:54:45 [http-nio-8080-exec-6] INFO  - Sistema de logs inicializado
+2025-03-05 09:54:45 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
+2025-03-05 09:54:47 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
+2025-03-05 09:54:48 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 09:54:50 [http-nio-8080-exec-3] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 09:54:56 [http-nio-8080-exec-5] INFO  - Acceso a página de inicio
+2025-03-05 09:55:12 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
+2025-03-05 09:55:26 [http-nio-8080-exec-7] INFO  - Acceso a página de inicio
+2025-03-05 09:55:27 [http-nio-8080-exec-14] INFO  - Acceso a página de registro
+2025-03-05 09:55:27 [http-nio-8080-exec-11] INFO  - Acceso a página de registro
+2025-03-05 09:55:40 [http-nio-8080-exec-15] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 09:55:40 [http-nio-8080-exec-16] INFO  - Acceso a página de acceso
+2025-03-05 10:02:59 [main] INFO  - Sistema de logs inicializado
+2025-03-05 10:02:59 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 10:02:59 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 10:03:00 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 10:03:00 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 10:05:24 [main] INFO  - Sistema de logs inicializado
+2025-03-05 10:05:24 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 10:05:24 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 10:05:25 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 10:05:25 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 10:07:48 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
+2025-03-05 10:07:49 [http-nio-8080-exec-9] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 10:07:51 [http-nio-8080-exec-9] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 10:07:56 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 10:08:56 [http-nio-8080-exec-10] INFO  - Correo de confirmación enviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 10:08:56 [http-nio-8080-exec-10] INFO  - Correo de confirmación reenviado a: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 10:08:56 [http-nio-8080-exec-1] INFO  - Acceso a página de acceso
+2025-03-05 10:09:07 [http-nio-8080-exec-2] INFO  - Correo confirmado para: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 10:09:07 [http-nio-8080-exec-2] INFO  - Correo confirmado exitosamente: andres.xiao.molina.diaz@isbilya.es
+2025-03-05 10:09:07 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
+2025-03-05 10:09:13 [http-nio-8080-exec-3] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 10:09:13 [http-nio-8080-exec-3] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 10:09:38 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio

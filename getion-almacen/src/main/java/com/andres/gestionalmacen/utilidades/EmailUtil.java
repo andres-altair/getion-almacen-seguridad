@@ -68,6 +68,7 @@ public class EmailUtil {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject("Confirma tu correo electrónico");
 
+            String contexto = System.getProperty("server.context");
             String contenido = String.format(
                 "Hola,<br/><br/>" +
                 "Gracias por registrarte. Por favor, confirma tu correo electrónico haciendo clic en el siguiente enlace:<br/><br/>" +
