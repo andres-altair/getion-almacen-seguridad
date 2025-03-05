@@ -77,7 +77,7 @@ public class RegistroServlet extends HttpServlet {
             usuarioServicio.crearUsuario(nuevoUsuario);
 
             // Generar y enviar confirmación por correo
-            String token = generarToken(correoElectronico);
+            String token = EmailUtil.generarToken(correoElectronico);
             EmailUtil.enviarCorreoConfirmacion(correoElectronico, token);
             
             // Redirigir con mensaje de éxito
@@ -89,9 +89,5 @@ public class RegistroServlet extends HttpServlet {
             request.getSession().setAttribute("error", "Error en el registro: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/registro");
         }
-    }
-
-    private String generarToken(String correoElectronico) {
-        return Base64.getEncoder().encodeToString((correoElectronico + ":" + System.currentTimeMillis()).getBytes());
     }
 }

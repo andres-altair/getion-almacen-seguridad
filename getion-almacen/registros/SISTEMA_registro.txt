@@ -338,3 +338,30 @@
 2025-03-05 10:56:23 [http-nio-8080-exec-6] INFO  - Correo confirmado para: biday37246@egvoo.com
 2025-03-05 10:56:23 [http-nio-8080-exec-6] INFO  - Correo confirmado exitosamente: biday37246@egvoo.com
 2025-03-05 10:56:23 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 11:03:46 [main] INFO  - Sistema de logs inicializado
+2025-03-05 11:03:46 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 11:03:46 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-05 11:03:46 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-05 11:03:46 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-05 11:03:49 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-05 11:03:53 [http-nio-8080-exec-10] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-05 11:03:55 [http-nio-8080-exec-10] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-05 11:03:57 [http-nio-8080-exec-6] INFO  - Acceso a página de inicio
+2025-03-05 11:03:58 [http-nio-8080-exec-3] INFO  - Acceso a página de registro
+2025-03-05 11:03:58 [http-nio-8080-exec-4] INFO  - Acceso a página de registro
+2025-03-05 11:04:44 [http-nio-8080-exec-2] INFO  - Correo de confirmación enviado a: dawafam303@lassora.com
+2025-03-05 11:04:44 [http-nio-8080-exec-6] INFO  - Acceso a página de acceso
+2025-03-05 11:04:56 [http-nio-8080-exec-3] INFO  - Correo confirmado para: dawafam303@lassora.com
+2025-03-05 11:04:56 [http-nio-8080-exec-3] INFO  - Correo confirmado exitosamente: dawafam303@lassora.com
+2025-03-05 11:04:56 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-05 11:05:12 [http-nio-8080-exec-5] INFO  - Acceso a página de inicio
+2025-03-05 11:05:12 [http-nio-8080-exec-9] INFO  - Acceso a página de registro
+2025-03-05 11:05:13 [http-nio-8080-exec-8] INFO  - Acceso a página de registro
+2025-03-05 11:05:19 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
+2025-03-05 11:05:20 [http-nio-8080-exec-1] INFO  - Acceso a página de registro
+2025-03-05 11:05:21 [http-nio-8080-exec-2] INFO  - Acceso a página de registro
+2025-03-05 11:06:08 [http-nio-8080-exec-7] INFO  - Correo de confirmación enviado a: nonopac607@lassora.com
+2025-03-05 11:06:08 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
+2025-03-05 11:06:23 [http-nio-8080-exec-5] INFO  - Correo confirmado para: nonopac607@lassora.com
+2025-03-05 11:06:23 [http-nio-8080-exec-5] INFO  - Correo confirmado exitosamente: nonopac607@lassora.com
+2025-03-05 11:06:23 [http-nio-8080-exec-9] INFO  - Acceso a página de acceso
