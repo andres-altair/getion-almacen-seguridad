@@ -100,3 +100,5 @@
 2025-03-05 10:09:13 [http-nio-8080-exec-3] INFO  - Acceso exitoso al sistema
 2025-03-05 10:09:13 [http-nio-8080-exec-3] INFO  - Redirigiendo a: /admin/panel
 2025-03-05 10:09:13 [http-nio-8080-exec-5] INFO  - Acceso al panel de administración
+2025-03-05 10:09:35 [http-nio-8080-exec-8] INFO  - Acceso a la gestión de usuarios
+2025-03-05 10:09:38 [http-nio-8080-exec-10] INFO  - Acceso a la gestión de usuarios
