@@ -84,6 +84,8 @@ public class CrearUsuarioServlet extends HttpServlet {
             nuevoUsuario.setContrasena(contrasenaEncriptada);
             nuevoUsuario.setRolId(rolId);
             nuevoUsuario.setFoto(fotoBytes);
+            nuevoUsuario.setCorreoConfirmado(true); // Por defecto, está confirmado
+            nuevoUsuario.setGoogle(false); // Los usuarios creados por el admin no son de Google
 
             // Guardar el usuario
             usuarioServicio.crearUsuario(nuevoUsuario);

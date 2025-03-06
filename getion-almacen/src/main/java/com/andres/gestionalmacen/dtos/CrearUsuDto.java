@@ -1,6 +1,5 @@
 package com.andres.gestionalmacen.dtos;
 
-
 public class CrearUsuDto {
 
     public String getNombreCompleto() {
@@ -45,14 +44,19 @@ public class CrearUsuDto {
 	public void setCorreoConfirmado(boolean correoConfirmado) {
 		this.correoConfirmado = correoConfirmado;
 	}
+	public boolean isGoogle() {
+		return google;
+	}
+	public void setGoogle(boolean google) {
+		this.google = google;
+	}
+	
 	private String nombreCompleto;
     private String movil;
     private String correoElectronico;
     private Long rolId;
-    private String	contrasena;
+    private String contrasena;
     private byte[] foto;
 	private boolean correoConfirmado;
-  
-
-	
+    private boolean google; 
 }

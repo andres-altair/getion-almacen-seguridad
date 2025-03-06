@@ -72,6 +72,8 @@ public class RegistroServlet extends HttpServlet {
             nuevoUsuario.setContrasena(contrasenaEncriptada);
             nuevoUsuario.setRolId(rolId);
             nuevoUsuario.setFoto(fotoBytes);
+            nuevoUsuario.setCorreoConfirmado(false); // Por defecto, no está confirmado
+            nuevoUsuario.setGoogle(false); // Los usuarios registrados no son de Google
 
             // Guardar el usuario
             usuarioServicio.crearUsuario(nuevoUsuario);

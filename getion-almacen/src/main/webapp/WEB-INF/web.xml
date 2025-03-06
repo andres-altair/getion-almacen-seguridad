@@ -6,6 +6,18 @@
     
     <display-name>Sistema de Gestión de Almacén</display-name>
     
+    <!-- Configuración de Google Sign-In -->
+    <context-param>
+        <param-name>google.client.id</param-name>
+        <param-value>478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com</param-value>
+    </context-param>
+    
+    <!-- URLs permitidas para Google Sign-In -->
+    <context-param>
+        <param-name>allowed.origins</param-name>
+        <param-value>http://localhost:8080,http://localhost:8080/getion-almacen</param-value>
+    </context-param>
+    
     <!-- Configuración del filtro de seguridad -->
     <filter>
         <filter-name>SecurityFilter</filter-name>
@@ -31,6 +43,15 @@
         <url-pattern>/js/*</url-pattern>
     </servlet-mapping>
     
+    <!-- Configuración de sesión -->
+    <session-config>
+        <session-timeout>60</session-timeout> <!-- 60 minutos -->
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>true</secure>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 
     <welcome-file-list>
         <welcome-file>inicio</welcome-file>
@@ -45,5 +66,3 @@
         <auth-constraint/>
     </security-constraint>
 </web-app>
-
-
