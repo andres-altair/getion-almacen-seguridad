@@ -434,3 +434,60 @@
 2025-03-06 16:29:42 [http-nio-8080-exec-8] INFO  - Acceso a página de registro
 2025-03-06 16:29:57 [http-nio-8080-exec-10] INFO  - Acceso a página de inicio
 2025-03-06 16:30:26 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-06 16:45:33 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 16:45:33 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 16:45:35 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-06 16:45:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 16:45:35 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 16:46:20 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-06 16:46:23 [http-nio-8080-exec-5] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-06 16:46:25 [http-nio-8080-exec-5] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-06 16:46:26 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-06 16:46:26 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-06 16:46:28 [http-nio-8080-exec-1] INFO  - Acceso a página de acceso
+2025-03-06 16:47:59 [http-nio-8080-exec-12] WARN  - Intento de acceso al panel de administración sin sesión válida desde IP: 127.0.0.1
+2025-03-06 16:47:59 [http-nio-8080-exec-13] INFO  - Acceso a página de acceso
+2025-03-06 17:20:52 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 17:20:52 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 17:20:54 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-06 17:20:54 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 17:20:54 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 17:21:13 [http-nio-8080-exec-12] INFO  - Acceso a página de acceso
+2025-03-06 17:21:17 [http-nio-8080-exec-19] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-06 17:21:18 [http-nio-8080-exec-19] INFO  - Usuario con ID: 4 accedió exitosamente. Rol: 1
+2025-03-06 17:21:29 [http-nio-8080-exec-20] INFO  - Sistema de logs inicializado
+2025-03-06 17:21:29 [http-nio-8080-exec-20] INFO  - Acceso a página de inicio
+2025-03-06 17:22:12 [http-nio-8080-exec-18] INFO  - Acceso a página de inicio
+2025-03-06 17:22:14 [http-nio-8080-exec-22] INFO  - Acceso a página de acceso
+2025-03-06 17:23:17 [http-nio-8080-exec-25] INFO  - Acceso a página de inicio
+2025-03-06 17:57:58 [main] INFO  - Sistema de logs inicializado
+2025-03-06 17:57:58 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 17:57:58 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 17:57:58 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-06 17:57:58 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-06 17:58:01 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-06 17:58:08 [http-nio-8080-exec-7] INFO  - Acceso a página de registro
+2025-03-06 17:58:08 [http-nio-8080-exec-8] INFO  - Acceso a página de registro
+2025-03-06 17:59:38 [http-nio-8080-exec-3] INFO  - Acceso a página de inicio
+2025-03-06 17:59:39 [http-nio-8080-exec-4] INFO  - Acceso a página de acceso
+2025-03-06 17:59:45 [http-nio-8080-exec-6] INFO  - Acceso a página de registro
+2025-03-06 17:59:45 [http-nio-8080-exec-7] INFO  - Acceso a página de registro
+2025-03-06 18:19:46 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:19:46 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:19:48 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-06 18:19:48 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 18:19:48 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 18:20:03 [http-nio-8080-exec-4] INFO  - Acceso a página de registro
+2025-03-06 18:20:03 [http-nio-8080-exec-8] INFO  - Acceso a página de registro
+2025-03-06 18:20:05 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-06 18:20:05 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-06 18:20:25 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-06 18:20:33 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
+2025-03-06 18:28:29 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:28:29 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:28:31 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-06 18:28:31 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 18:28:31 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 18:28:43 [http-nio-8080-exec-14] INFO  - Sistema de logs inicializado
+2025-03-06 18:28:43 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
+2025-03-06 18:28:54 [http-nio-8080-exec-13] INFO  - Acceso a página de acceso

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="google-signin-client_id" content="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com">
 </head>
 <body>
     <!-- Barra de Navegación -->
@@ -64,7 +65,7 @@
                                 <!-- Botón de Google -->
                                 <div class="d-grid mt-3">
                                     <div id="g_id_onload"
-                                         data-client_id="503302730974-grs94tgi74gh28k0a9qh5qv52chp1c8v.apps.googleusercontent.com"
+                                         data-client_id="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"
                                          data-context="signin"
                                          data-ux_mode="popup"
                                          data-callback="handleCredentialResponse"
@@ -120,25 +121,38 @@
     <script src="${pageContext.request.contextPath}/js/acceso.js"></script>
     <script>
         function handleCredentialResponse(response) {
-            // Enviar el token ID al servidor
-            fetch('${pageContext.request.contextPath}/google-signin', {
+            console.log('Iniciando proceso de login con Google');
+            fetch('${pageContext.request.contextPath}/GoogleAccesoServlet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: 'credential=' + response.credential
+                body: 'idToken=' + response.credential
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Respuesta recibida:', response.status);
+                return response.text().then(text => {
+                    if (!response.ok) {
+                        if (text.includes("Usuario no encontrado")) {
+                            console.log('Usuario no encontrado, redirigiendo a registro');
+                            window.location.href = '${pageContext.request.contextPath}/registro';
+                            return;
+                        }
+                        throw new Error(text);
+                    }
+                    return text;
+                });
+            })
             .then(data => {
-                if (data.success) {
-                    window.location.href = '${pageContext.request.contextPath}/inicio';
-                } else {
-                    alert('Error al iniciar sesión con Google');
+                console.log('Datos recibidos:', data);
+                if (data === "Inicio de sesión exitoso") {
+                    console.log('Login exitoso, redirigiendo a inicio');
+                    window.location.href = '${pageContext.request.contextPath}/usuario/panel';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error al procesar la solicitud');
+                alert('Error al iniciar sesión: ' + error.message);
             });
         }
     </script>

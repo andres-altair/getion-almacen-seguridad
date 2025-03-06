@@ -1,6 +1,12 @@
 package com.andres.gestionalmacen.dtos;
 
 public class CrearUsuDto {
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
     public String getNombreCompleto() {
 		return nombreCompleto;
@@ -50,7 +56,7 @@ public class CrearUsuDto {
 	public void setGoogle(boolean google) {
 		this.google = google;
 	}
-	
+	private Long id;
 	private String nombreCompleto;
     private String movil;
     private String correoElectronico;

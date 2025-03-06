@@ -254,7 +254,7 @@ public class UsuarioServicio {
         }
     }
 
-    public UsuarioDto actualizarUsuario(Long id, CrearUsuDto usuario) throws Exception {
+    public CrearUsuDto actualizarUsuario(Long id, CrearUsuDto usuario) throws Exception {
         try {
             String jsonBody = objetoMapeador.writeValueAsString(usuario);
             System.out.println("\n=== Actualizando usuario ===");
@@ -267,6 +267,10 @@ public class UsuarioServicio {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
 
+            System.out.println("Headers de la petición:");
+            conn.getRequestProperties().forEach((key, value) -> 
+                System.out.println(key + ": " + value));
+
             // Enviar el JSON
             try (OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonBody.getBytes("UTF-8");
@@ -275,6 +279,12 @@ public class UsuarioServicio {
 
             int responseCode = conn.getResponseCode();
             System.out.println("Código de respuesta: " + responseCode);
+            System.out.println("Mensaje de respuesta: " + conn.getResponseMessage());
+
+            // Imprimir headers de respuesta
+            System.out.println("Headers de respuesta:");
+            conn.getHeaderFields().forEach((key, value) -> 
+                System.out.println(key + ": " + value));
 
             if (responseCode != 200) {
                 StringBuilder errorResponse = new StringBuilder();
@@ -306,7 +316,13 @@ public class UsuarioServicio {
             String jsonResponse = response.toString();
             System.out.println("Respuesta exitosa: " + jsonResponse);
             
-            return objetoMapeador.readValue(jsonResponse, UsuarioDto.class);
+            CrearUsuDto usuarioActualizado = objetoMapeador.readValue(jsonResponse, CrearUsuDto.class);
+            System.out.println("Usuario actualizado -> ID: " + usuarioActualizado.getId() + 
+                             ", Nombre: " + usuarioActualizado.getNombreCompleto() + 
+                             ", Email: " + usuarioActualizado.getCorreoElectronico() + 
+                             ", Google: " + usuarioActualizado.isGoogle());
+            
+            return usuarioActualizado;
             
         } catch (Exception e) {
             System.err.println("Error en actualizarUsuario: " + e.getMessage());

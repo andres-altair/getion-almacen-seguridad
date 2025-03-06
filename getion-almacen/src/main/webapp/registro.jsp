@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- Google Sign-In -->
+    <!-- Google Sign-In API -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         .separator {
@@ -72,15 +72,14 @@
                                  data-callback="handleCredentialResponse"
                                  data-auto_prompt="false">
                             </div>
-
                             <div class="g_id_signin"
                                  data-type="standard"
                                  data-shape="rectangular"
                                  data-theme="outline"
                                  data-text="signup_with"
                                  data-size="large"
-                                 data-logo_alignment="center"
-                                 data-width="300">
+                                 data-logo_alignment="left"
+                                 data-width="100%">
                             </div>
                         </div>
 
@@ -96,9 +95,9 @@
                                        value="${requestScope.nombreCompleto}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="movil" class="form-label">Movil</label>
+                                <label for="movil" class="form-label">Móvil (Opcional)</label>
                                 <input type="tel" class="form-control" name="movil" id="movil" 
-                                       value="${requestScope.movil}" required pattern="[0-9]{9,15}"
+                                       value="${requestScope.movil}" pattern="[0-9]{9,15}"
                                        maxlength="15"
                                        placeholder="Ej: 612345678 +34612345678"
                                        title="Introduce un número de móvil válido (entre 9 y 15 dígitos)">
@@ -152,27 +151,36 @@
     <!-- Custom JS -->
     <script src="${pageContext.request.contextPath}/js/registro.js"></script>
     
-    <!-- Google Sign-In Handler -->
     <script>
         function handleCredentialResponse(response) {
-            fetch('${pageContext.request.contextPath}/google-signin', {
+            fetch('${pageContext.request.contextPath}/GoogleRegistroServlet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: 'credential=' + response.credential + '&isRegistration=true'
+                body: 'idToken=' + response.credential
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        if (text.includes("Ya existe una cuenta de Google")) {
+                            // Si ya existe cuenta de Google, redirigir al login
+                            window.location.href = '${pageContext.request.contextPath}/acceso';
+                        } else {
+                            throw new Error(text);
+                        }
+                    });
+                }
+                return response.text();
+            })
             .then(data => {
-                if (data.success) {
-                    window.location.href = '${pageContext.request.contextPath}/dashboard';
-                } else {
-                    alert('Error: ' + data.error);
+                if (data === "Registro exitoso") {
+                    window.location.href = '${pageContext.request.contextPath}/inicio';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error en el registro');
+                alert(error.message || 'Error al registrarse con Google');
             });
         }
     </script>

@@ -154,3 +154,13 @@
 2025-03-06 16:29:25 [http-nio-8080-exec-2] INFO  - Acceso a la gestión de usuarios
 2025-03-06 16:29:30 [http-nio-8080-exec-4] INFO  - Acceso a la gestión de usuarios
 2025-03-06 16:29:40 [http-nio-8080-exec-3] INFO  - Cierre de sesión
+2025-03-06 16:46:25 [http-nio-8080-exec-5] INFO  - Acceso exitoso al sistema
+2025-03-06 16:46:25 [http-nio-8080-exec-5] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 16:46:25 [http-nio-8080-exec-6] INFO  - Acceso al panel de administración
+2025-03-06 16:46:26 [http-nio-8080-exec-10] INFO  - Cierre de sesión
+2025-03-06 17:21:18 [http-nio-8080-exec-19] INFO  - Acceso exitoso al sistema
+2025-03-06 17:21:18 [http-nio-8080-exec-19] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 17:21:18 [http-nio-8080-exec-14] INFO  - Acceso al panel de administración
+2025-03-06 17:21:23 [http-nio-8080-exec-17] INFO  - Acceso a la gestión de usuarios
+2025-03-06 17:21:29 [http-nio-8080-exec-11] INFO  - Acceso a la gestión de usuarios
+2025-03-06 17:22:12 [http-nio-8080-exec-21] INFO  - Cierre de sesión
