@@ -1,0 +1,387 @@
+/* Componentes reutilizables */
+/* Barra de Navegación */
+.navbar {
+    background-color: var(--azul-marino);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.navbar img {
+    height: 60px;
+    margin-right: 1rem;
+}
+
+.navbar-logo {
+    margin-right: auto;
+    
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-wrap: nowrap;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-link {
+    color: var(--azul-marino);
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: var(--blanco);
+    border: 2px solid var(--blanco);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link:hover {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+}
+
+.nav-link:last-child {
+    margin-left: auto;
+}
+
+.nav-link i {
+    font-size: 1rem;
+}
+
+.navbar-brand {
+    color: var(--amarillo-oscuro);
+    font-size: 24px;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-text {
+    color: var(--negro);
+    font-size: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.welcome-text .nombre-usuario {
+    color: var(--amarillo-oscuro);
+    font-weight: bold;
+}
+
+.logout-icon {
+    color: var(--blanco);
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Botón volver en navbar */
+.navbar-back {
+    color: var(--blanco);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+.navbar-back:hover {
+    color: var(--amarillo-estrella);
+}
+
+.navbar-back i {
+    font-size: 20px;
+}
+
+/* Estilos específicos para la página de acceso */
+.navbar-logo {
+    margin-right: auto;
+}
+
+.navbar-logo img {
+    height: 80px;
+    width: auto;
+    margin: 5px 0;
+}
+
+/* Modificación específica para la página de acceso */
+.navbar-brand {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Estilos para el Panel de Operario */
+.welcome-text {
+    color: var(--negro);
+    font-size: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.welcome-text .nombre-usuario {
+    color: var(--amarillo-oscuro);
+    font-weight: bold;
+}
+
+/* Botones y enlaces del panel */
+.panel-button {
+    color: var(--azul-marino);
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: var(--blanco);
+    border: 2px solid var(--blanco);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-button:hover {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+}
+
+.panel-button i {
+    margin-right: 10px;
+}
+
+/* Estilos para las tarjetas del panel */
+.panel-card {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.panel-card h2 {
+    color: var(--azul-marino);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.panel-card p {
+    color: var(--gris-oscuro);
+    margin-bottom: 10px;
+}
+
+/* Estilos para los iconos del panel */
+.panel-icon {
+    font-size: 2em;
+    color: var(--amarillo-estrella);
+    margin-bottom: 15px;
+}
+
+/* Estilos para el contenedor de estadísticas */
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.stat-card {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    color: var(--azul-marino);
+    margin-bottom: 10px;
+}
+
+.stat-card .value {
+    font-size: 2em;
+    color: var(--amarillo-estrella);
+    font-weight: bold;
+}
+
+.stat-card .label {
+    color: var(--gris-oscuro);
+    margin-top: 5px;
+}
+
+/* Estilos para la información del usuario */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.img-perfil {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--azul-marino);
+}
+
+/* Estilos para Gestión de Usuarios */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table img.rounded-circle {
+    border: 2px solid #dee2e6;
+    transition: transform 0.2s;
+}
+
+.table img.rounded-circle:hover {
+    transform: scale(1.1);
+}
+
+.badge {
+    font-size: 0.85em;
+    padding: 0.5em 0.8em;
+}
+
+.btn.crear, .btn.admin {
+    color: var(--blanco);
+    height: 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn.crear {
+    background-color: var(--azul-marino);
+}
+
+.btn.admin {
+    background-color: var(--gris-oscuro);
+}
+
+.btn.crear i, .btn.admin i {
+    font-size: 14px;
+}
+
+.btn.crear:hover {
+    background-color: var(--azul-marino-claro);
+}
+
+.btn.admin:hover {
+    background-color: var(--gris-oscuro-claro);
+}
+
+.btn-group .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-group .btn i {
+    font-size: 1.1rem;
+}
+
+/* Estilos específicos para la navbar de gestión de usuarios */
+.navbar .nav-link.usuarios {
+    color: var(--amarillo-oscuro);
+}
+
+.navbar .nav-link.usuarios:hover {
+    color: var(--amarillo-oscuro);
+}
+
+/* Estilos para asegurar que los botones estén perfectamente alineados */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 38px;
+    margin: 0;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.btn i {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table {
+        min-width: 600px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+}

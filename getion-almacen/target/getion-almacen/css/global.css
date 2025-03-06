@@ -1,0 +1,67 @@
+/* Paleta de Colores */
+:root {
+    --azul-marino: #003366;
+    --azul-marino-claro: #004488;
+    --amarillo-estrella: #FFA500;
+    --amarillo-oscuro: #CC8400;
+    --rojo-coral: #E74C3C;
+    --rojo-oscuro: #C0392B;
+    --gris-oscuro: #2C3E50;
+    --gris-oscuro-claro: #3d5266;
+    --gris-claro: #F4F4F4;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+}
+
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--gris-claro);
+    color: var(--gris-oscuro);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    color: var(--azul-marino);
+    font-size: 36px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+p {
+    color: var(--gris-oscuro);
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+a {
+    display: inline-block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    background-color: var(--amarillo-estrella);
+    color: var(--azul-marino);
+}
+
+/* Estilo específico para el botón de cerrar sesión */
+.cerrar-sesion {
+    transition: all 0.3s ease;
+}
+
+.cerrar-sesion:hover {
+    background-color: var(--amarillo-estrella);
+    color: var(--azul-marino);
+}

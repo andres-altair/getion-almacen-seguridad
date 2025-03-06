@@ -491,3 +491,43 @@
 2025-03-06 18:28:43 [http-nio-8080-exec-14] INFO  - Sistema de logs inicializado
 2025-03-06 18:28:43 [http-nio-8080-exec-14] INFO  - Acceso a página de inicio
 2025-03-06 18:28:54 [http-nio-8080-exec-13] INFO  - Acceso a página de acceso
+2025-03-06 18:40:20 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:40:20 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 18:40:22 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-06 18:40:22 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 18:40:22 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:39:57 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:39:57 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:39:57 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:39:57 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:39:57 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:42:47 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:42:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:42:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:42:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:42:47 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:45:06 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:45:06 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:45:06 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:45:06 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:45:06 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:47:22 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:47:22 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:47:22 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:47:22 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:47:22 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:51:29 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:51:29 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:51:29 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:51:29 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:51:29 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:57:18 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:57:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:57:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:57:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:57:18 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:58:12 [main] INFO  - Sistema de logs inicializado
+2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m

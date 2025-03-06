@@ -1,0 +1,91 @@
+/* Estilos específicos para formularios */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Estilos específicos para el formulario de inicio de sesión */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--gris-oscuro);
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--gris-claro);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--amarillo-estrella);
+    color: var(--azul-marino);
+}
+
+.error {
+    color: var(--rojo-coral);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Estilos para el grupo de entrada de contraseña */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group .form-control {
+    border-right: none;
+}
+
+.input-group .btn {
+    background-color: var(--gris-claro);
+    border: 1px solid var(--gris-claro);
+    border-left: none;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.input-group .btn:hover {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
+}
+
+.input-group .btn i {
+    font-size: 41px;
+    line-height: 1;
+}

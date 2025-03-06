@@ -1,0 +1,10 @@
+/* Temas y variaciones */
+.theme-light {
+    background-color: var(--blanco);
+    color: var(--gris-oscuro);
+}
+
+.theme-dark {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
+}
