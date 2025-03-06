@@ -122,3 +122,35 @@
 2025-03-05 11:03:55 [http-nio-8080-exec-10] INFO  - Redirigiendo a: /admin/panel
 2025-03-05 11:03:55 [http-nio-8080-exec-1] INFO  - Acceso al panel de administración
 2025-03-05 11:03:57 [http-nio-8080-exec-2] INFO  - Cierre de sesión
+2025-03-06 16:18:32 [http-nio-8080-exec-2] INFO  - Acceso exitoso al sistema
+2025-03-06 16:18:32 [http-nio-8080-exec-2] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 16:18:32 [http-nio-8080-exec-3] INFO  - Acceso al panel de administración
+2025-03-06 16:18:34 [http-nio-8080-exec-5] INFO  - Cierre de sesión
+2025-03-06 16:18:49 [http-nio-8080-exec-9] INFO  - Acceso exitoso al sistema
+2025-03-06 16:18:49 [http-nio-8080-exec-9] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 16:18:49 [http-nio-8080-exec-10] INFO  - Acceso al panel de administración
+2025-03-06 16:18:52 [http-nio-8080-exec-1] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:18:57 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:19:07 [http-nio-8080-exec-6] INFO  - Cierre de sesión
+2025-03-06 16:27:27 [http-nio-8080-exec-1] INFO  - Acceso exitoso al sistema
+2025-03-06 16:27:27 [http-nio-8080-exec-1] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 16:27:27 [http-nio-8080-exec-2] INFO  - Acceso al panel de administración
+2025-03-06 16:27:28 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:27:33 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:27:45 [http-nio-8080-exec-7] INFO  - Iniciando eliminación del usuario con ID: 49
+2025-03-06 16:27:46 [http-nio-8080-exec-7] INFO  - Usuario eliminado exitosamente. ID: 49
+2025-03-06 16:27:46 [http-nio-8080-exec-8] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:27:51 [http-nio-8080-exec-10] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:28:16 [http-nio-8080-exec-2] INFO  - Cierre de sesión
+2025-03-06 16:28:40 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
+2025-03-06 16:28:40 [http-nio-8080-exec-10] INFO  - Redirigiendo a: /admin/panel
+2025-03-06 16:28:40 [http-nio-8080-exec-2] INFO  - Acceso al panel de administración
+2025-03-06 16:28:41 [http-nio-8080-exec-5] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:28:46 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:28:53 [http-nio-8080-exec-7] INFO  - Iniciando eliminación del usuario con ID: 50
+2025-03-06 16:28:54 [http-nio-8080-exec-7] INFO  - Usuario eliminado exitosamente. ID: 50
+2025-03-06 16:28:54 [http-nio-8080-exec-8] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:28:59 [http-nio-8080-exec-1] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:29:25 [http-nio-8080-exec-2] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:29:30 [http-nio-8080-exec-4] INFO  - Acceso a la gestión de usuarios
+2025-03-06 16:29:40 [http-nio-8080-exec-3] INFO  - Cierre de sesión
