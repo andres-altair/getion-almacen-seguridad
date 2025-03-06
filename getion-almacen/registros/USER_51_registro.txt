@@ -1,1 +1,2 @@
 2025-03-06 18:29:02 [http-nio-8080-exec-16] INFO  - Panel de operario cargado exitosamente
+2025-03-06 23:43:37 [http-nio-8080-exec-2] INFO  - Panel de usuario cargado exitosamente

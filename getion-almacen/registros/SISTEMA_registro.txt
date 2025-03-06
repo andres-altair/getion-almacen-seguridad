@@ -531,3 +531,9 @@
 2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
 2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
 2025-03-06 22:58:12 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-06 23:43:23 [main] INFO  - Sistema de logs inicializado
+2025-03-06 23:43:23 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 23:43:23 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-06 23:43:24 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-06 23:43:24 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-06 23:43:27 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
