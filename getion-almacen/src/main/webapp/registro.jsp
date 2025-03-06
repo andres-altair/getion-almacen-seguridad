@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
-    <title>Sistema de Gestión de Almacén - Iniciar Sesión</title>
+    <title>Sistema de Gestión de Almacén - Registro</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para iconos -->
@@ -17,6 +17,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .separator span {
+            padding: 0 10px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Barra de Navegación -->
@@ -38,6 +61,34 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <div class="card shadow-sm my-5">
                     <div class="card-body p-4">
+                        <h4 class="text-center mb-4">Registro de Usuario</h4>
+                        
+                        <!-- Registro con Google -->
+                        <div class="text-center mb-4">
+                            <div id="g_id_onload"
+                                 data-client_id="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"
+                                 data-context="signup"
+                                 data-ux_mode="popup"
+                                 data-callback="handleCredentialResponse"
+                                 data-auto_prompt="false">
+                            </div>
+
+                            <div class="g_id_signin"
+                                 data-type="standard"
+                                 data-shape="rectangular"
+                                 data-theme="outline"
+                                 data-text="signup_with"
+                                 data-size="large"
+                                 data-logo_alignment="center"
+                                 data-width="300">
+                            </div>
+                        </div>
+
+                        <div class="separator">
+                            <span>O regístrate con tu correo</span>
+                        </div>
+
+                        <!-- Formulario de registro tradicional -->
                         <form action="${pageContext.request.contextPath}/registro" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="nombreCompleto" class="form-label">Nombre completo</label>
@@ -100,5 +151,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="${pageContext.request.contextPath}/js/registro.js"></script>
+    
+    <!-- Google Sign-In Handler -->
+    <script>
+        function handleCredentialResponse(response) {
+            fetch('${pageContext.request.contextPath}/google-signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'credential=' + response.credential + '&isRegistration=true'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '${pageContext.request.contextPath}/dashboard';
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error en el registro');
+            });
+        }
+    </script>
 </body>
 </html>

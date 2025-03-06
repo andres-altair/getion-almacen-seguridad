@@ -43,6 +43,17 @@ public class AccesoServlet extends HttpServlet {
         UsuarioServicio usuarioServicio = new UsuarioServicio();
 
         try {
+            // Primero verificar si el usuario existe y su método de autenticación
+            UsuarioDto usuarioExistente = usuarioServicio.buscarPorCorreo(correoElectronico);
+            
+            if (usuarioExistente != null && usuarioExistente.isGoogle()) {
+                GestorRegistros.sistemaWarning("Intento de acceso con formulario para cuenta de Google: " + correoElectronico);
+                request.setAttribute("error", "Esta cuenta fue registrada con Google. Por favor, use el botón 'Iniciar sesión con Google'.");
+                request.setAttribute("correoElectronico", correoElectronico);
+                request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+                return;
+            }
+
             // Llamar al servicio para validar las credenciales
             UsuarioDto usuarioDto = usuarioServicio.validarCredenciales(correoElectronico, contrasenaHasheada);
             

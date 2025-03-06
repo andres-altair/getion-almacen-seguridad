@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <!-- Barra de Navegación -->
@@ -26,6 +28,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <div id="g_id_onload"
+                             data-client_id="TU_CLIENT_ID"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleCredentialResponse"
+                             data-auto_prompt="false">
+                        </div>
+
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="signin_with"
+                             data-size="large"
+                             data-logo_alignment="left">
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/acceso">Iniciar Sesión</a>
                     </li>
@@ -108,5 +128,33 @@
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Sign-In Handler -->
+    <script>
+        function handleCredentialResponse(response) {
+            // Enviar el token ID al servidor
+            fetch('${pageContext.request.contextPath}/google-signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'credential=' + response.credential
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirigir al dashboard u otra página después del inicio de sesión exitoso
+                    window.location.href = '${pageContext.request.contextPath}/dashboard';
+                } else {
+                    // Mostrar mensaje de error
+                    alert('Error de inicio de sesión: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al procesar el inicio de sesión');
+            });
+        }
+    </script>
 </body>
 </html>

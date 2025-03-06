@@ -181,13 +181,6 @@ public class UsuarioServicio {
 
     public CrearUsuDto crearUsuario(CrearUsuDto usuarioDTO) throws Exception {
         try {
-            // Si el usuario es creado desde el panel de administrador (rol 1), se marca como confirmado automáticamente
-            if (usuarioDTO.getRolId() == 1L || usuarioDTO.getRolId() == 2L || usuarioDTO.getRolId() == 3L) {
-                usuarioDTO.setCorreoConfirmado(true);
-            } else {
-                // Si es un registro normal (rol 4), necesita confirmación
-                usuarioDTO.setCorreoConfirmado(false);
-            }
 
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
@@ -462,6 +455,78 @@ public class UsuarioServicio {
         } catch (Exception e) {
             GestorRegistros.sistemaError("Error al actualizar contraseña: " + e.getMessage());
             throw new RuntimeException("Error al actualizar contraseña", e);
+        }
+    }
+
+    /**
+     * Busca un usuario por su correo electrónico.
+     * @param correoElectronico El correo electrónico del usuario a buscar
+     * @return El usuario encontrado o null si no existe
+     * @throws Exception Si hay un error en la comunicación con la API
+     */
+    public UsuarioDto buscarPorCorreo(String correoElectronico) throws Exception {
+        System.out.println("\n=== UsuarioServicio.buscarPorCorreo - Iniciando ===");
+        try {
+            String urlStr = API_BASE_URL + "/correo/" + correoElectronico;
+            System.out.println("URL de la API: " + urlStr);
+            
+            URL url = URI.create(urlStr).toURL();
+            HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+            conexion.setRequestMethod("GET");
+            conexion.setRequestProperty("Accept", "application/json");
+            conexion.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            
+            System.out.println("Conectando a la API...");
+            int respuestaCodigo = conexion.getResponseCode();
+            System.out.println("Código de respuesta: " + respuestaCodigo);
+            
+            if (respuestaCodigo == 404) {
+                System.out.println("Usuario no encontrado");
+                return null;
+            }
+            
+            if (respuestaCodigo != 200) {
+                String errorMsg = "Error HTTP: " + respuestaCodigo;
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream(), "UTF-8"))) {
+                    String line;
+                    StringBuilder response = new StringBuilder();
+                    while ((line = br.readLine()) != null) {
+                        response.append(line);
+                    }
+                    errorMsg += " - " + response.toString();
+                }
+                throw new RuntimeException(errorMsg);
+            }
+
+            System.out.println("Leyendo respuesta...");
+            StringBuilder respuesta = new StringBuilder();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    respuesta.append(linea);
+                }
+            }
+            
+            String respuestaJson = respuesta.toString();
+            System.out.println("Respuesta recibida: " + respuestaJson);
+            
+            System.out.println("Deserializando JSON...");
+            UsuarioDto usuario = objetoMapeador.readValue(respuestaJson, UsuarioDto.class);
+            System.out.println("Usuario encontrado -> ID: " + usuario.getId() + 
+                             ", Nombre: " + usuario.getNombreCompleto() + 
+                             ", Email: " + usuario.getCorreoElectronico() + 
+                             ", Rol: " + usuario.getRolId());
+            
+            System.out.println("=== UsuarioServicio.buscarPorCorreo - Completado ===\n");
+            return usuario;
+            
+        } catch (Exception e) {
+            System.err.println("\n=== UsuarioServicio.buscarPorCorreo - ERROR ===");
+            System.err.println("Mensaje de error: " + e.getMessage());
+            System.err.println("Causa: " + (e.getCause() != null ? e.getCause().getMessage() : "No hay causa"));
+            e.printStackTrace();
+            System.err.println("=====================================\n");
+            throw new Exception("Error al buscar usuario por correo: " + e.getMessage(), e);
         }
     }
 }
