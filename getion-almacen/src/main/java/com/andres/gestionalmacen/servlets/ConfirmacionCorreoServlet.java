@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
@@ -15,38 +16,38 @@ import com.andres.gestionalmacen.utilidades.GestorRegistros;
 public class ConfirmacionCorreoServlet extends HttpServlet {
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
-        String token = request.getParameter("token");
+        String tokenConfirmacion = peticion.getParameter("token");
         
-        if (token == null || token.isEmpty()) {
-            request.getSession().setAttribute("error", "Token de confirmación inválido");
-            response.sendRedirect(request.getContextPath() + "/acceso");
+        if (tokenConfirmacion == null || tokenConfirmacion.isEmpty()) {
+            peticion.getSession().setAttribute("error", "Token de confirmación inválido");
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
             return;
         }
 
         try {
-            if (!EmailUtil.validarToken(token)) {
-                request.getSession().setAttribute("error", 
+            if (!EmailUtil.validarToken(tokenConfirmacion)) {
+                peticion.getSession().setAttribute("error", 
                     "El enlace de confirmación ha expirado o no es válido. Por favor, solicita uno nuevo.");
-                response.sendRedirect(request.getContextPath() + "/reenviarConfirmacion");
+                respuesta.sendRedirect(peticion.getContextPath() + "/reenviarConfirmacion");
                 return;
             }
 
-            String email = EmailUtil.getEmailFromToken(token);
-            UsuarioServicio usuarioServicio = new UsuarioServicio();
-            usuarioServicio.confirmarCorreo(email);
+            String correoElectronico = EmailUtil.obtenerCorreoDeToken(tokenConfirmacion);
+            UsuarioServicio servicioUsuario = new UsuarioServicio();
+            servicioUsuario.confirmarCorreo(correoElectronico);
 
-            GestorRegistros.sistemaInfo("Correo confirmado exitosamente: " + email);
-            request.getSession().setAttribute("mensaje", 
+            GestorRegistros.sistemaInfo("Correo confirmado exitosamente: " + correoElectronico);
+            peticion.getSession().setAttribute("mensaje", 
                 "¡Correo confirmado exitosamente! Ya puedes iniciar sesión.");
-            response.sendRedirect(request.getContextPath() + "/acceso");
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
             
-        } catch (Exception e) {
-            GestorRegistros.sistemaError("Error en confirmación de correo: " + e.getMessage());
-            request.getSession().setAttribute("error", 
+        } catch (Exception error) {
+            GestorRegistros.sistemaError("Error en confirmación de correo: " + error.getMessage());
+            peticion.getSession().setAttribute("error", 
                 "Error al confirmar el correo. Por favor, inténtalo más tarde.");
-            response.sendRedirect(request.getContextPath() + "/reenviarConfirmacion");
+            respuesta.sendRedirect(peticion.getContextPath() + "/reenviarConfirmacion");
         }
     }
 }

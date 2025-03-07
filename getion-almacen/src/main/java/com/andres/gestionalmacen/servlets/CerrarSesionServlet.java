@@ -15,10 +15,10 @@ import com.andres.gestionalmacen.utilidades.GestorRegistros;
 @WebServlet("/cerrarSesion")
 public class CerrarSesionServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
         // Obtener la sesión actual, sin crear una nueva si no existe
-        HttpSession sesion = request.getSession(false);
+        HttpSession sesion = peticion.getSession(false);
         
         // Verificar si la sesión existe y si hay un usuario en la sesión
         if (sesion != null && sesion.getAttribute("usuario") != null) {
@@ -33,6 +33,6 @@ public class CerrarSesionServlet extends HttpServlet {
         }
         
         // Redirigir al servlet de inicio
-        response.sendRedirect(request.getContextPath() + "/inicio"); 
+        respuesta.sendRedirect(peticion.getContextPath() + "/inicio"); 
     }
 }

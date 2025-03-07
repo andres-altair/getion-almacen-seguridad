@@ -3,7 +3,6 @@ package com.andres.gestionalmacen.servlets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,65 +26,65 @@ import com.google.api.client.json.gson.GsonFactory;
 public class GoogleAccesoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(GoogleAccesoServlet.class.getName());
-    private static final String CLIENT_ID = "478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com";
+    private static final String ID_CLIENTE = "478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com";
     
-    private UsuarioServicio usuarioServicio;
-    private GoogleIdTokenVerifier verifier;
+    private UsuarioServicio servicioUsuario;
+    private GoogleIdTokenVerifier verificador;
     
     @Override
     public void init() throws ServletException {
         super.init();
-        usuarioServicio = new UsuarioServicio();
-        verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-            .setAudience(Collections.singletonList(CLIENT_ID))
+        servicioUsuario = new UsuarioServicio();
+        verificador = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+            .setAudience(Collections.singletonList(ID_CLIENTE))
             .build();
     }
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
         
-        response.setContentType("text/plain;charset=UTF-8");
+        respuesta.setContentType("text/plain;charset=UTF-8");
         
-        String idToken = request.getParameter("idToken");
-        if (idToken == null || idToken.isEmpty()) {
+        String tokenId = peticion.getParameter("idToken");
+        if (tokenId == null || tokenId.isEmpty()) {
             LOGGER.warning("Token de ID no proporcionado");
-            sendError(response, HttpServletResponse.SC_BAD_REQUEST, "Token de ID no proporcionado");
+            enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, "Token de ID no proporcionado");
             return;
         }
         
         try {
             // Verificar el token de ID
-            GoogleIdToken googleIdToken = verifier.verify(idToken);
-            if (googleIdToken == null) {
+            GoogleIdToken tokenGoogle = verificador.verify(tokenId);
+            if (tokenGoogle == null) {
                 LOGGER.warning("Token de ID inválido");
-                sendError(response, HttpServletResponse.SC_UNAUTHORIZED, "Token de ID inválido");
+                enviarError(respuesta, HttpServletResponse.SC_UNAUTHORIZED, "Token de ID inválido");
                 return;
             }
             
             // Obtener información del usuario
-            GoogleIdToken.Payload payload = googleIdToken.getPayload();
-            String email = payload.getEmail();
+            GoogleIdToken.Payload datosToken = tokenGoogle.getPayload();
+            String correoElectronico = datosToken.getEmail();
             
-            LOGGER.info("Intentando acceder con correo: " + email);
+            LOGGER.info("Intentando acceder con correo: " + correoElectronico);
             
             // Verificar que el correo esté verificado
-            if (!Boolean.TRUE.equals(payload.getEmailVerified())) {
-                LOGGER.warning("Correo no verificado: " + email);
-                sendError(response, HttpServletResponse.SC_BAD_REQUEST, "El correo electrónico de Google no está verificado");
+            if (!Boolean.TRUE.equals(datosToken.getEmailVerified())) {
+                LOGGER.warning("Correo no verificado: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, "El correo electrónico de Google no está verificado");
                 return;
             }
             
-            String name = (String) payload.get("name");
-            String picture = (String) payload.get("picture");
+            String nombreCompleto = (String) datosToken.get("name");
+            String urlFoto = (String) datosToken.get("picture");
             
             // Verificar si el usuario existe
-            UsuarioDto usuario = usuarioServicio.buscarPorCorreo(email);
+            UsuarioDto usuario = servicioUsuario.buscarPorCorreo(correoElectronico);
             LOGGER.info("Resultado búsqueda usuario: " + (usuario != null ? "encontrado" : "no encontrado"));
             
             if (usuario == null) {
-                LOGGER.warning("Usuario no encontrado para correo: " + email);
-                sendError(response, HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
+                LOGGER.warning("Usuario no encontrado para correo: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
                 return;
             }
             
@@ -94,8 +93,8 @@ public class GoogleAccesoServlet extends HttpServlet {
             
             // Verificar que sea un usuario de Google
             if (!usuario.isGoogle()) {
-                LOGGER.warning("Usuario no es de Google: " + email);
-                sendError(response, HttpServletResponse.SC_BAD_REQUEST, 
+                LOGGER.warning("Usuario no es de Google: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, 
                     "Esta cuenta no fue creada con Google. Por favor, inicie sesión con su correo y contraseña.");
                 return;
             }
@@ -103,62 +102,62 @@ public class GoogleAccesoServlet extends HttpServlet {
             // Crear DTO para actualización
             CrearUsuDto usuarioActualizar = new CrearUsuDto();
             usuarioActualizar.setId(usuario.getId());
-            usuarioActualizar.setNombreCompleto(name);
-            usuarioActualizar.setCorreoElectronico(email);
+            usuarioActualizar.setNombreCompleto(nombreCompleto);
+            usuarioActualizar.setCorreoElectronico(correoElectronico);
             usuarioActualizar.setGoogle(true);
             usuarioActualizar.setCorreoConfirmado(true);
             usuarioActualizar.setRolId(usuario.getRolId());
             usuarioActualizar.setMovil(usuario.getMovil());
             
             // Actualizar foto si hay una nueva
-            if (picture != null && !picture.isEmpty()) {
+            if (urlFoto != null && !urlFoto.isEmpty()) {
                 try {
-                    byte[] fotoBytes = descargarFoto(picture);
-                    usuarioActualizar.setFoto(fotoBytes);
-                } catch (Exception e) {
-                    LOGGER.log(Level.WARNING, "No se pudo actualizar la foto de perfil: " + e.getMessage());
+                    byte[] bytesFoto = descargarFoto(urlFoto);
+                    usuarioActualizar.setFoto(bytesFoto);
+                } catch (Exception error) {
+                    LOGGER.log(Level.WARNING, "No se pudo actualizar la foto de perfil: " + error.getMessage());
                 }
             }
             
             try {
                 // Actualizar usuario
-                CrearUsuDto usuarioActualizado = usuarioServicio.actualizarUsuario(usuario.getId(), usuarioActualizar);
+                CrearUsuDto usuarioActualizado = servicioUsuario.actualizarUsuario(usuario.getId(), usuarioActualizar);
                 LOGGER.info("Usuario actualizado correctamente");
                 
                 // Obtener usuario actualizado completo
-                UsuarioDto usuarioCompleto = usuarioServicio.buscarPorCorreo(email);
+                UsuarioDto usuarioCompleto = servicioUsuario.buscarPorCorreo(correoElectronico);
                 LOGGER.info("Usuario recuperado después de actualización");
                 
                 // Establecer el usuario en la sesión
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuarioCompleto);
-                session.setAttribute("mensaje", "¡Bienvenido de nuevo!");
+                HttpSession sesion = peticion.getSession();
+                sesion.setAttribute("usuario", usuarioCompleto);
+                sesion.setAttribute("mensaje", "¡Bienvenido de nuevo!");
                 LOGGER.info("Sesión establecida correctamente");
                 
                 // Enviar respuesta exitosa
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("Inicio de sesión exitoso");
+                respuesta.setStatus(HttpServletResponse.SC_OK);
+                respuesta.getWriter().write("Inicio de sesión exitoso");
                 LOGGER.info("Respuesta de éxito enviada");
                 
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error al actualizar usuario: " + e.getMessage());
-                sendError(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + e.getMessage());
+            } catch (Exception error) {
+                LOGGER.log(Level.SEVERE, "Error al actualizar usuario: " + error.getMessage());
+                enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + error.getMessage());
             }
             
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al procesar inicio de sesión con Google: " + e.getMessage());
-            sendError(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + e.getMessage());
+        } catch (Exception error) {
+            LOGGER.log(Level.SEVERE, "Error al procesar inicio de sesión con Google: " + error.getMessage());
+            enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + error.getMessage());
         }
     }
     
-    private void sendError(HttpServletResponse response, int status, String message) throws IOException {
-        response.setStatus(status);
-        response.getWriter().write(message);
+    private void enviarError(HttpServletResponse respuesta, int estado, String mensaje) throws IOException {
+        respuesta.setStatus(estado);
+        respuesta.getWriter().write(mensaje);
     }
     
-    private byte[] descargarFoto(String imageUrl) throws IOException {
-        try (InputStream in = URI.create(imageUrl).toURL().openStream()) {
-            return in.readAllBytes();
+    private byte[] descargarFoto(String urlImagen) throws IOException {
+        try (InputStream entrada = URI.create(urlImagen).toURL().openStream()) {
+            return entrada.readAllBytes();
         }
     }
 }

@@ -2,7 +2,7 @@ package com.andres.gestionalmacen.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,128 +22,125 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 
-/**
- * Servlet para manejar el registro inicial de usuarios a través de Google.
- */
 @WebServlet("/GoogleRegistroServlet")
 public class GoogleRegistroServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(GoogleRegistroServlet.class.getName());
-    private static final String CLIENT_ID = "478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"; // Reemplazar con tu Client ID de Google
+    private static final String ID_CLIENTE = "478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com";
     
-    private UsuarioServicio usuarioServicio;
-    private GoogleIdTokenVerifier verifier;
+    private UsuarioServicio servicioUsuario;
+    private GoogleIdTokenVerifier verificador;
     
     @Override
     public void init() throws ServletException {
         super.init();
-        usuarioServicio = new UsuarioServicio();
-        
-        // Configurar el verificador de tokens de Google
-        verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-            .setAudience(Collections.singletonList(CLIENT_ID))
+        servicioUsuario = new UsuarioServicio();
+        verificador = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+            .setAudience(Collections.singletonList(ID_CLIENTE))
             .build();
     }
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
         
-        response.setContentType("text/plain;charset=UTF-8");
+        respuesta.setContentType("text/plain;charset=UTF-8");
         
-        String idToken = request.getParameter("idToken");
-        if (idToken == null || idToken.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Token de ID no proporcionado");
+        String tokenId = peticion.getParameter("idToken");
+        if (tokenId == null || tokenId.isEmpty()) {
+            LOGGER.warning("Token de ID no proporcionado");
+            enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, "Token de ID no proporcionado");
             return;
         }
         
         try {
             // Verificar el token de ID
-            GoogleIdToken googleIdToken = verifier.verify(idToken);
-            if (googleIdToken == null) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("Token de ID inválido");
+            GoogleIdToken tokenGoogle = verificador.verify(tokenId);
+            if (tokenGoogle == null) {
+                LOGGER.warning("Token de ID inválido");
+                enviarError(respuesta, HttpServletResponse.SC_UNAUTHORIZED, "Token de ID inválido");
                 return;
             }
             
             // Obtener información del usuario
-            GoogleIdToken.Payload payload = googleIdToken.getPayload();
-            String email = payload.getEmail();
+            GoogleIdToken.Payload datosToken = tokenGoogle.getPayload();
+            String correoElectronico = datosToken.getEmail();
+            
+            LOGGER.info("Intentando registrar usuario con correo: " + correoElectronico);
             
             // Verificar que el correo esté verificado
-            if (!Boolean.TRUE.equals(payload.getEmailVerified())) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("El correo electrónico de Google no está verificado");
+            if (!Boolean.TRUE.equals(datosToken.getEmailVerified())) {
+                LOGGER.warning("Correo no verificado: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, "El correo electrónico de Google no está verificado");
                 return;
             }
-            
-            String name = (String) payload.get("name");
-            String picture = (String) payload.get("picture");
             
             // Verificar si el usuario ya existe
-            UsuarioDto usuarioExistente = usuarioServicio.buscarPorCorreo(email);
+            UsuarioDto usuarioExistente = servicioUsuario.buscarPorCorreo(correoElectronico);
             if (usuarioExistente != null) {
-                if (usuarioExistente.isGoogle()) {
-                    response.setStatus(HttpServletResponse.SC_CONFLICT);
-                    response.getWriter().write("Ya existe una cuenta de Google con este correo. Por favor, inicie sesión.");
-                } else {
-                    response.setStatus(HttpServletResponse.SC_CONFLICT);
-                    response.getWriter().write("Ya existe una cuenta con este correo que no es de Google.");
-                }
+                LOGGER.warning("Usuario ya existe: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_CONFLICT, "El usuario ya existe");
                 return;
             }
             
-            // Crear nuevo usuario
+            String nombreCompleto = (String) datosToken.get("name");
+            String urlFoto = (String) datosToken.get("picture");
+            
+            // Crear DTO para el nuevo usuario
             CrearUsuDto nuevoUsuario = new CrearUsuDto();
-            nuevoUsuario.setNombreCompleto(name);
-            nuevoUsuario.setCorreoElectronico(email);
+            nuevoUsuario.setNombreCompleto(nombreCompleto);
+            nuevoUsuario.setCorreoElectronico(correoElectronico);
             nuevoUsuario.setGoogle(true);
             nuevoUsuario.setCorreoConfirmado(true);
-            nuevoUsuario.setRolId(4L); // Rol por defecto = usuario
+            nuevoUsuario.setRolId(4L); // Usuario normal
             
-            // Descargar y establecer la foto de perfil
-            if (picture != null && !picture.isEmpty()) {
+            // Descargar y establecer la foto si está disponible
+            if (urlFoto != null && !urlFoto.isEmpty()) {
                 try {
-                    byte[] fotoBytes = descargarFoto(picture);
-                    nuevoUsuario.setFoto(fotoBytes);
-                } catch (Exception e) {
-                    LOGGER.log(Level.WARNING, "No se pudo descargar la foto de perfil: " + e.getMessage());
+                    byte[] bytesFoto = descargarFoto(urlFoto);
+                    nuevoUsuario.setFoto(bytesFoto);
+                } catch (Exception error) {
+                    LOGGER.log(Level.WARNING, "No se pudo descargar la foto de perfil: " + error.getMessage());
                 }
             }
             
             try {
-                // Guardar el usuario
-                CrearUsuDto usuarioCreado = usuarioServicio.crearUsuario(nuevoUsuario);
+                // Crear el usuario
+                CrearUsuDto usuarioCreado = servicioUsuario.crearUsuario(nuevoUsuario);
+                LOGGER.info("Usuario creado correctamente con ID: " + usuarioCreado.getId());
                 
-                // Buscar el usuario creado para obtener todos sus datos
-                UsuarioDto usuarioCompleto = usuarioServicio.buscarPorCorreo(usuarioCreado.getCorreoElectronico());
+                // Obtener usuario completo
+                UsuarioDto usuarioCompleto = servicioUsuario.buscarPorCorreo(correoElectronico);
                 
                 // Establecer el usuario en la sesión
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuarioCompleto);
-                session.setAttribute("mensaje", "¡Bienvenido! Tu cuenta ha sido creada exitosamente.");
+                HttpSession sesion = peticion.getSession();
+                sesion.setAttribute("usuario", usuarioCompleto);
+                sesion.setAttribute("mensaje", "¡Bienvenido! Tu cuenta ha sido creada exitosamente.");
                 
                 // Enviar respuesta exitosa
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("Registro exitoso");
+                respuesta.setStatus(HttpServletResponse.SC_OK);
+                respuesta.getWriter().write("Registro exitoso");
+                LOGGER.info("Registro completado exitosamente para: " + correoElectronico);
                 
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error al crear usuario: " + e.getMessage());
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().write("Error al registrar usuario");
+            } catch (Exception error) {
+                LOGGER.log(Level.SEVERE, "Error al crear usuario: " + error.getMessage());
+                enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al crear usuario: " + error.getMessage());
             }
             
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al registrar usuario de Google: " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Error al registrar usuario");
+        } catch (Exception error) {
+            LOGGER.log(Level.SEVERE, "Error al procesar registro con Google: " + error.getMessage());
+            enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al procesar registro: " + error.getMessage());
         }
     }
     
-    private byte[] descargarFoto(String imageUrl) throws IOException {
-        try (InputStream in = new URL(imageUrl).openStream()) {
-            return in.readAllBytes();
+    private void enviarError(HttpServletResponse respuesta, int estado, String mensaje) throws IOException {
+        respuesta.setStatus(estado);
+        respuesta.getWriter().write(mensaje);
+    }
+    
+    private byte[] descargarFoto(String urlImagen) throws IOException {
+        try (InputStream entrada = URI.create(urlImagen).toURL().openStream()) {
+            return entrada.readAllBytes();
         }
     }
 }

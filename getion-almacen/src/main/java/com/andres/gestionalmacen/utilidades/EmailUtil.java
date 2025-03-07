@@ -43,7 +43,7 @@ public class EmailUtil {
         return true;
     }
 
-    public static String getEmailFromToken(String token) {
+    public static String obtenerCorreoDeToken(String token) {
         TokenInfo info = tokenStorage.get(token);
         return info != null ? info.email : null;
     }

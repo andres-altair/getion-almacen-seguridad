@@ -43,9 +43,9 @@ public class RestablecerContrasenaServlet extends HttpServlet {
         String nuevaContrasena = request.getParameter("nuevaContrasena");
         
         if (EmailUtil.validarToken(token)) {
-            String email = EmailUtil.getEmailFromToken(token);
+            String correoElectronico = EmailUtil.obtenerCorreoDeToken(token);
             // Actualizar contraseña en la base de datos
-            usuarioServicio.actualizarContrasena(email, nuevaContrasena);
+            usuarioServicio.actualizarContrasena(correoElectronico, nuevaContrasena);
             
             request.getSession().setAttribute("mensaje", "Contraseña actualizada exitosamente");
             try {
