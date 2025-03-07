@@ -10,7 +10,7 @@
         <div class="alert alert-success">
             <h3>¡Pago Completado con Éxito!</h3>
             <p>Tu alquiler del sector ha sido procesado correctamente.</p>
-            <a href="../index.jsp" class="btn btn-primary">Volver al Inicio</a>
+            <a href="${pageContext.request.contextPath}/usuario/panel" class="btn home-btn ms-auto">Volver al Panel de Control</a>
         </div>
     </div>
 </body>

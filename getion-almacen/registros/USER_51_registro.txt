@@ -13,3 +13,5 @@
 2025-03-07 15:38:47 [http-nio-8080-exec-4] INFO  - Perfil actualizado correctamente
 2025-03-07 15:38:48 [http-nio-8080-exec-4] INFO  - Sesión iniciada correctamente
 2025-03-07 15:50:48 [http-nio-8080-exec-7] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 15:54:00 [http-nio-8080-exec-2] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 15:55:32 [http-nio-8080-exec-2] INFO  - Usuario de Google autenticado correctamente

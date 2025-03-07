@@ -1120,3 +1120,35 @@ Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL:
 2025-03-07 15:51:37 [http-nio-8080-exec-4] INFO  - Inicializado PagoCompletadoServlet con modo PayPal: sandbox
 2025-03-07 15:51:38 [http-nio-8080-exec-4] INFO  - Pago completado exitosamente - PaymentId: PAYID-M7FQPTI9G288265CV247483T, Sector: Sector A, PayerId: 57HCEYC7M8Q3A
 2025-03-07 15:51:38 [http-nio-8080-exec-4] INFO  - Pago completado exitosamente. PaymentId: PAYID-M7FQPTI9G288265CV247483T, Sector: Sector A
+2025-03-07 15:53:52 [http-nio-8080-exec-8] WARN  - Parámetros de pago inválidos - PaymentId: PAYID-M7FQPTI9G288265CV247483T, SectorId: null
+2025-03-07 15:53:52 [http-nio-8080-exec-8] ERROR - Parámetros de pago inválidos o faltantes
+2025-03-07 15:53:52 [http-nio-8080-exec-9] INFO  - Acceso a página de inicio
+2025-03-07 15:53:53 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-07 15:54:00 [http-nio-8080-exec-2] INFO  - Acceso exitoso con Google para: boltaxmd@gmail.com
+2025-03-07 15:54:02 [http-nio-8080-exec-6] INFO  - Iniciando procesamiento de pago
+2025-03-07 15:54:02 [http-nio-8080-exec-6] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 15:54:02 [http-nio-8080-exec-6] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 15:54:02 [http-nio-8080-exec-6] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 15:54:02 [http-nio-8080-exec-6] INFO  - Monto formateado: 149.99
+2025-03-07 15:54:03 [http-nio-8080-exec-6] INFO  - Pago creado en PayPal - ID: PAYID-M7FQRCY9PR64137L8850060C
+2025-03-07 15:54:03 [http-nio-8080-exec-6] INFO  - Link encontrado - Rel: self, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FQRCY9PR64137L8850060C
+2025-03-07 15:54:03 [http-nio-8080-exec-6] INFO  - Link encontrado - Rel: approval_url, Href: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-3WU321404H3986057
+2025-03-07 15:54:03 [http-nio-8080-exec-6] INFO  - Link encontrado - Rel: execute, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FQRCY9PR64137L8850060C/execute
+2025-03-07 15:54:03 [http-nio-8080-exec-6] INFO  - Redirigiendo a PayPal: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-3WU321404H3986057
+2025-03-07 15:54:11 [http-nio-8080-exec-7] INFO  - Pago completado exitosamente - PaymentId: PAYID-M7FQRCY9PR64137L8850060C, Sector: Sector A, PayerId: 57HCEYC7M8Q3A
+2025-03-07 15:54:11 [http-nio-8080-exec-7] INFO  - Pago completado exitosamente. PaymentId: PAYID-M7FQRCY9PR64137L8850060C, Sector: Sector A
+2025-03-07 15:54:13 [http-nio-8080-exec-8] INFO  - Acceso a página de inicio
+2025-03-07 15:55:25 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-07 15:55:32 [http-nio-8080-exec-2] INFO  - Acceso exitoso con Google para: boltaxmd@gmail.com
+2025-03-07 15:55:34 [http-nio-8080-exec-7] INFO  - Iniciando procesamiento de pago
+2025-03-07 15:55:34 [http-nio-8080-exec-7] INFO  - Parámetros recibidos - total: 199.99, sectorId: 2, sectorName: Sector B
+2025-03-07 15:55:34 [http-nio-8080-exec-7] INFO  - Creando pago en PayPal - Monto: 199.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 15:55:34 [http-nio-8080-exec-7] INFO  - Creando pago - Total: 199.99, Moneda: EUR
+2025-03-07 15:55:34 [http-nio-8080-exec-7] INFO  - Monto formateado: 199.99
+2025-03-07 15:55:35 [http-nio-8080-exec-7] INFO  - Pago creado en PayPal - ID: PAYID-M7FQRZY48688107HR267742E
+2025-03-07 15:55:35 [http-nio-8080-exec-7] INFO  - Link encontrado - Rel: self, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FQRZY48688107HR267742E
+2025-03-07 15:55:35 [http-nio-8080-exec-7] INFO  - Link encontrado - Rel: approval_url, Href: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-9PT84934EA2140207
+2025-03-07 15:55:35 [http-nio-8080-exec-7] INFO  - Link encontrado - Rel: execute, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FQRZY48688107HR267742E/execute
+2025-03-07 15:55:35 [http-nio-8080-exec-7] INFO  - Redirigiendo a PayPal: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-9PT84934EA2140207
+2025-03-07 15:55:41 [http-nio-8080-exec-8] INFO  - Pago completado exitosamente - PaymentId: PAYID-M7FQRZY48688107HR267742E, Sector: Sector B, PayerId: 57HCEYC7M8Q3A
+2025-03-07 15:55:41 [http-nio-8080-exec-8] INFO  - Pago completado exitosamente. PaymentId: PAYID-M7FQRZY48688107HR267742E, Sector: Sector B
