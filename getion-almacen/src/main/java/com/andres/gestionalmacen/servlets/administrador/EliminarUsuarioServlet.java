@@ -102,6 +102,10 @@ public class EliminarUsuarioServlet extends HttpServlet {
                 GestorRegistros.warning(adminActual.getId(), 
                     "Intento de eliminar la propia cuenta del administrador");
                 throw new Exception("No puedes eliminar tu propia cuenta");
+            }else if(id == 1 || id == 4) {
+                GestorRegistros.warning(adminActual.getId(), 
+                    "Intento de eliminar usuario protegido. ID: " + id);
+                throw new Exception("Este usuario no puede ser eliminado por razones de seguridad");
             }
 
             // Intentar eliminar el usuario
