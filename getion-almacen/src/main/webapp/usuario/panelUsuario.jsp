@@ -4,9 +4,9 @@
 <%@ page import="java.time.Year" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-    // Verificar si los atributos necesarios están presentes
-    if (request.getAttribute("usuarioNombre") == null || request.getAttribute("usuarioFoto") == null) {
-        response.sendRedirect(request.getContextPath() + "/usuario/panel");
+    // Verificar si hay una sesión válida
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect(request.getContextPath() + "/acceso");
         return;
     }
 %>

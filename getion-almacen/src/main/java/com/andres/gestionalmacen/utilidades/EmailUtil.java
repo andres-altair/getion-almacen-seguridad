@@ -177,7 +177,7 @@ public class EmailUtil {
         String contenido = String.format(
             "Hola,<br/><br/>" +
             "Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace:<br/><br/>" +
-            "<a href='http://localhost:8080/gestion-almacen/restablecerContrasena?token=%s'>Restablecer contraseña</a><br/><br/>" +
+            "<a href='http://localhost:8080/getion-almacen/restablecerContrasena?token=%s'>Restablecer contraseña</a><br/><br/>" +
             "Este enlace expirará en %d horas.<br/><br/>" +
             "Si no solicitaste esto, ignora este mensaje.<br/><br/>" +
             "Saludos,<br/>El equipo de Gestión de Almacén", 

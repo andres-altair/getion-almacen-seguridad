@@ -6,3 +6,16 @@
 2025-03-07 19:28:40 [http-nio-8080-exec-18] INFO  - Redirigiendo a: /usuario/panel
 2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Acceso exitoso al sistema
 2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Redirigiendo a: /usuario/panel
+2025-03-07 19:48:55 [http-nio-8080-exec-19] INFO  - Acceso exitoso al sistema
+2025-03-07 19:49:09 [http-nio-8080-exec-17] INFO  - Cierre de sesión exitoso
+2025-03-07 20:22:10 [http-nio-8080-exec-6] INFO  - Acceso exitoso al sistema
+2025-03-07 20:26:25 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
+2025-03-07 20:27:07 [http-nio-8080-exec-6] INFO  - Acceso exitoso al sistema
+2025-03-07 20:31:18 [http-nio-8080-exec-19] INFO  - Acceso exitoso al sistema
+2025-03-07 20:47:48 [http-nio-8080-exec-19] INFO  - Acceso exitoso al sistema
+2025-03-07 20:47:57 [http-nio-8080-exec-17] INFO  - Cierre de sesión exitoso
+2025-03-07 20:48:32 [http-nio-8080-exec-26] INFO  - Solicitud de recuperación de contraseña procesada
+2025-03-07 20:50:59 [http-nio-8080-exec-28] INFO  - Solicitud de recuperación de contraseña procesada
+2025-03-07 21:05:27 [http-nio-8080-exec-34] INFO  - Solicitud de recuperación de contraseña procesada
+2025-03-07 21:06:08 [http-nio-8080-exec-42] INFO  - Acceso exitoso al sistema
+2025-03-07 21:06:17 [http-nio-8080-exec-43] INFO  - Cierre de sesión exitoso

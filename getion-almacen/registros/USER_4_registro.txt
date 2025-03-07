@@ -198,3 +198,22 @@
 2025-03-07 16:20:24 [http-nio-8080-exec-17] INFO  - Acceso a la gestión de usuarios
 2025-03-07 16:20:29 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
 2025-03-07 16:20:46 [http-nio-8080-exec-8] INFO  - Cierre de sesión exitoso
+2025-03-07 20:32:01 [http-nio-8080-exec-4] INFO  - Acceso exitoso al sistema
+2025-03-07 20:33:45 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
+2025-03-07 20:47:38 [http-nio-8080-exec-14] INFO  - Acceso exitoso al sistema
+2025-03-07 20:47:38 [http-nio-8080-exec-18] INFO  - Acceso al panel de administración
+2025-03-07 21:06:32 [http-nio-8080-exec-48] INFO  - Acceso exitoso al sistema
+2025-03-07 21:06:32 [http-nio-8080-exec-45] INFO  - Acceso al panel de administración
+2025-03-07 21:06:34 [http-nio-8080-exec-49] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:06:40 [http-nio-8080-exec-41] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:02 [http-nio-8080-exec-42] INFO  - Usuario modificado exitosamente. ID: 18
+2025-03-07 21:07:02 [http-nio-8080-exec-42] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:06 [http-nio-8080-exec-43] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:18 [http-nio-8080-exec-48] INFO  - Iniciando eliminación del usuario con ID: 58
+2025-03-07 21:07:19 [http-nio-8080-exec-48] INFO  - Usuario eliminado exitosamente. ID: 58
+2025-03-07 21:07:19 [http-nio-8080-exec-45] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:23 [http-nio-8080-exec-50] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:43 [http-nio-8080-exec-46] INFO  - Iniciando creación de usuario: 6666673@gmail.com con rol: 2
+2025-03-07 21:07:44 [http-nio-8080-exec-46] INFO  - Usuario creado exitosamente: 6666673@gmail.com
+2025-03-07 21:07:44 [http-nio-8080-exec-46] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:07:50 [http-nio-8080-exec-47] INFO  - Acceso a la gestión de usuarios

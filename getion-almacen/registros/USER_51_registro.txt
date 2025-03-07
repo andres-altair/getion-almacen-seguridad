@@ -16,3 +16,10 @@
 2025-03-07 15:54:00 [http-nio-8080-exec-2] INFO  - Usuario de Google autenticado correctamente
 2025-03-07 15:55:32 [http-nio-8080-exec-2] INFO  - Usuario de Google autenticado correctamente
 2025-03-07 16:00:19 [http-nio-8080-exec-10] INFO  - Cierre de sesión exitoso
+2025-03-07 19:49:17 [http-nio-8080-exec-21] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 20:07:17 [http-nio-8080-exec-21] INFO  - Cierre de sesión exitoso
+2025-03-07 20:07:31 [http-nio-8080-exec-27] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 20:48:05 [http-nio-8080-exec-13] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 20:48:11 [http-nio-8080-exec-23] INFO  - Cierre de sesión exitoso
+2025-03-07 21:06:27 [http-nio-8080-exec-37] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 21:06:29 [http-nio-8080-exec-42] INFO  - Cierre de sesión exitoso

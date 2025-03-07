@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EmailUtil;
@@ -92,31 +94,47 @@ public class RestablecerContrasenaServlet extends HttpServlet {
                 String correoElectronico = EmailUtil.obtenerCorreoDeToken(token);
                 
                 if (correoElectronico != null) {
-                    // Encriptar la nueva contraseña
-                    String contrasenaEncriptada = EncriptarUtil.contraseñaHash(nuevaContrasena);
-                    
-                    // Actualizar contraseña en la base de datos
-                    servicioUsuario.actualizarContrasena(correoElectronico, contrasenaEncriptada);
-                    
-                    GestorRegistros.sistemaInfo("Contraseña actualizada exitosamente para: " + correoElectronico);
-                    peticion.getSession().setAttribute("mensaje", 
-                        "Tu contraseña ha sido actualizada exitosamente. Ya puedes iniciar sesión.");
+                    try {
+                        // Encriptar la nueva contraseña
+                        String contrasenaEncriptada = EncriptarUtil.contraseñaHash(nuevaContrasena);
+                        
+                        // Preparar datos para la API
+                        Map<String, String> datos = new HashMap<>();
+                        datos.put("correoElectronico", correoElectronico);
+                        datos.put("nuevaContrasena", contrasenaEncriptada);
+                        
+                        // Actualizar contraseña en la base de datos
+                        servicioUsuario.actualizarContrasena(datos);
+                        
+                        GestorRegistros.sistemaInfo("Contraseña actualizada exitosamente para: " + correoElectronico);
+                        peticion.getSession().setAttribute("mensaje", 
+                            "Tu contraseña ha sido actualizada exitosamente. Ya puedes iniciar sesión.");
+                        respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
+                        return;
+                    } catch (Exception e) {
+                        GestorRegistros.sistemaError("Error al actualizar contraseña: " + e.getMessage());
+                        peticion.getSession().setAttribute("error", 
+                            "Ha ocurrido un error al actualizar tu contraseña. Por favor, inténtalo de nuevo.");
+                        respuesta.sendRedirect(peticion.getContextPath() + "/recuperarContrasena");
+                        return;
+                    }
                 } else {
                     GestorRegistros.sistemaWarning("Token válido pero correo no encontrado");
                     peticion.getSession().setAttribute("error", 
                         "No se pudo completar la operación. Por favor, solicita un nuevo enlace.");
+                    respuesta.sendRedirect(peticion.getContextPath() + "/recuperarContrasena");
                 }
             } else {
                 GestorRegistros.sistemaWarning("Intento de actualización con token inválido");
                 peticion.getSession().setAttribute("error", 
                     "El enlace ha expirado. Por favor, solicita uno nuevo.");
+                respuesta.sendRedirect(peticion.getContextPath() + "/recuperarContrasena");
             }
         } catch (Exception error) {
-            GestorRegistros.sistemaError("Error al actualizar contraseña: " + error.getMessage());
+            GestorRegistros.sistemaError("Error al procesar solicitud de restablecimiento: " + error.getMessage());
             peticion.getSession().setAttribute("error", 
-                "Ha ocurrido un error al actualizar tu contraseña. Por favor, inténtalo de nuevo.");
+                "Ha ocurrido un error al procesar tu solicitud. Por favor, inténtalo de nuevo.");
+            respuesta.sendRedirect(peticion.getContextPath() + "/recuperarContrasena");
         }
-        
-        respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
     }
 }

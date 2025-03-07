@@ -70,8 +70,14 @@ public class ProcesarPagoServlet extends HttpServlet {
             sdkConfig.put("http.RetryCount", "1");
             sdkConfig.put("http.ReadTimeOut", "30000");
             sdkConfig.put("http.MaxConnection", "100");
+            
+            if ("sandbox".equals(mode)) {
             sdkConfig.put("service.EndPoint", "https://api.sandbox.paypal.com");
             sdkConfig.put("oauth.EndPoint", "https://api.sandbox.paypal.com");
+            } else {
+                sdkConfig.put("service.EndPoint", "https://api.paypal.com");
+                sdkConfig.put("oauth.EndPoint", "https://api.paypal.com");
+            }
             
             apiContext = new APIContext(clientId, clientSecret, mode);
             apiContext.setConfigurationMap(sdkConfig);

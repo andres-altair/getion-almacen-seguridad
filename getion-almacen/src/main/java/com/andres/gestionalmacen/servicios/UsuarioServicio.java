@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -20,6 +19,9 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 /**
  * Clase que maneja la lógica de negocio relacionada con los usuarios.
@@ -324,16 +326,11 @@ public class UsuarioServicio {
     /**
      * Actualiza la contraseña de un usuario existente enviando una petición a la API.
      * 
-     * @param email El correo electrónico del usuario
-     * @param nuevaContrasena La nueva contraseña del usuario
+     * @param datos El mapa con la información de la contraseña a actualizar
      * @throws Exception Si ocurre un error durante la actualización de la contraseña
      */
-    public void actualizarContrasena(String email, String nuevaContrasena) throws Exception {
+    public void actualizarContrasena(Map<String, String> datos) throws Exception {
         try {
-            Map<String, String> datos = new HashMap<>();
-            datos.put("email", email);
-            datos.put("nuevaContrasena", nuevaContrasena);
-            
             String jsonDatos = objetoMapeador.writeValueAsString(datos);
             
             URL url = URI.create(API_BASE_URL + "/actualizarContrasena").toURL();
@@ -342,18 +339,26 @@ public class UsuarioServicio {
             conexion.setRequestProperty("Content-Type", "application/json");
             conexion.setDoOutput(true);
             
-            conexion.getOutputStream().write(jsonDatos.getBytes());
+            try (OutputStream os = conexion.getOutputStream()) {
+                os.write(jsonDatos.getBytes(StandardCharsets.UTF_8));
+                os.flush();
+            }
             
             int responseCode = conexion.getResponseCode();
             if (responseCode != 200) {
-                GestorRegistros.sistemaError("Error al actualizar contraseña: " + responseCode);
-                throw new RuntimeException("Error al actualizar contraseña: " + responseCode);
+                String errorMessage;
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream(), StandardCharsets.UTF_8))) {
+                    errorMessage = br.lines().collect(Collectors.joining("\n"));
+                }
+                GestorRegistros.sistemaError("Error al actualizar contraseña: " + responseCode + ", " + errorMessage);
+                throw new Exception("Error al actualizar contraseña: " + responseCode);
             }
             
-            GestorRegistros.sistemaInfo("Contraseña actualizada con éxito");
+            GestorRegistros.sistemaInfo("Contraseña actualizada exitosamente");
+            
         } catch (Exception e) {
             GestorRegistros.sistemaError("Error al actualizar contraseña: " + e.getMessage());
-            throw new Exception("Error al actualizar contraseña: " + e.getMessage(), e);
+            throw new Exception("Error al actualizar contraseña: " + e.getMessage());
         }
     }
 

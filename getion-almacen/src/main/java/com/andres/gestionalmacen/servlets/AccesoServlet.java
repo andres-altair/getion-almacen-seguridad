@@ -15,55 +15,16 @@ import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
-/**
- * Servlet que maneja el proceso de inicio de sesión de usuarios.
- * Implementa la lógica de autenticación, validación de credenciales y redirección según el rol.
- * 
- * <p>Funcionalidades principales:</p>
- * <ul>
- *   <li>Validación de credenciales contra la base de datos</li>
- *   <li>Manejo de sesiones y cookies para "recordar usuario"</li>
- *   <li>Redirección basada en roles de usuario</li>
- *   <li>Validación de método de autenticación (normal vs Google)</li>
- *   <li>Registro detallado de actividades y errores</li>
- * </ul>
- * 
- * @author Andrés
- * @version 1.0
- */
 @WebServlet("/acceso")
 public class AccesoServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * Maneja las peticiones GET mostrando el formulario de inicio de sesión.
-     * 
-     * @param peticion La petición HTTP del cliente
-     * @param respuesta La respuesta HTTP al cliente
-     * @throws ServletException Si ocurre un error en el servlet
-     * @throws IOException Si ocurre un error de E/S
-     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
         GestorRegistros.sistemaInfo("Acceso a página de acceso");
         peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
     }
 
-    /**
-     * Procesa los intentos de inicio de sesión verificando las credenciales y gestionando la sesión.
-     * 
-     * <p>El método realiza las siguientes operaciones:</p>
-     * <ol>
-     *   <li>Valida el método de autenticación (normal vs Google)</li>
-     *   <li>Verifica las credenciales del usuario</li>
-     *   <li>Gestiona la sesión y cookies si se solicita "recordar usuario"</li>
-     *   <li>Redirige al panel correspondiente según el rol del usuario</li>
-     * </ol>
-     * 
-     * @param peticion La petición HTTP que contiene las credenciales
-     * @param respuesta La respuesta HTTP al cliente
-     * @throws ServletException Si ocurre un error en el servlet
-     * @throws IOException Si ocurre un error de E/S
-     */
     @Override
     protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
         String correoElectronico = peticion.getParameter("correoElectronico");
@@ -127,8 +88,16 @@ public class AccesoServlet extends HttpServlet {
                         peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
                         return;
                 }
-                GestorRegistros.info(datosUsuario.getId(), "Redirigiendo a: " + destino);
-                respuesta.sendRedirect(peticion.getContextPath() + destino);
+
+                // Log detallado antes de la redirección
+                GestorRegistros.sistemaInfo("Redirigiendo usuario ID: " + datosUsuario.getId() + 
+                    " con rol: " + datosUsuario.getRolId() + " a: " + destino);
+                
+                // Redirección con el contexto correcto
+                String rutaCompleta = peticion.getContextPath() + destino;
+                GestorRegistros.sistemaInfo("URL completa de redirección: " + rutaCompleta);
+                
+                respuesta.sendRedirect(rutaCompleta);
                 
             } else {
                 GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
