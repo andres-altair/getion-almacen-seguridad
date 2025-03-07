@@ -537,3 +537,506 @@
 2025-03-06 23:43:24 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
 2025-03-06 23:43:24 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
 2025-03-06 23:43:27 [http-nio-8080-exec-8] INFO  - Acceso a página de acceso
+2025-03-06 23:47:53 [http-nio-8080-exec-1] INFO  - Acceso a página de inicio
+2025-03-06 23:47:56 [http-nio-8080-exec-2] INFO  - Acceso a página de acceso
+2025-03-07 00:25:13 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:25:13 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:28:52 [main] INFO  - Sistema de logs inicializado
+2025-03-07 00:28:52 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:28:52 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:28:52 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-07 00:28:52 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-07 00:28:54 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-07 00:32:48 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:32:48 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:44:44 [main] INFO  - Sistema de logs inicializado
+2025-03-07 00:44:44 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:44:44 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:44:44 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-07 00:44:44 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-07 00:44:48 [http-nio-8080-exec-5] INFO  - Acceso a página de acceso
+2025-03-07 00:45:05 [http-nio-8080-exec-2] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"20fa22fb410a9","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 00:45:05 [http-nio-8080-exec-2] ERROR - Error en PayPal
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"20fa22fb410a9","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:121)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:59)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"20fa22fb410a9","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 00:47:20 [http-nio-8080-exec-6] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"b3e111c0fb322","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 00:47:20 [http-nio-8080-exec-6] ERROR - Error en PayPal
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"b3e111c0fb322","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:121)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:59)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"b3e111c0fb322","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 00:56:18 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:56:18 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 00:56:20 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-07 00:56:20 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:56:20 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 00:56:37 [http-nio-8080-exec-3] WARN  - Intento de acceso al panel sin sesión válida
+2025-03-07 00:56:37 [http-nio-8080-exec-10] INFO  - Acceso a página de acceso
+2025-03-07 00:56:51 [http-nio-8080-exec-7] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"c95e035979105","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 00:56:51 [http-nio-8080-exec-7] ERROR - Error en PayPal
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"c95e035979105","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:134)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:72)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"c95e035979105","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 01:12:01 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:12:01 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:12:02 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-07 01:12:02 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:12:02 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:12:12 [http-nio-8080-exec-18] WARN  - Intento de acceso al panel sin sesión válida
+2025-03-07 01:12:12 [http-nio-8080-exec-15] INFO  - Acceso a página de acceso
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Inicializando PayPal - Mode: sandbox
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - PayPal inicializado correctamente
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 01:12:23 [http-nio-8080-exec-20] INFO  - Enviando solicitud de pago a PayPal
+2025-03-07 01:12:23 [http-nio-8080-exec-20] ERROR - Error de PayPal: oauth.Endpoint, mode or service.EndPoint not set not configured to sandbox/live 
+com.paypal.base.rest.PayPalRESTException: oauth.Endpoint, mode or service.EndPoint not set not configured to sandbox/live 
+	at com.paypal.base.rest.OAuthTokenCredential.generateAccessToken(OAuthTokenCredential.java:403)
+	at com.paypal.base.rest.OAuthTokenCredential.getAccessToken(OAuthTokenCredential.java:230)
+	at com.paypal.base.rest.APIContext.fetchAccessToken(APIContext.java:303)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:282)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:194)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:110)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.net.MalformedURLException: oauth.Endpoint, mode or service.EndPoint not set not configured to sandbox/live 
+	at com.paypal.base.rest.OAuthTokenCredential.getOAuthHttpConfiguration(OAuthTokenCredential.java:472)
+	at com.paypal.base.rest.OAuthTokenCredential.generateAccessToken(OAuthTokenCredential.java:359)
+	... 31 common frames omitted
+2025-03-07 01:15:34 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:15:34 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:15:36 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-07 01:15:36 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:15:36 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:15:44 [http-nio-8080-exec-29] WARN  - Intento de acceso al panel sin sesión válida
+2025-03-07 01:15:44 [http-nio-8080-exec-26] INFO  - Acceso a página de acceso
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Inicializando PayPal - Mode: sandbox
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - PayPal inicializado correctamente con modo: sandbox y endpoint: https://api.sandbox.paypal.com
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 01:15:56 [http-nio-8080-exec-25] INFO  - Enviando solicitud de pago a PayPal
+2025-03-07 01:15:57 [http-nio-8080-exec-25] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"0f72341e6618d","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 01:15:57 [http-nio-8080-exec-25] ERROR - Error de PayPal: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"0f72341e6618d","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"0f72341e6618d","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:199)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:115)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"0f72341e6618d","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 01:20:38 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:20:38 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:20:39 [Catalina-utility-1] INFO  - Sistema de logs inicializado
+2025-03-07 01:20:39 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:20:39 [Catalina-utility-1] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:21:22 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:21:22 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:21:23 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-07 01:21:23 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:21:23 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:21:31 [http-nio-8080-exec-33] WARN  - Intento de acceso al panel sin sesión válida
+2025-03-07 01:21:31 [http-nio-8080-exec-38] INFO  - Acceso a página de acceso
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Inicializando PayPal - Mode: sandbox
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - PayPal inicializado correctamente con modo: sandbox y endpoint: https://api.sandbox.paypal.com
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Monto formateado: 149,99
+2025-03-07 01:21:41 [http-nio-8080-exec-37] INFO  - Enviando solicitud de pago a PayPal con monto: 149,99
+2025-03-07 01:21:42 [http-nio-8080-exec-37] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"f7cd82fc7a64a","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 01:21:42 [http-nio-8080-exec-37] ERROR - Error de PayPal: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"f7cd82fc7a64a","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"f7cd82fc7a64a","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:203)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:115)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"f7cd82fc7a64a","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 01:23:48 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:23:48 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:23:49 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-07 01:23:49 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:23:49 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:24:03 [http-nio-8080-exec-47] INFO  - Inicializando PayPal - Mode: sandbox
+2025-03-07 01:24:03 [http-nio-8080-exec-47] INFO  - PayPal inicializado correctamente con modo: sandbox y endpoint: https://api.sandbox.paypal.com
+2025-03-07 01:24:03 [http-nio-8080-exec-47] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:24:03 [http-nio-8080-exec-47] ERROR - Sesión inválida
+2025-03-07 01:24:03 [http-nio-8080-exec-41] INFO  - Acceso a página de acceso
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Monto formateado: 149,99
+2025-03-07 01:24:13 [http-nio-8080-exec-40] INFO  - Enviando solicitud de pago a PayPal con monto: 149,99
+2025-03-07 01:24:14 [http-nio-8080-exec-40] ERROR - Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"7e85396605aee","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+2025-03-07 01:24:14 [http-nio-8080-exec-40] ERROR - Error de PayPal: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"7e85396605aee","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+com.paypal.base.rest.PayPalRESTException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"7e85396605aee","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.rest.PayPalRESTException.createFromHttpErrorException(PayPalRESTException.java:72)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:431)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:295)
+	at com.paypal.base.rest.PayPalResource.configureAndExecute(PayPalResource.java:228)
+	at com.paypal.api.payments.Payment.create(Payment.java:149)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.createPayment(ProcesarPagoServlet.java:203)
+	at com.andres.gestionalmacen.servlets.usuario.ProcesarPagoServlet.doPost(ProcesarPagoServlet.java:115)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:663)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: com.paypal.base.exception.HttpErrorException: Response code: 400	Error response: {"name":"VALIDATION_ERROR","message":"Invalid request - see details","debug_id":"7e85396605aee","information_link":"https://developer.paypal.com/docs/api/payments/#errors","details":[{"field":"/transactions/0/amount","location":"body","issue":"Cannot construct instance of `com.paypal.platform.payments.model.rest.common.Amount`, problem: INVALID_CURRENCY_AMOUNT_FORMAT"}]}
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:162)
+	at com.paypal.base.HttpConnection.execute(HttpConnection.java:65)
+	at com.paypal.base.rest.PayPalResource.execute(PayPalResource.java:417)
+	... 29 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2055)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection$10.run(HttpURLConnection.java:2050)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getChainedException(HttpURLConnection.java:2049)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1619)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:223)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:132)
+	... 31 common frames omitted
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.sandbox.paypal.com/v1/payments/payment
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1998)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1599)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:531)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:307)
+	at com.paypal.base.HttpConnection.executeWithStream(HttpConnection.java:117)
+	... 31 common frames omitted
+2025-03-07 01:35:03 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:35:03 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP destruido[0m
+2025-03-07 01:35:05 [Catalina-utility-2] INFO  - Sistema de logs inicializado
+2025-03-07 01:35:05 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:35:05 [Catalina-utility-2] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 01:35:09 [http-nio-8080-exec-52] INFO  - Inicializando PayPal - Mode: sandbox
+2025-03-07 01:35:09 [http-nio-8080-exec-52] INFO  - PayPal inicializado correctamente con modo: sandbox y endpoint: https://api.sandbox.paypal.com
+2025-03-07 01:35:09 [http-nio-8080-exec-52] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:35:09 [http-nio-8080-exec-52] ERROR - Sesión inválida
+2025-03-07 01:35:09 [http-nio-8080-exec-51] INFO  - Acceso a página de acceso
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Iniciando procesamiento de pago
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Parámetros recibidos - total: 149.99, sectorId: 1, sectorName: Sector A
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Creando pago en PayPal - Monto: 149.99, BaseURL: http://localhost:8080/getion-almacen
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Creando pago - Total: 149.99, Moneda: EUR
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Monto formateado: 149.99
+2025-03-07 01:35:20 [http-nio-8080-exec-55] INFO  - Enviando solicitud de pago a PayPal con monto: 149.99
+2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Pago creado en PayPal - ID: PAYID-M7FD6SQ06T31704X5849832N
+2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Link encontrado - Rel: self, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FD6SQ06T31704X5849832N
+2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Link encontrado - Rel: approval_url, Href: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-0Y651353PK033125E
+2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Link encontrado - Rel: execute, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FD6SQ06T31704X5849832N/execute
+2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Redirigiendo a PayPal: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-0Y651353PK033125E
+2025-03-07 01:36:14 [http-nio-8080-exec-59] INFO  - Pago completado exitosamente. PaymentId: PAYID-M7FD6SQ06T31704X5849832N, Sector: Sector A

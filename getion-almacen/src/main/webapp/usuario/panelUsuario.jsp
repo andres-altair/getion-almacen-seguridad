@@ -159,7 +159,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Seguridad 24/7</li>
                                 <li><i class="fas fa-truck text-warning"></i> Acceso para camiones</li>
                             </ul>
-                            <div id="paypal-button-sectorA"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="1">
+                                <input type="hidden" name="total" value="149.99">
+                                <input type="hidden" name="sectorName" value="Sector A">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                     
@@ -174,7 +181,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Seguridad 24/7</li>
                                 <li><i class="fas fa-dolly text-warning"></i> Equipo de carga incluido</li>
                             </ul>
-                            <div id="paypal-button-sectorB"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="2">
+                                <input type="hidden" name="total" value="199.99">
+                                <input type="hidden" name="sectorName" value="Sector B">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                     
@@ -189,7 +203,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Seguridad avanzada</li>
                                 <li><i class="fas fa-users text-warning"></i> Personal de apoyo</li>
                             </ul>
-                            <div id="paypal-button-sectorC"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="3">
+                                <input type="hidden" name="total" value="299.99">
+                                <input type="hidden" name="sectorName" value="Sector C">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -206,7 +227,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Seguridad biométrica</li>
                                 <li><i class="fas fa-clock text-warning"></i> Acceso 24/7</li>
                             </ul>
-                            <div id="paypal-button-sectorD"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="4">
+                                <input type="hidden" name="total" value="399.99">
+                                <input type="hidden" name="sectorName" value="Sector D">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                     
@@ -221,7 +249,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Vigilancia dedicada</li>
                                 <li><i class="fas fa-robot text-warning"></i> Sistema automatizado</li>
                             </ul>
-                            <div id="paypal-button-sectorE"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="5">
+                                <input type="hidden" name="total" value="499.99">
+                                <input type="hidden" name="sectorName" value="Sector E">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                     
@@ -236,7 +271,14 @@
                                 <li><i class="fas fa-shield-alt text-success"></i> Centro de control dedicado</li>
                                 <li><i class="fas fa-star text-warning"></i> Servicios VIP</li>
                             </ul>
-                            <div id="paypal-button-sectorF"></div>
+                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
+                                <input type="hidden" name="sectorId" value="6">
+                                <input type="hidden" name="total" value="699.99">
+                                <input type="hidden" name="sectorName" value="Sector F">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -322,65 +364,6 @@
             // Actualizar cada 30 segundos
             setInterval(cargarEstadoSectores, 30000);
         });
-
-        // Función para crear botón de PayPal
-        function createPayPalButton(containerId, sectorName, price) {
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            description: `Alquiler Sector ${sectorName} - 1 mes`,
-                            amount: {
-                                currency_code: 'EUR',
-                                value: price
-                            }
-                        }]
-                    });
-                },
-                onApprove: async function(data, actions) {
-                    try {
-                        const orderData = await actions.order.capture();
-                        
-                        const response = await fetch('${pageContext.request.contextPath}/usuario/procesarPago', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                orderId: orderData.id,
-                                sectorName: sectorName,
-                                amount: price,
-                                type: 'SECTOR_RENTAL'
-                            })
-                        });
-                        
-                        const result = await handleFetchResponse(response);
-                        
-                        if (result.success) {
-                            alert('¡Gracias por tu alquiler! El Sector ' + sectorName + ' ha sido reservado.');
-                            window.location.reload();
-                        } else {
-                            mostrarError('Error al procesar el pago: ' + result.error);
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        mostrarError('Error al procesar el pago. Por favor, inténtalo de nuevo.');
-                    }
-                },
-                onError: function(err) {
-                    console.error('Error PayPal:', err);
-                    mostrarError('Error en el proceso de pago con PayPal. Por favor, inténtalo de nuevo.');
-                }
-            }).render('#' + containerId);
-        }
-
-        // Crear botones de PayPal para cada sector
-        createPayPalButton('paypal-button-sectorA', 'A', '149.99');
-        createPayPalButton('paypal-button-sectorB', 'B', '199.99');
-        createPayPalButton('paypal-button-sectorC', 'C', '299.99');
-        createPayPalButton('paypal-button-sectorD', 'D', '399.99');
-        createPayPalButton('paypal-button-sectorE', 'E', '499.99');
-        createPayPalButton('paypal-button-sectorF', 'F', '699.99');
     </script>
 </body>
 </html>
