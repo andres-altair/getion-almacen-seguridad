@@ -5,11 +5,11 @@ com\andres\gestionalmacen\utilidades\EmailUtil$1.class
 com\andres\gestionalmacen\servlets\usuario\ProcesarPagoServlet.class
 com\andres\gestionalmacen\servlets\usuario\PanelUsuarioServlet.class
 com\andres\gestionalmacen\servlets\administrador\VerTodosUsuariosServlet.class
-com\andres\gestionalmacen\AppInitializer.class
 com\andres\gestionalmacen\servicios\UsuarioServicio$1.class
 com\andres\gestionalmacen\servicios\ApiService.class
 com\andres\gestionalmacen\servlets\AccesoServlet.class
 com\andres\gestionalmacen\servlets\ReenviarConfirmacionServlet.class
+com\andres\gestionalmacen\servlets\usuario\PagoCompletadoServlet.class
 com\andres\gestionalmacen\utilidades\ImagenUtil.class
 com\andres\gestionalmacen\servlets\administrador\ModificarUsuarioServlet.class
 com\andres\gestionalmacen\dtos\RolDto.class
@@ -17,6 +17,7 @@ com\andres\gestionalmacen\servicios\ApiService$RequestExecutor.class
 com\andres\gestionalmacen\servlets\RecuperarContrasenaServlet.class
 com\andres\gestionalmacen\servlets\administrador\CrearUsuarioServlet.class
 com\andres\gestionalmacen\servlets\administrador\VerUsuarioPorIdServlet.class
+com\andres\gestionalmacen\servlets\ConfirmarCorreoNuevoServlet.class
 com\andres\gestionalmacen\servlets\RegistroServlet.class
 com\andres\gestionalmacen\utilidades\EncriptarUtil.class
 com\andres\gestionalmacen\dtos\CrearUsuDto.class
@@ -24,9 +25,9 @@ com\andres\gestionalmacen\servlets\gerente\PanelGerenteServlet.class
 com\andres\gestionalmacen\servlets\InicioServlet.class
 com\andres\gestionalmacen\utilidades\ImagenUtil$1.class
 com\andres\gestionalmacen\dtos\UsuarioDto.class
+com\andres\gestionalmacen\InicializadorApp.class
 com\andres\gestionalmacen\servicios\UsuarioServicio.class
 com\andres\gestionalmacen\servlets\CerrarSesionServlet.class
-com\andres\gestionalmacen\servlets\ConfirmacionCorreoServlet.class
 com\andres\gestionalmacen\servlets\RestablecerContrasenaServlet.class
 com\andres\gestionalmacen\dtos\AlquilerDto.class
 com\andres\gestionalmacen\servlets\GoogleRegistroServlet.class

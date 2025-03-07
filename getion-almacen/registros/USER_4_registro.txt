@@ -170,3 +170,31 @@
 2025-03-07 15:34:19 [http-nio-8080-exec-10] INFO  - Acceso exitoso al sistema
 2025-03-07 15:34:19 [http-nio-8080-exec-10] INFO  - Redirigiendo a: /admin/panel
 2025-03-07 15:34:19 [http-nio-8080-exec-9] INFO  - Acceso al panel de administración
+2025-03-07 16:00:23 [http-nio-8080-exec-4] INFO  - Acceso exitoso al sistema
+2025-03-07 16:00:23 [http-nio-8080-exec-4] INFO  - Redirigiendo a: /admin/panel
+2025-03-07 16:00:23 [http-nio-8080-exec-5] INFO  - Acceso al panel de administración
+2025-03-07 16:02:33 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:02:37 [http-nio-8080-exec-7] ERROR - Error al cargar la gestión de usuarios: Error al obtener usuarios: Error HTTP: 500
+2025-03-07 16:02:37 [http-nio-8080-exec-8] INFO  - Acceso al panel de administración
+2025-03-07 16:02:45 [http-nio-8080-exec-9] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:02:49 [http-nio-8080-exec-9] ERROR - Error al cargar la gestión de usuarios: Error al obtener usuarios: Error HTTP: 500
+2025-03-07 16:02:49 [http-nio-8080-exec-10] INFO  - Acceso al panel de administración
+2025-03-07 16:14:03 [http-nio-8080-exec-2] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:14:08 [http-nio-8080-exec-4] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:14:50 [http-nio-8080-exec-7] INFO  - Iniciando creación de usuario: 11111111111173@gmail.com con rol: 2
+2025-03-07 16:14:51 [http-nio-8080-exec-7] INFO  - Usuario creado exitosamente: 11111111111173@gmail.com
+2025-03-07 16:14:51 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:14:59 [http-nio-8080-exec-9] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:15:18 [http-nio-8080-exec-1] INFO  - Usuario modificado exitosamente. ID: 29
+2025-03-07 16:15:18 [http-nio-8080-exec-1] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:15:23 [http-nio-8080-exec-3] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:20:07 [http-nio-8080-exec-15] INFO  - Acceso exitoso al sistema
+2025-03-07 16:20:07 [http-nio-8080-exec-15] INFO  - Redirigiendo a: /admin/panel
+2025-03-07 16:20:07 [http-nio-8080-exec-8] INFO  - Acceso al panel de administración
+2025-03-07 16:20:09 [http-nio-8080-exec-13] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:20:14 [http-nio-8080-exec-11] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:20:24 [http-nio-8080-exec-16] INFO  - Iniciando eliminación del usuario con ID: 33
+2025-03-07 16:20:24 [http-nio-8080-exec-16] INFO  - Usuario eliminado exitosamente. ID: 33
+2025-03-07 16:20:24 [http-nio-8080-exec-17] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:20:29 [http-nio-8080-exec-7] INFO  - Acceso a la gestión de usuarios
+2025-03-07 16:20:46 [http-nio-8080-exec-8] INFO  - Cierre de sesión exitoso

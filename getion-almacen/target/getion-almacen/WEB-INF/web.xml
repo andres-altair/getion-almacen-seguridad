@@ -18,6 +18,20 @@
         <param-value>http://localhost:8080,http://localhost:8080/getion-almacen</param-value>
     </context-param>
     
+    <!-- PayPal Configuration -->
+    <context-param>
+        <param-name>paypal.client.id</param-name>
+        <param-value>AWJ7nuH-FzH0oLFfGCD3whtlMU5qXQSCbIW8EwPJU37XPcTtWoz3KcIhGkLB8-OCix-gNd10cD0vBQPi</param-value>
+    </context-param>
+    <context-param>
+        <param-name>paypal.client.secret</param-name>
+        <param-value>EHGib15ES9mKN0UioLY5iUkiMTECVYrVq9rHQhuSfEDs7iMyR_bOIsZ21Yh4avkwy-roWBio25OZuwbJ</param-value>
+    </context-param>
+    <context-param>
+        <param-name>paypal.mode</param-name>
+        <param-value>sandbox</param-value>
+    </context-param>
+    
     <!-- Configuración del filtro de seguridad -->
     <filter>
         <filter-name>SecurityFilter</filter-name>
@@ -42,8 +56,7 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/js/*</url-pattern>
-    </servlet-mapping>
-    
+    </servlet-mapping>    
     <!-- Configuración de sesión -->
     <session-config>
         <session-timeout>60</session-timeout>

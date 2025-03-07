@@ -372,7 +372,12 @@ public class UsuarioServicio {
             conexion.setRequestProperty("Accept", "application/json");
             
             int responseCode = conexion.getResponseCode();
-            if (responseCode != 200) {
+            if (responseCode == 404) {
+                // Usuario no encontrado, esto es normal y esperado
+                GestorRegistros.sistemaInfo("Usuario no encontrado con correo: " + correoElectronico);
+                return null;
+            } else if (responseCode != 200) {
+                // Otros códigos de error sí son problemáticos
                 GestorRegistros.sistemaError("Error al buscar usuario: " + responseCode);
                 throw new RuntimeException("Error al buscar usuario: " + responseCode);
             }
@@ -386,6 +391,10 @@ public class UsuarioServicio {
             
             return objetoMapeador.readValue(respuesta.toString(), UsuarioDto.class);
         } catch (Exception e) {
+            if (e instanceof RuntimeException && e.getMessage().contains("404")) {
+                // Si es una excepción causada por 404, retornamos null
+                return null;
+            }
             GestorRegistros.sistemaError("Error al buscar usuario: " + e.getMessage());
             throw new Exception("Error al buscar usuario: " + e.getMessage(), e);
         }

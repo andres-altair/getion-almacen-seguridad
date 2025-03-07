@@ -10,8 +10,8 @@ import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
 /**
  * Filtro que intercepta las solicitudes a archivos JSP.
- * Este filtro se encarga de registrar las solicitudes y redirigir a los usuarios
- * a la página de inicio, bloqueando el acceso directo a los JSP.
+ * Este filtro se encarga de registrar las solicitudes y bloquear el acceso directo a los JSP,
+ * permitiendo solo el acceso a través de forwards desde servlets.
  * 
  * <p>Funcionalidades principales:</p>
  * <ul>
@@ -31,46 +31,47 @@ public class filtro implements Filter {
     
     /**
      * Método que se ejecuta cuando se recibe una solicitud.
-     * Este método registra la solicitud y redirige al usuario a la página de inicio.
+     * Este método registra la solicitud y bloquea el acceso directo a los JSP,
+     * permitiendo solo el acceso a través de forwards desde servlets.
      * 
-     * @param request La solicitud recibida
-     * @param response La respuesta a la solicitud
-     * @param chain La cadena de filtros
+     * @param peticion La solicitud recibida
+     * @param respuesta La respuesta a la solicitud
+     * @param cadena La cadena de filtros
      * @throws IOException Si ocurre un error de entrada/salida
      * @throws ServletException Si ocurre un error en el servlet
      */
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest peticion, ServletResponse respuesta, FilterChain cadena)
             throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpServletRequest httpRequest = (HttpServletRequest) peticion;
+        HttpServletResponse httpResponse = (HttpServletResponse) respuesta;
         
-        // Log de información sobre la petición
-        GestorRegistros.sistemaInfo("\u001B[32m[FILTRO] Nueva petición recibida: " + 
-            httpRequest.getRequestURI() + "\u001B[0m");
+        // Verificar si es un forward desde un servlet
+        String requestDispatcher = (String) httpRequest.getAttribute("jakarta.servlet.forward.request_uri");
         
-        // Registrar el intento de acceso al JSP
-        GestorRegistros.sistemaWarning("\u001B[33mAcceso a JSP bloqueado: " + 
-            httpRequest.getRequestURI() + " - IP: " + httpRequest.getRemoteAddr() + "\u001B[0m");
-        
-        // Log de la redirección
-        GestorRegistros.sistemaInfo("\u001B[32m[FILTRO] Redirigiendo a /inicio\u001B[0m");
-        
-        // SIEMPRE redirigir al servlet de inicio, sin importar si es forward o acceso directo
-        httpResponse.sendRedirect(httpRequest.getContextPath() + "/inicio");
+        if (requestDispatcher != null) {
+            // Es un forward desde un servlet, permitir el acceso
+            GestorRegistros.sistemaInfo("[FILTRO] Forward detectado desde: " + requestDispatcher);
+            cadena.doFilter(peticion, respuesta);
+        } else {
+            // Es un acceso directo al JSP, bloquearlo
+            GestorRegistros.sistemaWarning("Acceso directo a JSP bloqueado: " + 
+                httpRequest.getRequestURI() + " - IP: " + httpRequest.getRemoteAddr());
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/inicio");
+        }
     }
     
     /**
      * Método que se ejecuta cuando se inicializa el filtro.
      * Este método registra la inicialización del filtro.
      * 
-     * @param filterConfig La configuración del filtro
+     * @param filtroConfig La configuración del filtro
      * @throws ServletException Si ocurre un error en el servlet
      */
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filtroConfig) throws ServletException {
         // Log de inicialización del filtro
-        GestorRegistros.sistemaInfo("\u001B[32m[FILTRO] Filtro de seguridad JSP inicializado\u001B[0m");
+        GestorRegistros.sistemaInfo("[FILTRO] Filtro de seguridad JSP inicializado");
     }
     
     /**
@@ -80,6 +81,6 @@ public class filtro implements Filter {
     @Override
     public void destroy() {
         // Log de destrucción del filtro
-        GestorRegistros.sistemaInfo("\u001B[32m[FILTRO] Filtro de seguridad JSP destruido\u001B[0m");
+        GestorRegistros.sistemaInfo("[FILTRO] Filtro de seguridad JSP destruido");
     }
 }

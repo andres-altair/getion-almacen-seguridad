@@ -84,7 +84,7 @@
                         <div class="links">
                             <a href="${pageContext.request.contextPath}/recuperarContrasena">¿Olvidaste tu contraseña?</a>
                             <a href="${pageContext.request.contextPath}/reenviarConfirmacion">¿No recibiste el correo de confirmación?</a>
-                            <a href="${pageContext.request.contextPath}/registrar">¿No tienes una cuenta?</a>
+                            <a href="${pageContext.request.contextPath}/registro">¿No tienes una cuenta?</a>
                         </div>
 
                         <c:if test="${not empty sessionScope.mensaje}">
@@ -94,9 +94,10 @@
                             </div>
                         </c:if>
 
-                        <c:if test="${not empty requestScope.error}">
+                        <c:if test="${not empty sessionScope.error}">
                             <div class="alert alert-danger mt-3" role="alert">
-                                ${requestScope.error}
+                                ${sessionScope.error}
+                                <% session.removeAttribute("error"); %>
                             </div>
                         </c:if>
                     </div>

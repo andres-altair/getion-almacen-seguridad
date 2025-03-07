@@ -87,54 +87,60 @@ public class RegistroServlet extends HttpServlet {
 
             // Verificar si el usuario ya existe
             UsuarioDto correoExistente = servicioUsuario.buscarPorCorreo(correoElectronico);
-            if (correoExistente != null ) {
+            if (correoExistente == null) {
+                // El correo no existe, podemos continuar con el registro
+                String contrasenaEncriptada = EncriptarUtil.contraseñaHash(contrasena);
+
+                // Procesar la foto si existe
+                Part parteFoto = peticion.getPart("foto");
+                byte[] bytesFoto = null;
+                if (parteFoto != null && parteFoto.getSize() > 0) {
+                    bytesFoto = parteFoto.getInputStream().readAllBytes();
+                    try {
+                        String nombreArchivo = parteFoto.getSubmittedFileName();
+                        ImagenUtil.verificarImagen(bytesFoto, nombreArchivo);
+                    } catch (IllegalArgumentException error) {
+                        GestorRegistros.sistemaWarning("Error al procesar foto para usuario " + correoElectronico + ": " + error.getMessage());
+                        peticion.getSession().setAttribute("error", 
+                            "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
+                        respuesta.sendRedirect(peticion.getContextPath() + "/registro");
+                        return;
+                    }
+                }
+
+                // Crear el DTO
+                CrearUsuDto nuevoUsuario = new CrearUsuDto();
+                nuevoUsuario.setNombreCompleto(nombreCompleto);
+                nuevoUsuario.setMovil(movil);
+                nuevoUsuario.setCorreoElectronico(correoElectronico);
+                nuevoUsuario.setContrasena(contrasenaEncriptada);
+                nuevoUsuario.setRolId(rolId);
+                nuevoUsuario.setFoto(bytesFoto);
+                nuevoUsuario.setCorreoConfirmado(false); // Por defecto, no está confirmado
+                nuevoUsuario.setGoogle(false); // Los usuarios registrados no son de Google
+
+                // Guardar el usuario
+                servicioUsuario.crearUsuario(nuevoUsuario);
+
+                // Generar y enviar confirmación por correo
+                String tokenConfirmacion = EmailUtil.generarToken(correoElectronico);
+                EmailUtil.enviarCorreoConfirmacion(correoElectronico, tokenConfirmacion);
+                
+                // Redirigir con mensaje de éxito
+                peticion.getSession().setAttribute("mensaje", 
+                    "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.");
+                respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
+            } else {
+                // El correo ya existe, mostrar error y detener el proceso
                 GestorRegistros.sistemaWarning("Intento de registro con correo existente: " + correoElectronico);
                 peticion.getSession().setAttribute("error", "Ya existe una cuenta con ese correo electrónico.");
+                // Mantener los datos del formulario excepto la contraseña
+                peticion.getSession().setAttribute("nombreCompleto", nombreCompleto);
+                peticion.getSession().setAttribute("correoElectronico", correoElectronico);
+                peticion.getSession().setAttribute("movil", movil);
                 respuesta.sendRedirect(peticion.getContextPath() + "/registro");
                 return;
             }
-
-            String contrasenaEncriptada = EncriptarUtil.contraseñaHash(contrasena);
-
-            // Procesar la foto si existe
-            Part parteFoto = peticion.getPart("foto");
-            byte[] bytesFoto = null;
-            if (parteFoto != null && parteFoto.getSize() > 0) {
-                bytesFoto = parteFoto.getInputStream().readAllBytes();
-                try {
-                    String nombreArchivo = parteFoto.getSubmittedFileName();
-                    ImagenUtil.verificarImagen(bytesFoto, nombreArchivo);
-                } catch (IllegalArgumentException error) {
-                    GestorRegistros.sistemaWarning("Error al procesar foto para usuario " + correoElectronico + ": " + error.getMessage());
-                    peticion.getSession().setAttribute("error", 
-                        "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
-                    respuesta.sendRedirect(peticion.getContextPath() + "/registro");
-                    return;
-                }
-            }
-
-            // Crear el DTO
-            CrearUsuDto nuevoUsuario = new CrearUsuDto();
-            nuevoUsuario.setNombreCompleto(nombreCompleto);
-            nuevoUsuario.setMovil(movil);
-            nuevoUsuario.setCorreoElectronico(correoElectronico);
-            nuevoUsuario.setContrasena(contrasenaEncriptada);
-            nuevoUsuario.setRolId(rolId);
-            nuevoUsuario.setFoto(bytesFoto);
-            nuevoUsuario.setCorreoConfirmado(false); // Por defecto, no está confirmado
-            nuevoUsuario.setGoogle(false); // Los usuarios registrados no son de Google
-
-            // Guardar el usuario
-            servicioUsuario.crearUsuario(nuevoUsuario);
-
-            // Generar y enviar confirmación por correo
-            String tokenConfirmacion = EmailUtil.generarToken(correoElectronico);
-            EmailUtil.enviarCorreoConfirmacion(correoElectronico, tokenConfirmacion);
-            
-            // Redirigir con mensaje de éxito
-            peticion.getSession().setAttribute("mensaje", 
-                "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.");
-            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
 
         } catch (Exception error) {
             GestorRegistros.sistemaError("Error en el registro de usuario - Error: " + error.getMessage());

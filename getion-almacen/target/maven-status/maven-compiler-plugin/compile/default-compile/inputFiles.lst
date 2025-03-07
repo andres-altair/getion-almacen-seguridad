@@ -1,10 +1,10 @@
-C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\AppInitializer.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\dtos\AlquilerDto.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\dtos\CrearUsuDto.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\dtos\RolDto.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\dtos\SectorDto.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\dtos\UsuarioDto.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\filtro\filtro.java
+C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\InicializadorApp.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servicios\ApiService.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servicios\UsuarioServicio.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\AccesoServlet.java
@@ -15,7 +15,7 @@ C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\m
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\administrador\VerTodosUsuariosServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\administrador\VerUsuarioPorIdServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\CerrarSesionServlet.java
-C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\ConfirmacionCorreoServlet.java
+C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\ConfirmarCorreoNuevoServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\gerente\PanelGerenteServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\GoogleAccesoServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\GoogleRegistroServlet.java
@@ -25,6 +25,7 @@ C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\m
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\ReenviarConfirmacionServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\RegistroServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\RestablecerContrasenaServlet.java
+C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\usuario\PagoCompletadoServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\usuario\PanelUsuarioServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\servlets\usuario\ProcesarPagoServlet.java
 C:\Users\amoliaz\eclipse-workspace\getion-almacen-seguridad\getion-almacen\src\main\java\com\andres\gestionalmacen\utilidades\EmailUtil.java

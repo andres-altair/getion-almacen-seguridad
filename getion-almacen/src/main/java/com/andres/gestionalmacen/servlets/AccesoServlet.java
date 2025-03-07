@@ -81,7 +81,7 @@ public class AccesoServlet extends HttpServlet {
             
             if (usuarioExistente != null && usuarioExistente.isGoogle()) {
                 GestorRegistros.sistemaWarning("Intento de acceso con formulario para cuenta de Google: " + correoElectronico);
-                peticion.setAttribute("error", "Esta cuenta fue registrada con Google. Por favor, use el botón 'Iniciar sesión con Google'.");
+                peticion.getSession().setAttribute("error", "Esta cuenta fue registrada con Google. Por favor, use el botón 'Iniciar sesión con Google'.");
                 peticion.setAttribute("correoElectronico", correoElectronico);
                 peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
                 return;
@@ -122,7 +122,8 @@ public class AccesoServlet extends HttpServlet {
                         break;
                     default:
                         GestorRegistros.warning(datosUsuario.getId(), "Intento de acceso con rol no válido: " + datosUsuario.getRolId());
-                        peticion.setAttribute("error", "Rol no válido");
+                        peticion.getSession().setAttribute("error", "Rol no válido");
+                        peticion.setAttribute("correoElectronico", correoElectronico);
                         peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
                         return;
                 }
@@ -131,7 +132,8 @@ public class AccesoServlet extends HttpServlet {
                 
             } else {
                 GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
-                peticion.setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
+                peticion.getSession().setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
+                peticion.setAttribute("correoElectronico", correoElectronico);
                 peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
             }
         } catch (Exception error) {
@@ -141,7 +143,7 @@ public class AccesoServlet extends HttpServlet {
             if (mensajeError.contains("500")) {
                 mensajeError = "Error en el servidor. Por favor, inténtelo más tarde.";
             }
-            peticion.setAttribute("error", mensajeError);
+            peticion.getSession().setAttribute("error", mensajeError);
             peticion.setAttribute("correoElectronico", correoElectronico);
             peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
         }

@@ -27,9 +27,10 @@
                     <div class="card-body p-4">
                         <h3 class="text-center mb-4">Registro de Usuario</h3>
                         
-                        <c:if test="${not empty error}">
+                        <c:if test="${not empty sessionScope.error}">
                             <div class="alert alert-danger" role="alert">
-                                ${error}
+                                ${sessionScope.error}
+                                <% session.removeAttribute("error"); %>
                             </div>
                         </c:if>
                         
@@ -50,7 +51,8 @@
                                            minlength="3"
                                            maxlength="100"
                                            placeholder="Ingresa tu nombre completo"
-                                           value="${requestScope.nombreCompleto}">
+                                           value="${sessionScope.nombreCompleto}">
+                                    <% session.removeAttribute("nombreCompleto"); %>
                                     <div class="invalid-feedback">
                                         El nombre debe tener entre 3 y 100 caracteres.
                                     </div>
@@ -70,7 +72,8 @@
                                            class="form-control" 
                                            required
                                            placeholder="Ingresa tu correo electrónico"
-                                           value="${requestScope.correoElectronico}">
+                                           value="${sessionScope.correoElectronico}">
+                                    <% session.removeAttribute("correoElectronico"); %>
                                     <div class="invalid-feedback">
                                         Por favor, ingresa un correo electrónico válido.
                                     </div>
@@ -91,7 +94,8 @@
                                            required
                                            pattern="[0-9]{9}"
                                            placeholder="Ingresa tu número móvil"
-                                           value="${requestScope.movil}">
+                                           value="${sessionScope.movil}">
+                                    <% session.removeAttribute("movil"); %>
                                     <div class="invalid-feedback">
                                         Por favor, ingresa un número móvil válido (9 dígitos).
                                     </div>
