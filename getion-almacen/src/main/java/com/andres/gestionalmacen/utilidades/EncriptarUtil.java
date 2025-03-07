@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class EncriptarUtil {
     
-    public static String hashPassword(String password) {
+    public static String contraseñaHash(String password) {
         try {
             System.out.println("Hasheando contraseña original: " + password);
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

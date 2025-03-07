@@ -56,7 +56,7 @@ public class CrearUsuarioServlet extends HttpServlet {
             GestorRegistros.info(adminActual.getId(), 
                 "Iniciando creación de usuario: " + correoElectronico + " con rol: " + rolId);
 
-            String contrasenaEncriptada = EncriptarUtil.hashPassword(contrasena);
+            String contrasenaEncriptada = EncriptarUtil.contraseñaHash(contrasena);
 
             // Procesar la foto si existe
             Part fotoPart = request.getPart("foto");

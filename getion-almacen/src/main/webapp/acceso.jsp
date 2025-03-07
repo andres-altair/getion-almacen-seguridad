@@ -6,20 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com">
+    <meta name="context-path" content="${pageContext.request.contextPath}">
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <title>Sistema de Gestión de Almacén - Iniciar Sesión</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Sign-In API -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="google-signin-client_id" content="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com">
 </head>
 <body>
     <!-- Barra de Navegación -->
@@ -51,7 +50,7 @@
                                 <label for="contrasena" class="form-label">Contraseña</label>
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="contrasena" id="contrasena" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="togglePassword('contrasena', this)">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="alternarContrasena('contrasena', this)">
                                         <i class="fas fa-eye" id="eyeIconCrear"></i>
                                     </button>
                                 </div>
@@ -63,24 +62,7 @@
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                                 <!-- Botón de Google -->
-                                <div class="d-grid mt-3">
-                                    <div id="g_id_onload"
-                                         data-client_id="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"
-                                         data-context="signin"
-                                         data-ux_mode="popup"
-                                         data-callback="handleCredentialResponse"
-                                         data-auto_prompt="false">
-                                    </div>
-                                    <div class="g_id_signin"
-                                         data-type="standard"
-                                         data-shape="rectangular"
-                                         data-theme="outline"
-                                         data-text="signin_with"
-                                         data-size="large"
-                                         data-logo_alignment="left"
-                                         data-width="100%">
-                                    </div>
-                                </div>
+                                <div id="g_id_signin" class="d-grid mt-3"></div>
                             </div>
                         </form>
                         <div class="links">
@@ -119,42 +101,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="${pageContext.request.contextPath}/js/acceso.js"></script>
-    <script>
-        function handleCredentialResponse(response) {
-            console.log('Iniciando proceso de login con Google');
-            fetch('${pageContext.request.contextPath}/GoogleAccesoServlet', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'idToken=' + response.credential
-            })
-            .then(response => {
-                console.log('Respuesta recibida:', response.status);
-                return response.text().then(text => {
-                    if (!response.ok) {
-                        if (text.includes("Usuario no encontrado")) {
-                            console.log('Usuario no encontrado, redirigiendo a registro');
-                            window.location.href = '${pageContext.request.contextPath}/registro';
-                            return;
-                        }
-                        throw new Error(text);
-                    }
-                    return text;
-                });
-            })
-            .then(data => {
-                console.log('Datos recibidos:', data);
-                if (data === "Inicio de sesión exitoso") {
-                    console.log('Login exitoso, redirigiendo a inicio');
-                    window.location.href = '${pageContext.request.contextPath}/usuario/panel';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al iniciar sesión: ' + error.message);
-            });
-        }
-    </script>
 </body>
 </html>

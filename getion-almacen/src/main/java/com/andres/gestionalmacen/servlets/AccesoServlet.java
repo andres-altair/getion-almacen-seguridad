@@ -19,62 +19,62 @@ import com.andres.gestionalmacen.utilidades.GestorRegistros;
 public class AccesoServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
         // Registrar el acceso
         GestorRegistros.sistemaInfo("Acceso a página de acceso");
         
         // Redirigir al JSP
-        request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+        peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String correoElectronico = request.getParameter("correoElectronico");
-        String contrasena = request.getParameter("contrasena");
-        boolean recordar = request.getParameter("recordar") != null;
+    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
+        String correoElectronico = peticion.getParameter("correoElectronico");
+        String contrasena = peticion.getParameter("contrasena");
+        boolean recordar = peticion.getParameter("recordar") != null;
 
         // Log del intento de acceso
         GestorRegistros.sistemaInfo("Intento de acceso para usuario: " + correoElectronico);
 
         // Hashear la contraseña
-        String contrasenaHasheada = EncriptarUtil.hashPassword(contrasena);
+        String contrasenaHasheada = EncriptarUtil.contraseñaHash(contrasena);
         
         // Crear una instancia de UsuarioServicio
-        UsuarioServicio usuarioServicio = new UsuarioServicio();
+        UsuarioServicio servicioUsuario = new UsuarioServicio();
 
         try {
             // Primero verificar si el usuario existe y su método de autenticación
-            UsuarioDto usuarioExistente = usuarioServicio.buscarPorCorreo(correoElectronico);
+            UsuarioDto usuarioExistente = servicioUsuario.buscarPorCorreo(correoElectronico);
             
             if (usuarioExistente != null && usuarioExistente.isGoogle()) {
                 GestorRegistros.sistemaWarning("Intento de acceso con formulario para cuenta de Google: " + correoElectronico);
-                request.setAttribute("error", "Esta cuenta fue registrada con Google. Por favor, use el botón 'Iniciar sesión con Google'.");
-                request.setAttribute("correoElectronico", correoElectronico);
-                request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+                peticion.setAttribute("error", "Esta cuenta fue registrada con Google. Por favor, use el botón 'Iniciar sesión con Google'.");
+                peticion.setAttribute("correoElectronico", correoElectronico);
+                peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
                 return;
             }
 
             // Llamar al servicio para validar las credenciales
-            UsuarioDto usuarioDto = usuarioServicio.validarCredenciales(correoElectronico, contrasenaHasheada);
+            UsuarioDto datosUsuario = servicioUsuario.validarCredenciales(correoElectronico, contrasenaHasheada);
             
-            if (usuarioDto != null) {
+            if (datosUsuario != null) {
                 // Log de acceso exitoso
-                GestorRegistros.info(usuarioDto.getId(), "Acceso exitoso al sistema");
-                GestorRegistros.sistemaInfo("Usuario con ID: " + usuarioDto.getId() + " accedió exitosamente. Rol: " + usuarioDto.getRolId());
+                GestorRegistros.info(datosUsuario.getId(), "Acceso exitoso al sistema");
+                GestorRegistros.sistemaInfo("Usuario con ID: " + datosUsuario.getId() + " accedió exitosamente. Rol: " + datosUsuario.getRolId());
                 
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuarioDto);
+                HttpSession sesion = peticion.getSession();
+                sesion.setAttribute("usuario", datosUsuario);
 
                 if (recordar) {
-                    Cookie cookie = new Cookie("usuario", correoElectronico);
-                    cookie.setMaxAge(60 * 60 * 24 * 30); // 30 días
-                    response.addCookie(cookie);
-                    GestorRegistros.info(usuarioDto.getId(), "Se ha activado la opción 'recordar usuario'");
+                    Cookie galleta = new Cookie("usuario", correoElectronico);
+                    galleta.setMaxAge(60 * 60 * 24 * 30); // 30 días
+                    respuesta.addCookie(galleta);
+                    GestorRegistros.info(datosUsuario.getId(), "Se ha activado la opción 'recordar usuario'");
                 }
 
                 // Redirigir según el rol
                 String destino;
-                switch (usuarioDto.getRolId().intValue()) {
+                switch (datosUsuario.getRolId().intValue()) {
                     case 1: // Admin
                         destino = "/admin/panel";
                         break;
@@ -84,35 +84,38 @@ public class AccesoServlet extends HttpServlet {
                     case 3: // Operador
                         destino = "/operario/panel";
                         break;
+                    case 4: // Usuario
+                        destino = "/usuario/panel";
+                        break;
                     default:
-                        GestorRegistros.warning(usuarioDto.getId(), "Intento de acceso con rol no válido: " + usuarioDto.getRolId());
-                        request.setAttribute("error", "Rol no válido");
-                        request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+                        GestorRegistros.warning(datosUsuario.getId(), "Intento de acceso con rol no válido: " + datosUsuario.getRolId());
+                        peticion.setAttribute("error", "Rol no válido");
+                        peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
                         return;
                 }
-                GestorRegistros.info(usuarioDto.getId(), "Redirigiendo a: " + destino);
-                response.sendRedirect(request.getContextPath() + destino);
+                GestorRegistros.info(datosUsuario.getId(), "Redirigiendo a: " + destino);
+                respuesta.sendRedirect(peticion.getContextPath() + destino);
                 
             } else {
                 // Log de acceso fallido
                 GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
                 
                 // Establecer mensaje de error y atributos para mantener el email
-                request.setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
-                request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+                peticion.setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
+                peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
             }
-        } catch (Exception e) {
+        } catch (Exception error) {
             // Log de error
-            GestorRegistros.sistemaError("Error en el proceso de acceso para usuario " + correoElectronico + ": " + e.getMessage());
+            GestorRegistros.sistemaError("Error en el proceso de acceso para usuario " + correoElectronico + ": " + error.getMessage());
             
-            String errorMessage = e.getMessage();
-            if (errorMessage.contains("500")) {
-                errorMessage = "Error en el servidor. Por favor, inténtelo más tarde.";
+            String mensajeError = error.getMessage();
+            if (mensajeError.contains("500")) {
+                mensajeError = "Error en el servidor. Por favor, inténtelo más tarde.";
             }
             // Establecer mensaje de error y mantener el email
-            request.setAttribute("error", errorMessage);
-            request.setAttribute("correoElectronico", correoElectronico);
-            request.getRequestDispatcher("/acceso.jsp").forward(request, response);
+            peticion.setAttribute("error", mensajeError);
+            peticion.setAttribute("correoElectronico", correoElectronico);
+            peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
         }
     }
 }
