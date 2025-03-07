@@ -49,12 +49,13 @@
                                            class="form-control" 
                                            required
                                            minlength="8"
+                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                                            placeholder="Ingresa tu nueva contraseña">
                                     <button class="btn btn-outline-secondary" type="button" id="mostrarContrasena">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                     <div class="invalid-feedback">
-                                        La contraseña debe tener al menos 8 caracteres.
+                                        La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.
                                     </div>
                                 </div>
                             </div>
@@ -68,15 +69,17 @@
                                     </span>
                                     <input type="password" 
                                            id="confirmarContrasena"
+                                           name="confirmarContrasena"
                                            class="form-control" 
                                            required
                                            minlength="8"
+                                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                                            placeholder="Confirma tu nueva contraseña">
                                     <button class="btn btn-outline-secondary" type="button" id="mostrarConfirmarContrasena">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                     <div class="invalid-feedback">
-                                        Las contraseñas no coinciden.
+                                        Las contraseñas no coinciden o no cumplen con los requisitos mínimos.
                                     </div>
                                 </div>
                             </div>

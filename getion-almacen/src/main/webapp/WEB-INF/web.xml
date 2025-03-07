@@ -35,7 +35,7 @@
     <!-- Configuración del filtro de seguridad -->
     <filter>
         <filter-name>SecurityFilter</filter-name>
-        <filter-class>com.andres.gestionalmacen.filtro.filtro</filter-class>
+        <filter-class>com.andres.gestionalmacen.filtro.FiltroSeguridad</filter-class>
         <async-supported>true</async-supported>
     </filter>
     

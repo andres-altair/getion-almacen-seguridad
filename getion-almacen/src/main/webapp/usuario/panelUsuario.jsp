@@ -20,8 +20,11 @@
     <title>Panel de Usuario</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- FontAwesome con iconos de marcas incluidos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" rel="stylesheet">
     <!-- Estilos propios -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
@@ -156,7 +159,7 @@
                             <input type="hidden" name="sectorId" value="1">
                             <input type="hidden" name="total" value="149.99">
                             <input type="hidden" name="sectorName" value="Sector A">
-                            <button type="submit" class="payment-button">
+                            <button type="submit" class="payment-button d-flex align-items-center justify-content-center">
                                 <i class="fab fa-paypal me-2"></i> Pagar con PayPal
                             </button>
                         </form>
@@ -178,7 +181,7 @@
                             <input type="hidden" name="sectorId" value="2">
                             <input type="hidden" name="total" value="199.99">
                             <input type="hidden" name="sectorName" value="Sector B">
-                            <button type="submit" class="payment-button">
+                            <button type="submit" class="payment-button d-flex align-items-center justify-content-center">
                                 <i class="fab fa-paypal me-2"></i> Pagar con PayPal
                             </button>
                         </form>
@@ -200,7 +203,7 @@
                             <input type="hidden" name="sectorId" value="3">
                             <input type="hidden" name="total" value="299.99">
                             <input type="hidden" name="sectorName" value="Sector C">
-                            <button type="submit" class="payment-button">
+                            <button type="submit" class="payment-button d-flex align-items-center justify-content-center">
                                 <i class="fab fa-paypal me-2"></i> Pagar con PayPal
                             </button>
                         </form>
@@ -222,7 +225,7 @@
                             <input type="hidden" name="sectorId" value="4">
                             <input type="hidden" name="total" value="399.99">
                             <input type="hidden" name="sectorName" value="Sector D">
-                            <button type="submit" class="payment-button">
+                            <button type="submit" class="payment-button d-flex align-items-center justify-content-center">
                                 <i class="fab fa-paypal me-2"></i> Pagar con PayPal
                             </button>
                         </form>

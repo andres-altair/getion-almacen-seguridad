@@ -1,0 +1,6 @@
+2025-03-07 23:10:45 [http-nio-8080-exec-41] INFO  - Acceso exitoso al sistema
+2025-03-07 23:42:49 [http-nio-8080-exec-41] INFO  - Acceso exitoso al sistema
+2025-03-07 23:44:10 [http-nio-8080-exec-51] INFO  - Acceso exitoso al sistema
+2025-03-07 23:44:21 [http-nio-8080-exec-46] INFO  - Acceso exitoso al sistema
+2025-03-07 23:54:16 [http-nio-8080-exec-64] INFO  - Acceso exitoso al sistema
+2025-03-08 00:16:05 [http-nio-8080-exec-5] INFO  - Acceso exitoso al sistema
