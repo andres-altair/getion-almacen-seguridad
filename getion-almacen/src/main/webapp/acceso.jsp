@@ -68,6 +68,7 @@
                         <div class="links">
                             <a href="${pageContext.request.contextPath}/recuperarContrasena">¿Olvidaste tu contraseña?</a>
                             <a href="${pageContext.request.contextPath}/reenviarConfirmacion">¿No recibiste el correo de confirmación?</a>
+                            <a href="${pageContext.request.contextPath}/registrar">¿No tienes una cuenta?</a>
                         </div>
 
                         <c:if test="${not empty sessionScope.mensaje}">
@@ -85,10 +86,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Añadir esto justo antes del cierre del div container -->
-        <div class="links">
-            <a href="${pageContext.request.contextPath}/reenviarConfirmacion">¿No recibiste el correo de confirmación?</a>
         </div>
     </div>
 

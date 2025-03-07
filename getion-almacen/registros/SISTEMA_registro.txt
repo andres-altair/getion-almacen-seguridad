@@ -1040,3 +1040,16 @@ Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL:
 2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Link encontrado - Rel: execute, Href: https://api.sandbox.paypal.com/v1/payments/payment/PAYID-M7FD6SQ06T31704X5849832N/execute
 2025-03-07 01:35:22 [http-nio-8080-exec-55] INFO  - Redirigiendo a PayPal: https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-0Y651353PK033125E
 2025-03-07 01:36:14 [http-nio-8080-exec-59] INFO  - Pago completado exitosamente. PaymentId: PAYID-M7FD6SQ06T31704X5849832N, Sector: Sector A
+2025-03-07 14:07:44 [main] INFO  - Sistema de logs inicializado
+2025-03-07 14:07:44 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 14:07:44 [main] INFO  - [32m[FILTRO] Filtro de seguridad JSP inicializado[0m
+2025-03-07 14:07:45 [http-nio-8080-exec-2] INFO  - Sistema de logs inicializado
+2025-03-07 14:07:45 [http-nio-8080-exec-2] INFO  - Sistema de registro inicializado correctamente
+2025-03-07 14:07:45 [http-nio-8080-exec-2] INFO  - Acceso a página de inicio
+2025-03-07 14:07:48 [http-nio-8080-exec-7] INFO  - Acceso a página de acceso
+2025-03-07 14:09:36 [http-nio-8080-exec-5] INFO  - Intento de acceso para usuario: palomitasverdes73@gmail.com
+2025-03-07 14:09:36 [http-nio-8080-exec-5] INFO  - Hasheando contraseña original: 28984371R
+2025-03-07 14:09:36 [http-nio-8080-exec-5] INFO  - Hash generado: 3cc890a93fa2160c551414745f084c101a9a4be2d32d6b1b1c622d1a217dbbaa
+2025-03-07 14:09:37 [http-nio-8080-exec-5] ERROR - Error al buscar usuario: 404
+2025-03-07 14:09:37 [http-nio-8080-exec-5] ERROR - Error al buscar usuario: Error al buscar usuario: 404
+2025-03-07 14:09:37 [http-nio-8080-exec-5] ERROR - Error en el proceso de acceso para usuario palomitasverdes73@gmail.com: Error al buscar usuario: Error al buscar usuario: 404
