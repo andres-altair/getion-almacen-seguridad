@@ -1487,3 +1487,13 @@ Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL:
 2025-03-07 19:28:40 [http-nio-8080-exec-18] INFO  - Respuesta de la API:
 2025-03-07 19:28:40 [http-nio-8080-exec-18] INFO  - Credenciales validadas, respuesta: {"id":62,"nombreCompleto":"dsgsdf","movil":"123456789","correoElectronico":"dobafad996@oziere.com","rolId":4,"foto":null,"fechaCreacion":"2025-03-07T18:25:00","correoConfirmado":true,"google":false}
 2025-03-07 19:28:40 [http-nio-8080-exec-18] INFO  - Usuario con ID: 62 accedió exitosamente. Rol: 4
+2025-03-07 19:28:49 [http-nio-8080-exec-19] WARN  - jakarta.servlet.http.legacyDoHeadIntento de acceso al panel sin sesión válida
+2025-03-07 19:28:49 [http-nio-8080-exec-19] WARN  - Intento de acceso al panel sin sesión válida
+2025-03-07 19:28:49 [http-nio-8080-exec-20] INFO  - Acceso a página de acceso
+2025-03-07 19:29:10 [http-nio-8080-exec-13] INFO  - Intento de acceso para usuario: dobafad996@oziere.com
+2025-03-07 19:29:10 [http-nio-8080-exec-13] INFO  - Hasheando contraseña original: 28984371R
+2025-03-07 19:29:10 [http-nio-8080-exec-13] INFO  - Hash generado: 3cc890a93fa2160c551414745f084c101a9a4be2d32d6b1b1c622d1a217dbbaa
+2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Enviando petición a la API para validar credenciales
+2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Respuesta de la API:
+2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Credenciales validadas, respuesta: {"id":62,"nombreCompleto":"dsgsdf","movil":"123456789","correoElectronico":"dobafad996@oziere.com","rolId":4,"foto":null,"fechaCreacion":"2025-03-07T18:25:00","correoConfirmado":true,"google":false}
+2025-03-07 19:29:11 [http-nio-8080-exec-13] INFO  - Usuario con ID: 62 accedió exitosamente. Rol: 4
