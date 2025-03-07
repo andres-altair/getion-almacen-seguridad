@@ -15,35 +15,68 @@ import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
+/**
+ * Servlet que maneja el proceso de inicio de sesión de usuarios.
+ * Implementa la lógica de autenticación, validación de credenciales y redirección según el rol.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Validación de credenciales contra la base de datos</li>
+ *   <li>Manejo de sesiones y cookies para "recordar usuario"</li>
+ *   <li>Redirección basada en roles de usuario</li>
+ *   <li>Validación de método de autenticación (normal vs Google)</li>
+ *   <li>Registro detallado de actividades y errores</li>
+ * </ul>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/acceso")
 public class AccesoServlet extends HttpServlet {
 
+    /**
+     * Maneja las peticiones GET mostrando el formulario de inicio de sesión.
+     * 
+     * @param peticion La petición HTTP del cliente
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
-        // Registrar el acceso
         GestorRegistros.sistemaInfo("Acceso a página de acceso");
-        
-        // Redirigir al JSP
         peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
     }
 
+    /**
+     * Procesa los intentos de inicio de sesión verificando las credenciales y gestionando la sesión.
+     * 
+     * <p>El método realiza las siguientes operaciones:</p>
+     * <ol>
+     *   <li>Valida el método de autenticación (normal vs Google)</li>
+     *   <li>Verifica las credenciales del usuario</li>
+     *   <li>Gestiona la sesión y cookies si se solicita "recordar usuario"</li>
+     *   <li>Redirige al panel correspondiente según el rol del usuario</li>
+     * </ol>
+     * 
+     * @param peticion La petición HTTP que contiene las credenciales
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
         String correoElectronico = peticion.getParameter("correoElectronico");
         String contrasena = peticion.getParameter("contrasena");
         boolean recordar = peticion.getParameter("recordar") != null;
 
-        // Log del intento de acceso
         GestorRegistros.sistemaInfo("Intento de acceso para usuario: " + correoElectronico);
 
-        // Hashear la contraseña
         String contrasenaHasheada = EncriptarUtil.contraseñaHash(contrasena);
-        
-        // Crear una instancia de UsuarioServicio
         UsuarioServicio servicioUsuario = new UsuarioServicio();
 
         try {
-            // Primero verificar si el usuario existe y su método de autenticación
+            // Verificar método de autenticación
             UsuarioDto usuarioExistente = servicioUsuario.buscarPorCorreo(correoElectronico);
             
             if (usuarioExistente != null && usuarioExistente.isGoogle()) {
@@ -54,14 +87,14 @@ public class AccesoServlet extends HttpServlet {
                 return;
             }
 
-            // Llamar al servicio para validar las credenciales
+            // Validar credenciales
             UsuarioDto datosUsuario = servicioUsuario.validarCredenciales(correoElectronico, contrasenaHasheada);
             
             if (datosUsuario != null) {
-                // Log de acceso exitoso
                 GestorRegistros.info(datosUsuario.getId(), "Acceso exitoso al sistema");
                 GestorRegistros.sistemaInfo("Usuario con ID: " + datosUsuario.getId() + " accedió exitosamente. Rol: " + datosUsuario.getRolId());
                 
+                // Gestionar sesión y cookies
                 HttpSession sesion = peticion.getSession();
                 sesion.setAttribute("usuario", datosUsuario);
 
@@ -72,7 +105,7 @@ public class AccesoServlet extends HttpServlet {
                     GestorRegistros.info(datosUsuario.getId(), "Se ha activado la opción 'recordar usuario'");
                 }
 
-                // Redirigir según el rol
+                // Redirección según rol
                 String destino;
                 switch (datosUsuario.getRolId().intValue()) {
                     case 1: // Admin
@@ -97,22 +130,17 @@ public class AccesoServlet extends HttpServlet {
                 respuesta.sendRedirect(peticion.getContextPath() + destino);
                 
             } else {
-                // Log de acceso fallido
                 GestorRegistros.sistemaWarning("Intento de acceso fallido para usuario: " + correoElectronico + " - Credenciales incorrectas");
-                
-                // Establecer mensaje de error y atributos para mantener el email
                 peticion.setAttribute("error", "¡Credenciales inválidas! Por favor, verifica tu correo y contraseña.");
                 peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);
             }
         } catch (Exception error) {
-            // Log de error
             GestorRegistros.sistemaError("Error en el proceso de acceso para usuario " + correoElectronico + ": " + error.getMessage());
             
             String mensajeError = error.getMessage();
             if (mensajeError.contains("500")) {
                 mensajeError = "Error en el servidor. Por favor, inténtelo más tarde.";
             }
-            // Establecer mensaje de error y mantener el email
             peticion.setAttribute("error", mensajeError);
             peticion.setAttribute("correoElectronico", correoElectronico);
             peticion.getRequestDispatcher("/acceso.jsp").forward(peticion, respuesta);

@@ -16,16 +16,46 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.IOException;
 
+/**
+ * Servlet que maneja la creación de nuevos usuarios.
+ * Este servlet verifica la sesión del administrador, procesa los datos del formulario
+ * y crea un nuevo usuario en el sistema.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del administrador</li>
+ *   <li>Procesamiento de datos del formulario</li>
+ *   <li>Validación de la imagen del usuario</li>
+ *   <li>Creación de un nuevo usuario en el sistema</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con la creación de usuarios.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/admin/usuarios/crear")
 @MultipartConfig
 public class CrearUsuarioServlet extends HttpServlet {
 
     private final UsuarioServicio usuarioServicio;
 
+    /**
+     * Constructor que inicializa el servicio de usuarios.
+     */
     public CrearUsuarioServlet() {
         this.usuarioServicio = new UsuarioServicio();
     }
 
+    /**
+     * Método que maneja la petición POST para crear un nuevo usuario.
+     * 
+     * @param request  La petición HTTP.
+     * @param response La respuesta HTTP.
+     * @throws ServletException Si ocurre un error en la ejecución del servlet.
+     * @throws IOException      Si ocurre un error en la lectura o escritura de datos.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

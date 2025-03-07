@@ -15,16 +15,44 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.IOException;
 
+/**
+ * Servlet que maneja la modificación de usuarios.
+ * Este servlet verifica la sesión del administrador y actualiza la información de un usuario existente.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del administrador</li>
+ *   <li>Validación del ID del usuario a modificar</li>
+ *   <li>Actualización de la información del usuario en el sistema</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con la modificación de usuarios.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/admin/usuarios/modificar")
 @MultipartConfig
 public class ModificarUsuarioServlet extends HttpServlet {
 
     private final UsuarioServicio usuarioServicio;
 
+    /**
+     * Constructor que inicializa el servicio de usuarios.
+     */
     public ModificarUsuarioServlet() {
         this.usuarioServicio = new UsuarioServicio();
     }
 
+    /**
+     * Método que maneja la petición POST para modificar un usuario.
+     * 
+     * @param request  objeto que contiene la petición HTTP
+     * @param response objeto que contiene la respuesta HTTP
+     * @throws ServletException si ocurre un error en la ejecución del servlet
+     * @throws IOException      si ocurre un error en la lectura o escritura de datos
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

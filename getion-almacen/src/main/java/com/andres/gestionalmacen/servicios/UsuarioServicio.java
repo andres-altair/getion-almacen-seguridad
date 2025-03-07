@@ -21,26 +21,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Clase que maneja la lógica de negocio relacionada con los usuarios.
+ * Esta clase proporciona métodos para validar credenciales, confirmar correos,
+ * obtener usuarios y crear nuevos usuarios.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Validación de credenciales de usuario</li>
+ *   <li>Confirmación de correos electrónicos</li>
+ *   <li>Obtención de la lista de usuarios</li>
+ *   <li>Creación de nuevos usuarios</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con las operaciones de usuario.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 public class UsuarioServicio {
     private static final String API_BASE_URL = "http://localhost:8081/api/usuarios";
     
     private final ObjectMapper objetoMapeador;
     
     /**
-     * @author andres
      * Constructor de la clase UsuarioServicio.
      * Este constructor inicializa el objeto ObjectMapper con configuraciones específicas
      * para manejar la serialización y deserialización de objetos JSON.
      */
     public UsuarioServicio() {
         this.objetoMapeador = new ObjectMapper()
-            .registerModule(new JavaTimeModule())//manejar feachas:localdatetime,date...
+            .registerModule(new JavaTimeModule())//manejar fechas:localdatetime,date...
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)//fecha legible no en ms
             .configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)//Permite nombres de campo no entrecomillados en el JSON
-            .configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)//Permite el uso de comillas simples:campo  y valores
-            .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);//para que no falle si SON contiene campos que no están presentes en la clase Java
+            .configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)//Permite el uso de comillas simples:campo y valores
+            .configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);//para que no falle si contiene campos que no están presentes en la clase Java
     }
 
+    /**
+     * Valida las credenciales del usuario enviando una petición a la API.
+     * 
+     * @param correoElectronico El correo electrónico del usuario
+     * @param contrasenaEncriptada La contraseña encriptada del usuario
+     * @return Un objeto UsuarioDto con la información del usuario autenticado
+     * @throws Exception Si ocurre un error durante la autenticación
+     */
     public UsuarioDto validarCredenciales(String correoElectronico, String contrasenaEncriptada) throws Exception {
         try {
             Map<String, String> credencialesMap = new HashMap<>();
@@ -48,9 +74,7 @@ public class UsuarioServicio {
             credencialesMap.put("contrasena", contrasenaEncriptada);
             
             String cuerpoJson = objetoMapeador.writeValueAsString(credencialesMap);
-            System.out.println("Enviando petición a la API:");
-            System.out.println("URL: " + API_BASE_URL + "/autenticar");
-            System.out.println("Body: " + cuerpoJson);
+            GestorRegistros.sistemaInfo("Enviando petición a la API para validar credenciales");
             
             URL url = URI.create(API_BASE_URL + "/autenticar").toURL();
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
@@ -59,9 +83,7 @@ public class UsuarioServicio {
             conexion.setDoOutput(true);
             conexion.getOutputStream().write(cuerpoJson.getBytes());
             
-            System.out.println("Respuesta de la API:");
-            System.out.println("Status: " + conexion.getResponseCode());
-            
+            GestorRegistros.sistemaInfo("Respuesta de la API:");
             if (conexion.getResponseCode() == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"));
                 StringBuilder respuesta = new StringBuilder();
@@ -71,8 +93,7 @@ public class UsuarioServicio {
                 }
                 
                 String respuestaJson = respuesta.toString();
-                System.out.println("Body: " + respuestaJson);
-                
+                GestorRegistros.sistemaInfo("Credenciales validadas, respuesta: " + respuestaJson);
                 return objetoMapeador.readValue(respuestaJson, UsuarioDto.class);
             } else {
                 String mensajeError = "Error en la autenticación: " + conexion.getResponseCode();
@@ -87,15 +108,20 @@ public class UsuarioServicio {
                 if (respustaJson != null && !respustaJson.isEmpty()) {
                     mensajeError += " - " + respustaJson;
                 }
+                GestorRegistros.sistemaError(mensajeError);
                 throw new IOException(mensajeError);
             }
         } catch (Exception e) {
-            System.err.println("Error durante la autenticación: " + e.getMessage());
-            e.printStackTrace();
+            GestorRegistros.sistemaError("Error durante la autenticación: " + e.getMessage());
             throw new Exception("Error durante la autenticación: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Confirma el correo electrónico del usuario enviando una petición a la API.
+     * 
+     * @param email El correo electrónico del usuario a confirmar
+     */
     public void confirmarCorreo(String email) {
         try {
             URL url = URI.create(API_BASE_URL + "/confirmarCorreo/" + email).toURL();
@@ -105,6 +131,7 @@ public class UsuarioServicio {
             
             int responseCode = conexion.getResponseCode();
             if (responseCode != 200) {
+                GestorRegistros.sistemaError("Error al confirmar correo: " + responseCode);
                 throw new RuntimeException("Error al confirmar correo: " + responseCode);
             }
             
@@ -115,34 +142,28 @@ public class UsuarioServicio {
         }
     }
 
+    /**
+     * Obtiene la lista de usuarios desde la API.
+     * 
+     * @return Una lista de objetos UsuarioDto
+     * @throws Exception Si ocurre un error al obtener los usuarios
+     */
     public List<UsuarioDto> obtenerUsuarios() throws Exception {
-        System.out.println("\n=== UsuarioServicio.obtenerUsuarios - Iniciando ===");
+        GestorRegistros.sistemaInfo("Iniciando obtención de usuarios...");
         try {
-            System.out.println("URL de la API: " + API_BASE_URL);
             URL url = URI.create(API_BASE_URL).toURL();
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("GET");
             conexion.setRequestProperty("Accept", "application/json");
             conexion.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             
-            System.out.println("Conectando a la API...");
             int repuestaCodigo = conexion.getResponseCode();
-            System.out.println("Código de respuesta: " + repuestaCodigo);
-            
             if (repuestaCodigo != 200) {
                 String errorMsg = "Error HTTP: " + repuestaCodigo;
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream(), "UTF-8"))) {
-                    String line;
-                    StringBuilder response = new StringBuilder();
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    errorMsg += " - " + response.toString();
-                }
+                GestorRegistros.sistemaError(errorMsg);
                 throw new RuntimeException(errorMsg);
             }
 
-            System.out.println("Leyendo respuesta...");
             StringBuilder respuesta = new StringBuilder();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"))) {
                 String linea;
@@ -152,293 +173,162 @@ public class UsuarioServicio {
             }
             
             String respuestaJson = respuesta.toString();
-            System.out.println("Respuesta recibida. Longitud: " + respuestaJson.length());
-            System.out.println("Respuesta: " + respuestaJson);
-            
-            System.out.println("Deserializando JSON...");
-            List<UsuarioDto> usuarios = objetoMapeador.readValue(respuestaJson, new TypeReference<List<UsuarioDto>>() {});
-            System.out.println("Usuarios deserializados: " + usuarios.size());
-            
-            for (UsuarioDto dto : usuarios) {
-                System.out.println("Usuario -> ID: " + dto.getId() + 
-                                 ", Nombre: " + dto.getNombreCompleto() + 
-                                 ", Email: " + dto.getCorreoElectronico() + 
-                                 ", Rol: " + dto.getRolId());
-            }
-            
-            System.out.println("=== UsuarioServicio.obtenerUsuarios - Completado ===\n");
-            return usuarios;
-            
+            return objetoMapeador.readValue(respuestaJson, new TypeReference<List<UsuarioDto>>() {});
         } catch (Exception e) {
-            System.err.println("\n=== UsuarioServicio.obtenerUsuarios - ERROR ===");
-            System.err.println("Mensaje de error: " + e.getMessage());
-            System.err.println("Causa: " + (e.getCause() != null ? e.getCause().getMessage() : "No hay causa"));
-            e.printStackTrace();
-            System.err.println("=====================================\n");
+            GestorRegistros.sistemaError("Error al obtener usuarios: " + e.getMessage());
             throw new Exception("Error al obtener usuarios: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Crea un nuevo usuario enviando una petición a la API.
+     * 
+     * @param usuarioDTO El objeto CrearUsuDto con la información del nuevo usuario
+     * @return El objeto UsuarioDto creado
+     * @throws Exception Si ocurre un error durante la creación del usuario
+     */
     public CrearUsuDto crearUsuario(CrearUsuDto usuarioDTO) throws Exception {
         try {
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.registerModule(new JavaTimeModule());
-            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-            
-            String usuarioJson = objectMapper.writeValueAsString(usuarioDTO);
-            System.out.println("Enviando petición para crear usuario:");
-            System.out.println("URL: " + API_BASE_URL);
-            System.out.println("Body: " + usuarioJson);
+            String usuarioJson = objetoMapeador.writeValueAsString(usuarioDTO);
+            GestorRegistros.sistemaInfo("Enviando petición para crear usuario:");
             
             URL url = URI.create(API_BASE_URL).toURL();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json");
             conn.setDoOutput(true);
+            conn.getOutputStream().write(usuarioJson.getBytes());
             
-            // Enviar el JSON
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = usuarioJson.getBytes("UTF-8");
-                os.write(input, 0, input.length);
-            }
-
-            // Leer la respuesta
             int responseCode = conn.getResponseCode();
-            System.out.println("Código de respuesta: " + responseCode);
-            
-            if (responseCode == 201) {
-                // Leer respuesta exitosa
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    String jsonResponse = response.toString();
-                    System.out.println("Respuesta exitosa: " + jsonResponse);
-                    return objetoMapeador.readValue(jsonResponse, CrearUsuDto.class);
-                }
-            } else {
-                // Leer respuesta de error
-                String mensajeError;
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"))) {
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    mensajeError = response.toString();
-                }
-                
-                System.err.println("Error al crear usuario. Código: " + responseCode + ", Mensaje: " + mensajeError);
-                
-                switch (responseCode) {
-                    case 400:
-                        throw new Exception("Datos inválidos: " + mensajeError);
-                    case 409:
-                        throw new Exception("El correo electrónico ya existe");
-                    case 401:
-                        throw new Exception("No autorizado");
-                    case 403:
-                        throw new Exception("Acceso denegado");
-                    default:
-                        throw new Exception("Error del servidor: " + mensajeError);
-                }
+            if (responseCode != 201) {
+                GestorRegistros.sistemaError("Error al crear usuario: " + responseCode);
+                throw new RuntimeException("Error al crear usuario: " + responseCode);
             }
             
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuilder respuesta = new StringBuilder();
+            String salida;
+            while ((salida = br.readLine()) != null) {
+                respuesta.append(salida);
+            }
+            
+            return objetoMapeador.readValue(respuesta.toString(), CrearUsuDto.class);
         } catch (Exception e) {
-            System.err.println("Error al crear usuario: " + e.getMessage());
-            throw new Exception("Error al crear usuario: " + e.getMessage());
+            GestorRegistros.sistemaError("Error al crear usuario: " + e.getMessage());
+            throw new Exception("Error al crear usuario: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Actualiza un usuario existente enviando una petición a la API.
+     * 
+     * @param id El ID del usuario a actualizar
+     * @param usuario El objeto CrearUsuDto con la información actualizada del usuario
+     * @return El objeto CrearUsuDto actualizado
+     * @throws Exception Si ocurre un error durante la actualización del usuario
+     */
     public CrearUsuDto actualizarUsuario(Long id, CrearUsuDto usuario) throws Exception {
         try {
             String jsonBody = objetoMapeador.writeValueAsString(usuario);
-            System.out.println("\n=== Actualizando usuario ===");
-            System.out.println("URL: " + API_BASE_URL + "/" + id);
-            System.out.println("Body: " + jsonBody);
+            GestorRegistros.sistemaInfo("Actualizando usuario con ID: " + id);
             
             URL url = URI.create(API_BASE_URL + "/" + id).toURL();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-
-            System.out.println("Headers de la petición:");
-            conn.getRequestProperties().forEach((key, value) -> 
-                System.out.println(key + ": " + value));
-
-            // Enviar el JSON
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonBody.getBytes("UTF-8");
-                os.write(input, 0, input.length);
-            }
-
+            
+            conn.getOutputStream().write(jsonBody.getBytes());
+            
             int responseCode = conn.getResponseCode();
-            System.out.println("Código de respuesta: " + responseCode);
-            System.out.println("Mensaje de respuesta: " + conn.getResponseMessage());
-
-            // Imprimir headers de respuesta
-            System.out.println("Headers de respuesta:");
-            conn.getHeaderFields().forEach((key, value) -> 
-                System.out.println(key + ": " + value));
-
             if (responseCode != 200) {
-                StringBuilder errorResponse = new StringBuilder();
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"))) {
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        errorResponse.append(line);
-                    }
-                }
-                
-                String errorMessage = "Error al actualizar usuario. Código: " + responseCode;
-                if (errorResponse.length() > 0) {
-                    errorMessage += ", Mensaje: " + errorResponse.toString();
-                }
-                
-                System.err.println(errorMessage);
-                throw new Exception(errorMessage);
-            }
-
-            // Leer respuesta exitosa
-            StringBuilder response = new StringBuilder();
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    response.append(line);
-                }
+                GestorRegistros.sistemaError("Error al actualizar usuario: " + responseCode);
+                throw new RuntimeException("Error al actualizar usuario: " + responseCode);
             }
             
-            String jsonResponse = response.toString();
-            System.out.println("Respuesta exitosa: " + jsonResponse);
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuilder respuesta = new StringBuilder();
+            String salida;
+            while ((salida = br.readLine()) != null) {
+                respuesta.append(salida);
+            }
             
-            CrearUsuDto usuarioActualizado = objetoMapeador.readValue(jsonResponse, CrearUsuDto.class);
-            System.out.println("Usuario actualizado -> ID: " + usuarioActualizado.getId() + 
-                             ", Nombre: " + usuarioActualizado.getNombreCompleto() + 
-                             ", Email: " + usuarioActualizado.getCorreoElectronico() + 
-                             ", Google: " + usuarioActualizado.isGoogle());
-            
-            return usuarioActualizado;
-            
+            return objetoMapeador.readValue(respuesta.toString(), CrearUsuDto.class);
         } catch (Exception e) {
-            System.err.println("Error en actualizarUsuario: " + e.getMessage());
-            e.printStackTrace();
+            GestorRegistros.sistemaError("Error al actualizar usuario: " + e.getMessage());
             throw new Exception("Error al actualizar usuario: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Elimina un usuario existente enviando una petición a la API.
+     * 
+     * @param id El ID del usuario a eliminar
+     * @throws Exception Si ocurre un error durante la eliminación del usuario
+     */
     public void eliminarUsuario(Long id) throws Exception {
-        System.out.println("\n=== Eliminando usuario ===");
-        System.out.println("URL: " + API_BASE_URL + "/" + id);
-        
-        HttpURLConnection conn = null;
         try {
             URL url = URI.create(API_BASE_URL + "/" + id).toURL();
-            conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("DELETE");
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Content-Type", "application/json");
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-
-            System.out.println("Conectando al servidor...");
-            conn.connect();
-
+            
             int responseCode = conn.getResponseCode();
-            System.out.println("Código de respuesta: " + responseCode);
-
-            // Leer la respuesta si existe
-            String responseMessage = "";
-            InputStream inputStream = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
-            
-            if (inputStream != null) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    responseMessage = response.toString();
-                    if (!responseMessage.isEmpty()) {
-                        System.out.println("Respuesta del servidor: " + responseMessage);
-                    }
-                }
-            }
-
-            // Manejar la respuesta según el código
-            if (responseCode == 200 || responseCode == 204) {
-                System.out.println("Usuario eliminado exitosamente");
-                return;
+            if (responseCode != 200 && responseCode != 204) {
+                GestorRegistros.sistemaError("Error al eliminar usuario: " + responseCode);
+                throw new RuntimeException("Error al eliminar usuario: " + responseCode);
             }
             
-            // Si llegamos aquí, es porque hubo un error
-            String errorMsg;
-            switch (responseCode) {
-                case 404:
-                    errorMsg = "Usuario no encontrado. ID: " + id;
-                    break;
-                case 400:
-                    errorMsg = "Error en la solicitud: " + responseMessage;
-                    break;
-                case 401:
-                    errorMsg = "No autorizado para eliminar usuarios";
-                    break;
-                case 403:
-                    errorMsg = "Acceso denegado para eliminar usuarios";
-                    break;
-                case 500:
-                    errorMsg = "Error interno del servidor: " + responseMessage;
-                    break;
-                default:
-                    errorMsg = "Error inesperado (Código " + responseCode + "): " + responseMessage;
-            }
-            throw new Exception(errorMsg);
-            
+            GestorRegistros.sistemaInfo("Usuario eliminado con éxito");
         } catch (Exception e) {
-            System.err.println("Error al eliminar usuario: " + e.getMessage());
-            e.printStackTrace();
-            throw new Exception("Error al eliminar usuario: " + e.getMessage());
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.disconnect();
-                } catch (Exception e) {
-                    System.err.println("Error al cerrar la conexión: " + e.getMessage());
-                }
-            }
+            GestorRegistros.sistemaError("Error al eliminar usuario: " + e.getMessage());
+            throw new Exception("Error al eliminar usuario: " + e.getMessage(), e);
         }
     }
 
+    /**
+     * Obtiene un usuario por su ID enviando una petición a la API.
+     * 
+     * @param id El ID del usuario a obtener
+     * @return El objeto UsuarioDto correspondiente al ID
+     * @throws Exception Si ocurre un error durante la obtención del usuario
+     */
     public UsuarioDto obtenerUsuarioPorId(Long id) throws Exception {
         try {
-            System.out.println("Obteniendo usuario por ID: " + id);
             URL url = URI.create(API_BASE_URL + "/" + id).toURL();
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("GET");
             conexion.setRequestProperty("Accept", "application/json");
             
-            if (conexion.getResponseCode() != 200) {
-                throw new RuntimeException("Error HTTP: " + conexion.getResponseCode());
+            int responseCode = conexion.getResponseCode();
+            if (responseCode != 200) {
+                GestorRegistros.sistemaError("Error al obtener usuario: " + responseCode);
+                throw new RuntimeException("Error al obtener usuario: " + responseCode);
             }
-
+            
             BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"));
             StringBuilder respuesta = new StringBuilder();
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                respuesta.append(linea);
+            String salida;
+            while ((salida = br.readLine()) != null) {
+                respuesta.append(salida);
             }
             
             return objetoMapeador.readValue(respuesta.toString(), UsuarioDto.class);
         } catch (Exception e) {
-            throw new Exception("Error al obtener usuario por ID: " + e.getMessage(), e);
+            GestorRegistros.sistemaError("Error al obtener usuario: " + e.getMessage());
+            throw new Exception("Error al obtener usuario: " + e.getMessage(), e);
         }
     }
 
-    public void actualizarContrasena(String email, String nuevaContrasena) {
+    /**
+     * Actualiza la contraseña de un usuario existente enviando una petición a la API.
+     * 
+     * @param email El correo electrónico del usuario
+     * @param nuevaContrasena La nueva contraseña del usuario
+     * @throws Exception Si ocurre un error durante la actualización de la contraseña
+     */
+    public void actualizarContrasena(String email, String nuevaContrasena) throws Exception {
         try {
             Map<String, String> datos = new HashMap<>();
             datos.put("email", email);
@@ -452,97 +342,52 @@ public class UsuarioServicio {
             conexion.setRequestProperty("Content-Type", "application/json");
             conexion.setDoOutput(true);
             
-            try (OutputStream os = conexion.getOutputStream()) {
-                os.write(jsonDatos.getBytes("UTF-8"));
-            }
+            conexion.getOutputStream().write(jsonDatos.getBytes());
             
             int responseCode = conexion.getResponseCode();
             if (responseCode != 200) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
-                    response.append(line);
-                }
-                throw new RuntimeException("Error al actualizar contraseña: " + response.toString());
+                GestorRegistros.sistemaError("Error al actualizar contraseña: " + responseCode);
+                throw new RuntimeException("Error al actualizar contraseña: " + responseCode);
             }
             
-            GestorRegistros.sistemaInfo("Contraseña actualizada para: " + email);
+            GestorRegistros.sistemaInfo("Contraseña actualizada con éxito");
         } catch (Exception e) {
             GestorRegistros.sistemaError("Error al actualizar contraseña: " + e.getMessage());
-            throw new RuntimeException("Error al actualizar contraseña", e);
+            throw new Exception("Error al actualizar contraseña: " + e.getMessage(), e);
         }
     }
 
     /**
-     * Busca un usuario por su correo electrónico.
+     * Busca un usuario por su correo electrónico enviando una petición a la API.
+     * 
      * @param correoElectronico El correo electrónico del usuario a buscar
-     * @return El usuario encontrado o null si no existe
-     * @throws Exception Si hay un error en la comunicación con la API
+     * @return El objeto UsuarioDto correspondiente al correo electrónico
+     * @throws Exception Si ocurre un error durante la búsqueda del usuario
      */
     public UsuarioDto buscarPorCorreo(String correoElectronico) throws Exception {
-        System.out.println("\n=== UsuarioServicio.buscarPorCorreo - Iniciando ===");
         try {
-            String urlStr = API_BASE_URL + "/correo/" + correoElectronico;
-            System.out.println("URL de la API: " + urlStr);
-            
-            URL url = URI.create(urlStr).toURL();
+            URL url = URI.create(API_BASE_URL + "/correo/" + correoElectronico).toURL();
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("GET");
             conexion.setRequestProperty("Accept", "application/json");
-            conexion.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             
-            System.out.println("Conectando a la API...");
-            int respuestaCodigo = conexion.getResponseCode();
-            System.out.println("Código de respuesta: " + respuestaCodigo);
-            
-            if (respuestaCodigo == 404) {
-                System.out.println("Usuario no encontrado");
-                return null;
+            int responseCode = conexion.getResponseCode();
+            if (responseCode != 200) {
+                GestorRegistros.sistemaError("Error al buscar usuario: " + responseCode);
+                throw new RuntimeException("Error al buscar usuario: " + responseCode);
             }
             
-            if (respuestaCodigo != 200) {
-                String errorMsg = "Error HTTP: " + respuestaCodigo;
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getErrorStream(), "UTF-8"))) {
-                    String line;
-                    StringBuilder response = new StringBuilder();
-                    while ((line = br.readLine()) != null) {
-                        response.append(line);
-                    }
-                    errorMsg += " - " + response.toString();
-                }
-                throw new RuntimeException(errorMsg);
-            }
-
-            System.out.println("Leyendo respuesta...");
+            BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"));
             StringBuilder respuesta = new StringBuilder();
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(conexion.getInputStream(), "UTF-8"))) {
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    respuesta.append(linea);
-                }
+            String salida;
+            while ((salida = br.readLine()) != null) {
+                respuesta.append(salida);
             }
             
-            String respuestaJson = respuesta.toString();
-            System.out.println("Respuesta recibida: " + respuestaJson);
-            
-            System.out.println("Deserializando JSON...");
-            UsuarioDto usuario = objetoMapeador.readValue(respuestaJson, UsuarioDto.class);
-            System.out.println("Usuario encontrado -> ID: " + usuario.getId() + 
-                             ", Nombre: " + usuario.getNombreCompleto() + 
-                             ", Email: " + usuario.getCorreoElectronico() + 
-                             ", Rol: " + usuario.getRolId());
-            
-            System.out.println("=== UsuarioServicio.buscarPorCorreo - Completado ===\n");
-            return usuario;
-            
+            return objetoMapeador.readValue(respuesta.toString(), UsuarioDto.class);
         } catch (Exception e) {
-            System.err.println("\n=== UsuarioServicio.buscarPorCorreo - ERROR ===");
-            System.err.println("Mensaje de error: " + e.getMessage());
-            System.err.println("Causa: " + (e.getCause() != null ? e.getCause().getMessage() : "No hay causa"));
-            e.printStackTrace();
-            System.err.println("=====================================\n");
-            throw new Exception("Error al buscar usuario por correo: " + e.getMessage(), e);
+            GestorRegistros.sistemaError("Error al buscar usuario: " + e.getMessage());
+            throw new Exception("Error al buscar usuario: " + e.getMessage(), e);
         }
     }
 }

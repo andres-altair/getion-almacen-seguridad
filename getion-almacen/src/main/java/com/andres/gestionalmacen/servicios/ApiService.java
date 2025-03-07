@@ -18,6 +18,24 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Clase ApiService que maneja las interacciones con la API.
+ * Esta clase proporciona métodos para realizar solicitudes HTTP a la API
+ * y manejar las respuestas.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Realizar solicitudes GET, POST y PUT a la API</li>
+ *   <li>Manejar errores y reintentos en las solicitudes</li>
+ *   <li>Soporte para solicitudes asíncronas</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con las interacciones con la API.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 public class ApiService {
     private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
     private static final String API_BASE_URL = "http://localhost:8081/api";
@@ -27,6 +45,11 @@ public class ApiService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
+    /** 
+     * Constructor de la clase ApiService.
+     * Este constructor inicializa el cliente HTTP y el objeto ObjectMapper
+     * con configuraciones específicas para manejar la serialización y deserialización de objetos JSON.
+     */
     public ApiService() {
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(TIMEOUT)
@@ -39,6 +62,14 @@ public class ApiService {
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
+    /** 
+     * Realiza una solicitud GET a la API.
+     * 
+     * @param endpoint El endpoint de la API al que se realiza la solicitud
+     * @return Un objeto JsonNode con la respuesta de la API
+     * @throws IOException Si ocurre un error durante la solicitud
+     * @throws InterruptedException Si la operación es interrumpida
+     */
     public JsonNode get(String endpoint) throws IOException, InterruptedException {
         return executeWithRetry(() -> executeRequest(HttpRequest.newBuilder()
                 .GET()
@@ -48,6 +79,15 @@ public class ApiService {
                 .build()));
     }
 
+    /** 
+     * Realiza una solicitud POST a la API.
+     * 
+     * @param endpoint El endpoint de la API al que se realiza la solicitud
+     * @param body El cuerpo de la solicitud como un objeto ObjectNode
+     * @return Un objeto JsonNode con la respuesta de la API
+     * @throws IOException Si ocurre un error durante la solicitud
+     * @throws InterruptedException Si la operación es interrumpida
+     */
     public JsonNode post(String endpoint, ObjectNode body) throws IOException, InterruptedException {
         return executeWithRetry(() -> executeRequest(HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
@@ -57,6 +97,15 @@ public class ApiService {
                 .build()));
     }
 
+    /** 
+     * Realiza una solicitud PUT a la API.
+     * 
+     * @param endpoint El endpoint de la API al que se realiza la solicitud
+     * @param body El cuerpo de la solicitud como un objeto ObjectNode
+     * @return Un objeto JsonNode con la respuesta de la API
+     * @throws IOException Si ocurre un error durante la solicitud
+     * @throws InterruptedException Si la operación es interrumpida
+     */
     public JsonNode put(String endpoint, ObjectNode body) throws IOException, InterruptedException {
         return executeWithRetry(() -> executeRequest(HttpRequest.newBuilder()
                 .PUT(HttpRequest.BodyPublishers.ofString(body.toString()))
@@ -66,6 +115,14 @@ public class ApiService {
                 .build()));
     }
 
+    /** 
+     * Ejecuta una solicitud HTTP y maneja la respuesta.
+     * 
+     * @param request El objeto HttpRequest que se va a ejecutar
+     * @return Un objeto JsonNode con la respuesta de la API
+     * @throws IOException Si ocurre un error durante la solicitud
+     * @throws InterruptedException Si la operación es interrumpida
+     */
     private JsonNode executeRequest(HttpRequest request) throws IOException, InterruptedException {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         
@@ -78,6 +135,14 @@ public class ApiService {
         return objectMapper.readTree(response.body());
     }
 
+    /** 
+     * Ejecuta una solicitud con reintentos en caso de fallos.
+     * 
+     * @param executor El ejecutor de la solicitud
+     * @return Un objeto JsonNode con la respuesta de la API
+     * @throws IOException Si ocurre un error durante la solicitud
+     * @throws InterruptedException Si la operación es interrumpida
+     */
     private JsonNode executeWithRetry(RequestExecutor executor) throws IOException, InterruptedException {
         int attempts = 0;
         while (attempts < MAX_RETRIES) {
@@ -101,6 +166,12 @@ public class ApiService {
         JsonNode execute() throws IOException, InterruptedException;
     }
 
+    /** 
+     * Realiza una solicitud GET asíncrona a la API.
+     * 
+     * @param endpoint El endpoint de la API al que se realiza la solicitud
+     * @return Un CompletableFuture con la respuesta de la API como JsonNode
+     */
     public CompletableFuture<JsonNode> getAsync(String endpoint) {
         return CompletableFuture.supplyAsync(() -> {
             try {

@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebListener;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
 @WebListener
-public class AppInitializer implements ServletContextListener {
+public class InicializadorApp implements ServletContextListener {
     
     @Override
     public void contextInitialized(ServletContextEvent sce) {

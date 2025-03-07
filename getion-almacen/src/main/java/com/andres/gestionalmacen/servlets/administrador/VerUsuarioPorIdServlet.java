@@ -17,15 +17,44 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Servlet que maneja la visualización de un usuario específico por ID.
+ * Este servlet verifica la sesión del administrador y obtiene los detalles
+ * del usuario solicitado.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del administrador</li>
+ *   <li>Obtención de los detalles del usuario por ID</li>
+ *   <li>Registro de eventos relacionados con la visualización de usuarios</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con la visualización de un usuario específico.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/admin/verUsuarioId")
 public class VerUsuarioPorIdServlet extends HttpServlet {
 
     private final UsuarioServicio usuarioServicio;
 
+    /**
+     * Constructor que inicializa el servicio de usuarios.
+     */
     public VerUsuarioPorIdServlet() {
         this.usuarioServicio = new UsuarioServicio();
     }
 
+    /**
+     * Método que maneja la solicitud GET para visualizar un usuario específico.
+     * 
+     * @param request  objeto que contiene la solicitud HTTP
+     * @param response objeto que contiene la respuesta HTTP
+     * @throws ServletException si ocurre un error en la ejecución del servlet
+     * @throws IOException      si ocurre un error en la lectura o escritura de datos
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {

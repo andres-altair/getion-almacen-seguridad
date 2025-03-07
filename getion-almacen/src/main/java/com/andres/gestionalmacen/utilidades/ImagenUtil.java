@@ -5,8 +5,28 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+/**
+ * Clase utilitaria para el manejo de imágenes.
+ * Esta clase proporciona métodos para verificar la validez de imágenes y asegurar que los bytes de la imagen incluyan el MIME type.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de imágenes válidas</li>
+ *   <li>Asegurar que los bytes de la imagen incluyan el MIME type</li>
+ *   <li>Registro detallado de actividades</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con la verificación y procesamiento de imágenes.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 public class ImagenUtil {
+    
+    private static final Logger LOGGER = Logger.getLogger(ImagenUtil.class.getName());
     
     // Set de MIME types permitidos para imágenes
     private static final Set<String> MIME_TYPES_PERMITIDOS = new HashSet<String>() {{
@@ -35,9 +55,11 @@ public class ImagenUtil {
      */
     public static void verificarImagen(byte[] imageBytes, String nombreArchivo) {
         if (imageBytes == null || imageBytes.length == 0) {
+            LOGGER.severe("No se proporcionaron datos de imagen");
             throw new IllegalArgumentException("No se proporcionaron datos de imagen");
         }
         if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) {
+            LOGGER.severe("No se proporcionó nombre de archivo");
             throw new IllegalArgumentException("No se proporcionó nombre de archivo");
         }
 
@@ -47,12 +69,14 @@ public class ImagenUtil {
             String mimeType = tika.detect(imageBytes);
             
             if (!MIME_TYPES_PERMITIDOS.contains(mimeType)) {
+                LOGGER.warning("El archivo no es una imagen válida. MIME type detectado: " + mimeType);
                 throw new IllegalArgumentException("El archivo no es una imagen válida. MIME type detectado: " + mimeType);
             }
             
             // Verificar extensión
             String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf(".") + 1).toLowerCase();
             if (!EXTENSIONES_PERMITIDAS.contains(extension)) {
+                LOGGER.warning("Extensión de archivo no permitida: " + extension);
                 throw new IllegalArgumentException("Extensión de archivo no permitida: " + extension);
             }
             
@@ -71,12 +95,15 @@ public class ImagenUtil {
             }
             
             if (!coincidencia) {
+                LOGGER.warning("Imagen válida. MIME type detectado: " + mimeType + ", extensión: " + extension);
                 throw new IllegalArgumentException("Imagen válida. MIME type detectado: " + mimeType + ", extensión: " + extension);
             }
             
         } catch (IllegalArgumentException e) {
+            LOGGER.severe("Error al verificar la imagen: " + e.getMessage());
             throw e; // Re-lanzar excepciones de validación
         } catch (Exception e) {
+            LOGGER.severe("Error al verificar la imagen: " + e.getMessage());
             throw new IllegalArgumentException("Error al verificar la imagen: " + e.getMessage());
         }
     }
@@ -88,6 +115,7 @@ public class ImagenUtil {
      */
     public static byte[] asegurarMimeTypeImagen(byte[] imageBytes) {
         if (imageBytes == null || imageBytes.length == 0) {
+            LOGGER.warning("No se proporcionaron datos de imagen");
             return null;
         }
 
@@ -104,7 +132,7 @@ public class ImagenUtil {
             String base64ConMime = "data:" + mimeType + ";base64," + Base64.getEncoder().encodeToString(imageBytes);
             return base64ConMime.getBytes(StandardCharsets.UTF_8);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe("Error al asegurar MIME type de la imagen: " + e.getMessage());
             return null;
         }
     }

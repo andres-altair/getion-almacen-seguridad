@@ -20,12 +20,33 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Servlet que maneja el procesamiento de pagos.
+ * Este servlet verifica la sesión del usuario y procesa el pago a través de PayPal.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión del usuario</li>
+ *   <li>Procesamiento de pagos utilizando la API de PayPal</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con el procesamiento de pagos.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/usuario/procesarPago")
 public class ProcesarPagoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcesarPagoServlet.class);
     private APIContext apiContext;
 
+    /**
+     * Inicializa el servlet y configura la conexión con PayPal.
+     * 
+     * @throws ServletException si ocurre un error durante la inicialización
+     */
     @Override
     public void init() throws ServletException {
         try {
@@ -63,6 +84,14 @@ public class ProcesarPagoServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Maneja las solicitudes GET y redirige al panel de usuario.
+     * 
+     * @param request la solicitud HTTP
+     * @param response la respuesta HTTP
+     * @throws ServletException si ocurre un error durante el procesamiento
+     * @throws IOException si ocurre un error de E/S
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -71,6 +100,14 @@ public class ProcesarPagoServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/usuario/panel");
     }
 
+    /**
+     * Maneja las solicitudes POST y procesa el pago a través de PayPal.
+     * 
+     * @param request la solicitud HTTP
+     * @param response la respuesta HTTP
+     * @throws ServletException si ocurre un error durante el procesamiento
+     * @throws IOException si ocurre un error de E/S
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -167,41 +204,51 @@ public class ProcesarPagoServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Crea un pago en PayPal con los parámetros especificados.
+     * 
+     * @param total el monto del pago
+     * @param currency la moneda del pago
+     * @param cancelUrl la URL de cancelación del pago
+     * @param successUrl la URL de éxito del pago
+     * @return el pago creado en PayPal
+     * @throws PayPalRESTException si ocurre un error durante la creación del pago
+     */
     private Payment createPayment(double total, String currency, 
             String cancelUrl, String successUrl) throws PayPalRESTException {
+                
+            LOGGER.info("Creando pago - Total: {}, Moneda: {}", total, currency);
+            total = Double.parseDouble(String.valueOf(total).replace(",", ".")); // Reemplazar la coma por un punto
             
-        LOGGER.info("Creando pago - Total: {}, Moneda: {}", total, currency);
-        total = Double.parseDouble(String.valueOf(total).replace(",", ".")); // Reemplazar la coma por un punto
-        
-        // Formatear el monto correctamente para PayPal usando Locale.US para asegurar el punto decimal
-        String formattedAmount = String.format(Locale.US, "%.2f", total);
-        LOGGER.info("Monto formateado: {}", formattedAmount);
-        
-        Amount amount = new Amount();
-        amount.setCurrency(currency);
-        amount.setTotal(formattedAmount);
+            // Formatear el monto correctamente para PayPal usando Locale.US para asegurar el punto decimal
+            String formattedAmount = String.format(Locale.US, "%.2f", total);
+            LOGGER.info("Monto formateado: {}", formattedAmount);
+            
+            Amount amount = new Amount();
+            amount.setCurrency(currency);
+            amount.setTotal(formattedAmount);
 
-        Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
-        transaction.setDescription("Alquiler de Sector en Gestión Almacén");
+            Transaction transaction = new Transaction();
+            transaction.setAmount(amount);
+            transaction.setDescription("Alquiler de Sector en Gestión Almacén");
 
-        List<Transaction> transactions = new ArrayList<>();
-        transactions.add(transaction);
+            List<Transaction> transactions = new ArrayList<>();
+            transactions.add(transaction);
 
-        Payer payer = new Payer();
-        payer.setPaymentMethod("paypal");
+            Payer payer = new Payer();
+            payer.setPaymentMethod("paypal");
 
-        Payment payment = new Payment();
-        payment.setIntent("sale");
-        payment.setPayer(payer);
-        payment.setTransactions(transactions);
+            Payment payment = new Payment();
+            payment.setIntent("sale");
+            payment.setPayer(payer);
+            payment.setTransactions(transactions);
 
-        RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl(cancelUrl);
-        redirectUrls.setReturnUrl(successUrl);
-        payment.setRedirectUrls(redirectUrls);
-
-        LOGGER.info("Enviando solicitud de pago a PayPal con monto: {}", formattedAmount);
-        return payment.create(apiContext);
+            RedirectUrls redirectUrls = new RedirectUrls();
+            redirectUrls.setCancelUrl(cancelUrl);
+            redirectUrls.setReturnUrl(successUrl);
+            
+            payment.setRedirectUrls(redirectUrls);
+            
+            return payment.create(apiContext);
     }
 }

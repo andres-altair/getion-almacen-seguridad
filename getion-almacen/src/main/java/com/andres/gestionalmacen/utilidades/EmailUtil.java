@@ -6,6 +6,29 @@ import java.util.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Clase utilitaria para el manejo de correos electrónicos.
+ * Esta clase proporciona métodos para generar tokens de confirmación,
+ * validar tokens, y enviar correos de confirmación y recuperación.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Generación de tokens de confirmación</li>
+ *   <li>Validación de tokens</li>
+ *   <li>Envío de correos de confirmación</li>
+ *   <li>Envío de correos de recuperación de contraseña</li>
+ *   <li>Registro detallado de actividades</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con el envío de correos.</p>
+ * 
+ * <p>Según [35176471-70ce-4b89-92e3-77ccfc940534], utiliza un almacenamiento de tokens
+ * para gestionar la validez de los mismos.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 public class EmailUtil {
     private static final String FROM_EMAIL = "andresxiaomd12@gmail.com";
     private static final String PASSWORD = "frjn ntoe crjy bqgi";
@@ -22,32 +45,60 @@ public class EmailUtil {
         }
     }
 
+    /**
+     * Genera un token de confirmación para el correo proporcionado.
+     * 
+     * @param email El correo electrónico del usuario
+     * @return El token generado
+     */
     public static String generarToken(String email) {
         String token = Base64.getEncoder().encodeToString((email + ":" + System.currentTimeMillis()).getBytes());
         Instant expiracion = Instant.now().plus(TOKEN_EXPIRATION_HOURS, ChronoUnit.HOURS);
         tokenStorage.put(token, new TokenInfo(email, expiracion));
+        GestorRegistros.sistemaInfo("Token de confirmación generado para: " + email);
         return token;
     }
 
+    /**
+     * Valida un token de confirmación.
+     * 
+     * @param token El token a validar
+     * @return true si el token es válido, false en caso contrario
+     */
     public static boolean validarToken(String token) {
         TokenInfo info = tokenStorage.get(token);
         if (info == null) {
+            GestorRegistros.sistemaInfo("Token de confirmación inválido: " + token);
             return false;
         }
         
         if (Instant.now().isAfter(info.expirationTime)) {
             tokenStorage.remove(token);
+            GestorRegistros.sistemaInfo("Token de confirmación expirado: " + token);
             return false;
         }
         
+        GestorRegistros.sistemaInfo("Token de confirmación válido: " + token);
         return true;
     }
 
+    /**
+     * Obtiene el correo electrónico asociado a un token.
+     * 
+     * @param token El token del cual se desea obtener el correo
+     * @return El correo electrónico asociado al token, o null si no existe
+     */
     public static String obtenerCorreoDeToken(String token) {
         TokenInfo info = tokenStorage.get(token);
         return info != null ? info.email : null;
     }
 
+    /**
+     * Envía un correo de confirmación al usuario.
+     * 
+     * @param toEmail El correo electrónico del destinatario
+     * @param token El token de confirmación
+     */
     public static void enviarCorreoConfirmacion(String toEmail, String token) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -88,6 +139,11 @@ public class EmailUtil {
         }
     }
 
+    /**
+     * Reenvía el correo de confirmación al usuario.
+     * 
+     * @param email El correo electrónico del destinatario
+     */
     public static void reenviarCorreoConfirmacion(String email) {
         // Invalidar token anterior si existe
         tokenStorage.entrySet().removeIf(entry -> entry.getValue().email.equals(email));
@@ -97,6 +153,12 @@ public class EmailUtil {
         enviarCorreoConfirmacion(email, nuevoToken);
     }
 
+    /**
+     * Envía un correo de recuperación de contraseña al usuario.
+     * 
+     * @param email El correo electrónico del destinatario
+     * @param token El token de recuperación
+     */
     public static void enviarCorreoRecuperacionContasena(String email, String token) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -130,8 +192,10 @@ public class EmailUtil {
             message.setContent(contenido, "text/html; charset=utf-8");
 
             Transport.send(message);
+            GestorRegistros.sistemaInfo("Correo de recuperación de contraseña enviado a: " + email);
         } catch (MessagingException e) {
-            throw new RuntimeException("Error al enviar el correo de recuperación: " + e.getMessage(), e);
+            GestorRegistros.sistemaError("Error al enviar correo de recuperación: " + e.getMessage());
+            throw new RuntimeException("Error al enviar el correo de recuperación", e);
         }
     }
 }

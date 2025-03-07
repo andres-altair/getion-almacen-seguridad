@@ -17,22 +17,49 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Servlet que maneja la visualización de todos los usuarios.
+ * Este servlet verifica la sesión del administrador y obtiene la lista de usuarios
+ * desde el sistema.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del administrador</li>
+ *   <li>Obtención de la lista de usuarios</li>
+ *   <li>Registro de eventos relacionados con la gestión de usuarios</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con la visualización de usuarios.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/admin/usuarios")
 public class VerTodosUsuariosServlet extends HttpServlet {
 
     private final UsuarioServicio usuarioServicio;
 
+    /**
+     * Constructor que inicializa el servicio de usuarios.
+     */
     public VerTodosUsuariosServlet() {
         this.usuarioServicio = new UsuarioServicio();
     }
 
+    /**
+     * Método que maneja la solicitud GET para visualizar la lista de usuarios.
+     * 
+     * @param peticion  La solicitud HTTP.
+     * @param respuesta La respuesta HTTP.
+     * @throws ServletException Si ocurre un error en la ejecución del servlet.
+     * @throws IOException      Si ocurre un error en la lectura o escritura de la solicitud o respuesta.
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
         try {
-
             // Verificar sesión y rol (código existente)
             HttpSession session = peticion.getSession(false);
-            //System.out.println("Sesión: " + (session != null ? "existe" : "no existe"));
             
             if (session == null || session.getAttribute("usuario") == null) {
                 GestorRegistros.sistemaWarning("Intento de acceso a gestión de usuarios sin sesión válida desde IP: " 
@@ -42,8 +69,6 @@ public class VerTodosUsuariosServlet extends HttpServlet {
             }
             
             UsuarioDto usuarioActual = (UsuarioDto) session.getAttribute("usuario");
-            //System.out.println("Usuario en sesión: " + usuarioActual.getNombreCompleto());
-            //System.out.println("Rol del usuario: " + usuarioActual.getRolId());
             
             if (usuarioActual.getRolId() != 1) {
                 GestorRegistros.warning(usuarioActual.getId(), 

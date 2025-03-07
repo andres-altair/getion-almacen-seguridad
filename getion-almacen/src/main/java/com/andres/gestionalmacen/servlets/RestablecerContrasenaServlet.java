@@ -13,6 +13,26 @@ import com.andres.gestionalmacen.utilidades.EmailUtil;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
+/**
+ * Servlet que maneja el proceso de restablecimiento de contraseña.
+ * Este servlet verifica el token de recuperación y actualiza la contraseña del usuario.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de validez del token de recuperación</li>
+ *   <li>Actualización de la contraseña del usuario</li>
+ *   <li>Registro detallado de actividades</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], este servlet verifica
+ * la existencia del usuario antes de proceder con la actualización.</p>
+ * 
+ * <p>Según [35176471-70ce-4b89-92e3-77ccfc940534], utiliza validarToken
+ * de manera eficiente para verificar la validez del token.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/restablecerContrasena")
 public class RestablecerContrasenaServlet extends HttpServlet {
     
@@ -22,6 +42,14 @@ public class RestablecerContrasenaServlet extends HttpServlet {
         this.servicioUsuario = new UsuarioServicio();
     }
     
+    /**
+     * Maneja las peticiones GET para el restablecimiento de contraseña.
+     * 
+     * @param peticion La petición HTTP que contiene el token
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
@@ -45,6 +73,14 @@ public class RestablecerContrasenaServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Procesa las solicitudes POST para actualizar la contraseña.
+     * 
+     * @param peticion La petición HTTP que contiene el token y la nueva contraseña
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {

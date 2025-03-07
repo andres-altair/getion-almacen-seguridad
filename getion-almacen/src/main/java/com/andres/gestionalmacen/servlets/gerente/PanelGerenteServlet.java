@@ -12,9 +12,36 @@ import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
 
+/**
+ * Servlet que maneja el panel del gerente.
+ * Este servlet verifica la sesión del gerente y carga la información
+ * del usuario en el panel.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del gerente</li>
+ *   <li>Procesamiento de datos del usuario para mostrar en el panel</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con el acceso al panel del gerente.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/gerente/panel")
 public class PanelGerenteServlet extends HttpServlet {
     
+    /**
+     * Método que maneja la petición GET para el panel del gerente.
+     * Verifica la sesión y permisos del gerente, y carga la información
+     * del usuario en el panel.
+     * 
+     * @param peticion objeto que contiene la petición HTTP
+     * @param respuesta objeto que contiene la respuesta HTTP
+     * @throws ServletException si ocurre un error en el servlet
+     * @throws IOException si ocurre un error de entrada/salida
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {

@@ -14,9 +14,35 @@ import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 
+/**
+ * Servlet que maneja el panel de administración.
+ * Este servlet verifica la sesión del administrador y carga la información
+ * del usuario en el panel.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de sesión y permisos del administrador</li>
+ *   <li>Procesamiento de datos del usuario para mostrar en el panel</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], esta clase maneja el registro
+ * de eventos relacionados con el acceso al panel de administración.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/admin/panel")
 public class PanelAdminServlet extends HttpServlet {
     
+    /**
+     * Método que maneja la petición GET para el panel de administración.
+     * Verifica la sesión del administrador y carga la información del usuario.
+     * 
+     * @param peticion La petición HTTP
+     * @param respuesta La respuesta HTTP
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de entrada/salida
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {

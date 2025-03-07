@@ -19,6 +19,29 @@ import com.andres.gestionalmacen.utilidades.EncriptarUtil;
 import com.andres.gestionalmacen.utilidades.GestorRegistros;
 import com.andres.gestionalmacen.utilidades.ImagenUtil;
 
+/**
+ * Servlet que maneja el registro de nuevos usuarios.
+ * Este servlet procesa las solicitudes de registro, verifica la existencia
+ * de usuarios y envía correos de confirmación.
+ * 
+ * <p>Funcionalidades principales:</p>
+ * <ul>
+ *   <li>Verificación de existencia de usuario</li>
+ *   <li>Registro de nuevos usuarios</li>
+ *   <li>Envío de correos de confirmación</li>
+ *   <li>Procesamiento de imágenes de perfil</li>
+ *   <li>Registro detallado de actividades</li>
+ * </ul>
+ * 
+ * <p>Según [875eb101-5aa8-4067-87e7-39617e3a474a], este servlet verifica
+ * si el usuario ya existe antes de proceder con el registro.</p>
+ * 
+ * <p>Según [35176471-70ce-4b89-92e3-77ccfc940534], utiliza buscarPorCorreo
+ * de manera eficiente para verificar usuarios.</p>
+ * 
+ * @author Andrés
+ * @version 1.0
+ */
 @WebServlet("/registro")
 @MultipartConfig
 public class RegistroServlet extends HttpServlet {
@@ -28,6 +51,14 @@ public class RegistroServlet extends HttpServlet {
         this.servicioUsuario = new UsuarioServicio();
     }
     
+    /**
+     * Maneja las peticiones GET mostrando el formulario de registro.
+     * 
+     * @param peticion La petición HTTP del cliente
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta)
             throws ServletException, IOException {
@@ -35,6 +66,14 @@ public class RegistroServlet extends HttpServlet {
         peticion.getRequestDispatcher("/registro.jsp").forward(peticion, respuesta);
     }
 
+    /**
+     * Procesa las solicitudes de registro de nuevos usuarios.
+     * 
+     * @param peticion La petición HTTP que contiene los datos del formulario
+     * @param respuesta La respuesta HTTP al cliente
+     * @throws ServletException Si ocurre un error en el servlet
+     * @throws IOException Si ocurre un error de E/S
+     */
     @Override
     protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta)
             throws ServletException, IOException {
