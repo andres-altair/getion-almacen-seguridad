@@ -6,7 +6,7 @@
 <%
     // Verificar si los atributos necesarios están presentes
     if (request.getAttribute("usuarioNombre") == null || request.getAttribute("usuarioFoto") == null) {
-        response.sendRedirect(request.getContextPath() + "/admin/panel");
+        response.sendRedirect(request.getContextPath() + "/usuario/panel");
         return;
     }
 %>
@@ -14,42 +14,70 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Panel de Usuario</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <style>
-        .plan-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 10px;
-            text-align: center;
-            transition: transform 0.3s;
+        .sector-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
-        .plan-card:hover {
+        .sector-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .plan-price {
-            font-size: 2em;
-            color: #007bff;
-            margin: 15px 0;
+        .sector-price {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 1rem 0;
         }
-        .plan-features {
+        .sector-features {
             list-style: none;
             padding: 0;
-            margin: 15px 0;
+            margin: 1.5rem 0;
         }
-        .plan-features li {
-            margin: 5px 0;
+        .sector-features li {
+            margin: 0.8rem 0;
+            color: var(--text-color);
         }
-        .ocupado {
-            opacity: 0.5;
+        .sector-features i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        .payment-button {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .payment-button:hover {
+            background: var(--primary-dark);
+        }
+        .panel-section {
+            margin-bottom: 2rem;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
     </style>
 </head>
@@ -60,20 +88,17 @@
             <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
         </div>
         <div class="nav-links-container">
-            <a href="${pageContext.request.contextPath}/admin/recepcion" class="nav-link">
-                <i class="fas fa-users"></i> Registrar Recepción
+            <a href="${pageContext.request.contextPath}/usuario/alquileres" class="nav-link">
+                <i class="fas fa-warehouse"></i> Mis Alquileres
             </a>
-            <a href="${pageContext.request.contextPath}/admin/estado" class="nav-link">
-                <i class="fas fa-database"></i> Actualizar Estado
+            <a href="${pageContext.request.contextPath}/usuario/perfil" class="nav-link">
+                <i class="fas fa-user"></i> Mi Perfil
             </a>
-            <a href="${pageContext.request.contextPath}/admin/mantenimiento" class="nav-link">
-                <i class="fas fa-exclamation-triangle"></i> Mantenimiento Almacén
-            </a>
-            <a href="${pageContext.request.contextPath}/admin/menu" class="nav-link">
-                <i class="fas fa-bars"></i> Menú
+            <a href="${pageContext.request.contextPath}/usuario/ayuda" class="nav-link">
+                <i class="fas fa-question-circle"></i> Ayuda
             </a>
             <a href="${pageContext.request.contextPath}/cerrarSesion" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> 
+                <i class="fas fa-sign-out-alt"></i> Salir
             </a>
         </div>
     </nav>
@@ -84,7 +109,7 @@
         <div class="user-info row">
             <div class="col-12">
                 <img src="${usuarioFoto}" class="img-perfil" alt="Foto de perfil">
-                <span class="welcome-text">Bienvenido <span class="nombre-usuario">${usuarioNombre}</span></span><span><h2>Panel de Usuario</h2></span>
+                <span class="welcome-text">Bienvenido <span class="nombre-usuario">${usuarioNombre}</span></span>
             </div>
         </div>
 
@@ -92,194 +117,115 @@
         <section class="panel-section">
             <div class="stats-container">
                 <div class="stat-card">
+                    <i class="fas fa-warehouse panel-icon"></i>
+                    <h3>Sectores Alquilados</h3>
+                    <div class="value">2</div>
+                    <div class="label">sectores</div>
+                </div>
+                <div class="stat-card">
                     <i class="fas fa-box panel-icon"></i>
-                    <h3>Productos en Stock</h3>
+                    <h3>Espacio Total</h3>
                     <div class="value">150</div>
-                    <div class="label">unidades</div>
+                    <div class="label">m²</div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-truck panel-icon"></i>
-                    <h3>Envíos Pendientes</h3>
+                    <i class="fas fa-calendar-alt panel-icon"></i>
+                    <h3>Días Restantes</h3>
                     <div class="value">25</div>
-                    <div class="label">pedidos</div>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-tasks panel-icon"></i>
-                    <h3>Tareas Asignadas</h3>
-                    <div class="value">8</div>
-                    <div class="label">tareas</div>
+                    <div class="label">días</div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección de Acciones -->
+        <!-- Sección de Alquiler de Sectores -->
         <section class="panel-section">
-            <div class="panel-grid">
-                <div class="panel-card">
-                    <i class="fas fa-clipboard-list panel-icon"></i>
-                    <h2>Gestión de Inventario</h2>
-                    <p>Administra el stock y ubicación de productos</p>
-                    <a href="inventario" class="panel-button">
-                        <i class="fas fa-boxes"></i>Ver Inventario
-                    </a>
-                </div>
-                <div class="panel-card">
-                    <i class="fas fa-shipping-fast panel-icon"></i>
-                    <h2>Gestión de Envíos</h2>
-                    <p>Controla los envíos y recepciones</p>
-                    <a href="envios" class="panel-button">
-                        <i class="fas fa-truck-loading"></i>Gestionar Envíos
-                    </a>
-                </div>
-                <div class="panel-card">
-                    <i class="fas fa-tasks panel-icon"></i>
-                    <h2>Tareas Pendientes</h2>
-                    <p>Visualiza y gestiona tus tareas asignadas</p>
-                    <a href="tareas" class="panel-button">
-                        <i class="fas fa-list-check"></i>Ver Tareas
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección de alquiler de sectores -->
-        <section class="panel-section">
-            <div class="container mt-5">
-                <h1 class="text-center mb-5">Alquiler de Sectores de Almacén</h1>
-                
-                <div class="row">
-                    <!-- Sector A -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector A</h3>
-                            <div class="plan-price">149.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 50m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Climatizado</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Seguridad 24/7</li>
-                                <li><i class="fas fa-truck text-warning"></i> Acceso para camiones</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="1">
-                                <input type="hidden" name="total" value="149.99">
-                                <input type="hidden" name="sectorName" value="Sector A">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <!-- Sector B -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector B</h3>
-                            <div class="plan-price">199.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 75m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Climatizado</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Seguridad 24/7</li>
-                                <li><i class="fas fa-dolly text-warning"></i> Equipo de carga incluido</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="2">
-                                <input type="hidden" name="total" value="199.99">
-                                <input type="hidden" name="sectorName" value="Sector B">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <!-- Sector C -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector C</h3>
-                            <div class="plan-price">299.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 100m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Control de temperatura</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Seguridad avanzada</li>
-                                <li><i class="fas fa-users text-warning"></i> Personal de apoyo</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="3">
-                                <input type="hidden" name="total" value="299.99">
-                                <input type="hidden" name="sectorName" value="Sector C">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
+            <h2 class="section-title">Alquiler de Sectores</h2>
+            <div class="row">
+                <!-- Sector A -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="sector-card">
+                        <h3>Sector A</h3>
+                        <div class="sector-price">149.99€<small>/mes</small></div>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-warehouse"></i> 50m² de espacio</li>
+                            <li><i class="fas fa-temperature-low"></i> Climatizado</li>
+                            <li><i class="fas fa-shield-alt"></i> Seguridad 24/7</li>
+                            <li><i class="fas fa-truck"></i> Acceso para camiones</li>
+                        </ul>
+                        <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post">
+                            <input type="hidden" name="sectorId" value="1">
+                            <input type="hidden" name="total" value="149.99">
+                            <input type="hidden" name="sectorName" value="Sector A">
+                            <button type="submit" class="payment-button">
+                                <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <!-- Sector D -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector D</h3>
-                            <div class="plan-price">399.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 150m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Control ambiental total</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Seguridad biométrica</li>
-                                <li><i class="fas fa-clock text-warning"></i> Acceso 24/7</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="4">
-                                <input type="hidden" name="total" value="399.99">
-                                <input type="hidden" name="sectorName" value="Sector D">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
+                <!-- Sector B -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="sector-card">
+                        <h3>Sector B</h3>
+                        <div class="sector-price">199.99€<small>/mes</small></div>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-warehouse"></i> 75m² de espacio</li>
+                            <li><i class="fas fa-temperature-low"></i> Climatizado</li>
+                            <li><i class="fas fa-shield-alt"></i> Seguridad 24/7</li>
+                            <li><i class="fas fa-dolly"></i> Equipo de carga incluido</li>
+                        </ul>
+                        <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post">
+                            <input type="hidden" name="sectorId" value="2">
+                            <input type="hidden" name="total" value="199.99">
+                            <input type="hidden" name="sectorName" value="Sector B">
+                            <button type="submit" class="payment-button">
+                                <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                            </button>
+                        </form>
                     </div>
-                    
-                    <!-- Sector E -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector E</h3>
-                            <div class="plan-price">499.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 200m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Zona refrigerada</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Vigilancia dedicada</li>
-                                <li><i class="fas fa-robot text-warning"></i> Sistema automatizado</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="5">
-                                <input type="hidden" name="total" value="499.99">
-                                <input type="hidden" name="sectorName" value="Sector E">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
+                </div>
+
+                <!-- Sector C -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="sector-card">
+                        <h3>Sector C</h3>
+                        <div class="sector-price">299.99€<small>/mes</small></div>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-warehouse"></i> 100m² de espacio</li>
+                            <li><i class="fas fa-temperature-low"></i> Climatizado</li>
+                            <li><i class="fas fa-shield-alt"></i> Seguridad 24/7</li>
+                            <li><i class="fas fa-users"></i> Personal de apoyo</li>
+                        </ul>
+                        <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post">
+                            <input type="hidden" name="sectorId" value="3">
+                            <input type="hidden" name="total" value="299.99">
+                            <input type="hidden" name="sectorName" value="Sector C">
+                            <button type="submit" class="payment-button">
+                                <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                            </button>
+                        </form>
                     </div>
-                    
-                    <!-- Sector F -->
-                    <div class="col-md-4">
-                        <div class="plan-card">
-                            <h3>Sector F</h3>
-                            <div class="plan-price">699.99€<small>/mes</small></div>
-                            <ul class="plan-features">
-                                <li><i class="fas fa-warehouse text-primary"></i> 300m² de espacio</li>
-                                <li><i class="fas fa-temperature-low text-info"></i> Control climático premium</li>
-                                <li><i class="fas fa-shield-alt text-success"></i> Centro de control dedicado</li>
-                                <li><i class="fas fa-star text-warning"></i> Servicios VIP</li>
-                            </ul>
-                            <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post" class="payment-form">
-                                <input type="hidden" name="sectorId" value="6">
-                                <input type="hidden" name="total" value="699.99">
-                                <input type="hidden" name="sectorName" value="Sector F">
-                                <button type="submit" class="btn btn-primary btn-lg mt-3">
-                                    <i class="fab fa-paypal me-2"></i> Pagar con PayPal
-                                </button>
-                            </form>
-                        </div>
+                </div>
+
+                <!-- Sector D -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="sector-card">
+                        <h3>Sector D</h3>
+                        <div class="sector-price">399.99€<small>/mes</small></div>
+                        <ul class="sector-features">
+                            <li><i class="fas fa-warehouse"></i> 150m² de espacio</li>
+                            <li><i class="fas fa-temperature-low"></i> Climatizado</li>
+                            <li><i class="fas fa-shield-alt"></i> Seguridad 24/7</li>
+                            <li><i class="fas fa-star"></i> Servicios premium</li>
+                        </ul>
+                        <form action="${pageContext.request.contextPath}/usuario/procesarPago" method="post">
+                            <input type="hidden" name="sectorId" value="4">
+                            <input type="hidden" name="total" value="399.99">
+                            <input type="hidden" name="sectorName" value="Sector D">
+                            <button type="submit" class="payment-button">
+                                <i class="fab fa-paypal me-2"></i> Pagar con PayPal
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -293,77 +239,5 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- PayPal JS SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
-    <script>
-        // Configuración de la API
-        const API_URL = 'http://localhost:8081/api';
-        
-        // Función para manejar errores de fetch
-        async function handleFetchResponse(response) {
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Error HTTP: ${response.status} - ${errorText}`);
-            }
-            return response.json();
-        }
-        
-        // Función para cargar el estado de los sectores
-        async function cargarEstadoSectores() {
-            try {
-                const response = await fetch(`${API_URL}/sectores`);
-                const sectores = await handleFetchResponse(response);
-                
-                sectores.forEach(sector => {
-                    const button = document.querySelector(`#paypal-button-sector${sector.nombre}`);
-                    if (!button) return;
-                    
-                    const card = button.closest('.plan-card');
-                    const priceElement = card.querySelector('.plan-price');
-                    
-                    // Actualizar precio si es diferente
-                    const displayedPrice = priceElement.textContent.replace('€/mes', '').trim();
-                    if (sector.precioMensual !== displayedPrice) {
-                        priceElement.textContent = `${sector.precioMensual}€/mes`;
-                    }
-                    
-                    if (!sector.disponible) {
-                        button.style.display = 'none';
-                        card.classList.add('ocupado');
-                        if (!card.querySelector('.text-danger')) {
-                            priceElement.insertAdjacentHTML('afterend', 
-                                '<div class="text-danger mt-2">No disponible</div>');
-                        }
-                    } else {
-                        button.style.display = 'block';
-                        card.classList.remove('ocupado');
-                        const noDisponible = card.querySelector('.text-danger');
-                        if (noDisponible) noDisponible.remove();
-                    }
-                });
-            } catch (error) {
-                console.error('Error al cargar estado de sectores:', error);
-                mostrarError('Error al cargar el estado de los sectores. Por favor, recarga la página.');
-            }
-        }
-
-        // Función para mostrar mensajes de error
-        function mostrarError(mensaje) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'alert alert-danger alert-dismissible fade show';
-            errorDiv.innerHTML = `
-                ${mensaje}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-            document.querySelector('.container').prepend(errorDiv);
-        }
-
-        // Cargar estado inicial y configurar actualización periódica
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarEstadoSectores();
-            // Actualizar cada 30 segundos
-            setInterval(cargarEstadoSectores, 30000);
-        });
-    </script>
 </body>
 </html>
