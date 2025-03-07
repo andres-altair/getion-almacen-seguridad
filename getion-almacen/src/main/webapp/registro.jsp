@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.time.Year" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.time.Year"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,124 +18,161 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- Google Sign-In API -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        .separator {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .separator::before,
-        .separator::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        .separator span {
-            padding: 0 10px;
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
-<body>
-    <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <div class="navbar-logo">
-                <img src="${pageContext.request.contextPath}/img/logo.svg" alt="EnvioGo" class="img-fluid">
-            </div>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/acceso">Registro</a>
-            <a href="${pageContext.request.contextPath}/inicio" class="btn home-btn ms-auto">
-                <i class="fas fa-home"></i> Inicio
-            </a>
-        </div>
-    </nav>
-
-    <!-- Contenedor Principal -->
-    <div class="container">
+<body class="d-flex flex-column min-vh-100">
+    <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class="card shadow-sm my-5">
+            <div class="col-md-8">
+                <div class="card shadow">
                     <div class="card-body p-4">
-                        <h4 class="text-center mb-4">Registro de Usuario</h4>
+                        <h3 class="text-center mb-4">Registro de Usuario</h3>
                         
-                        <!-- Registro con Google -->
-                        <div class="text-center mb-4">
-                            <div id="g_id_onload"
-                                 data-client_id="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"
-                                 data-context="signup"
-                                 data-ux_mode="popup"
-                                 data-callback="handleCredentialResponse"
-                                 data-auto_prompt="false">
-                            </div>
-                            <div class="g_id_signin"
-                                 data-type="standard"
-                                 data-shape="rectangular"
-                                 data-theme="outline"
-                                 data-text="signup_with"
-                                 data-size="large"
-                                 data-logo_alignment="left"
-                                 data-width="100%">
-                            </div>
-                        </div>
-
-                        <div class="separator">
-                            <span>O regístrate con tu correo</span>
-                        </div>
-
-                        <!-- Formulario de registro tradicional -->
-                        <form action="${pageContext.request.contextPath}/registro" method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="nombreCompleto" class="form-label">Nombre completo</label>
-                                <input type="text" class="form-control" name="nombreCompleto" id="nombreCompleto" 
-                                       value="${requestScope.nombreCompleto}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="movil" class="form-label">Móvil (Opcional)</label>
-                                <input type="tel" class="form-control" name="movil" id="movil" 
-                                       value="${requestScope.movil}" pattern="[0-9]{9,15}"
-                                       maxlength="15"
-                                       placeholder="Ej: 612345678 +34612345678"
-                                       title="Introduce un número de móvil válido (entre 9 y 15 dígitos)">
-                                <div class="form-text">Formato: 612345678 (entre 9 y 15 dígitos)</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="correoElectronico" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" 
-                                       value="${requestScope.correoElectronico}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contrasena" class="form-label">Contraseña</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" name="contrasena" id="contrasena" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="togglePasswordCrear" onclick="verContasena('contrasena', this)">
-                                        <i class="fas fa-eye" id="eyeIconCrear"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="foto" class="form-label">Foto</label>
-                                <input type="file" class="form-control" name="foto" id="foto" accept="image/*" onchange="mostrarVistaPrevia(event)">
-                                <!-- Vista previa de la imagen -->
-                                <div class="mt-3 text-center">
-                                    <img id="vistaPrevia" src="#" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
-                                </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Registrar</button>
-                            </div>
-                        </form>
-
-                        <c:if test="${not empty requestScope.error}">
-                            <div class="alert alert-danger mt-3" role="alert">
-                                ${requestScope.error}
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger" role="alert">
+                                ${error}
                             </div>
                         </c:if>
+                        
+                        <form action="registro" method="post" enctype="multipart/form-data" 
+                              class="needs-validation" novalidate id="formularioRegistro">
+                            <!-- Nombre Completo -->
+                            <div class="form-group mb-3">
+                                <label for="nombreCompleto" class="form-label">Nombre Completo:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" 
+                                           id="nombreCompleto"
+                                           name="nombreCompleto"
+                                           class="form-control" 
+                                           required
+                                           minlength="3"
+                                           maxlength="100"
+                                           placeholder="Ingresa tu nombre completo"
+                                           value="${requestScope.nombreCompleto}">
+                                    <div class="invalid-feedback">
+                                        El nombre debe tener entre 3 y 100 caracteres.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Correo Electrónico -->
+                            <div class="form-group mb-3">
+                                <label for="correoElectronico" class="form-label">Correo Electrónico:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" 
+                                           id="correoElectronico"
+                                           name="correoElectronico"
+                                           class="form-control" 
+                                           required
+                                           placeholder="Ingresa tu correo electrónico"
+                                           value="${requestScope.correoElectronico}">
+                                    <div class="invalid-feedback">
+                                        Por favor, ingresa un correo electrónico válido.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Móvil -->
+                            <div class="form-group mb-3">
+                                <label for="movil" class="form-label">Teléfono Móvil:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </span>
+                                    <input type="tel" 
+                                           id="movil"
+                                           name="movil"
+                                           class="form-control" 
+                                           required
+                                           pattern="[0-9]{9}"
+                                           placeholder="Ingresa tu número móvil"
+                                           value="${requestScope.movil}">
+                                    <div class="invalid-feedback">
+                                        Por favor, ingresa un número móvil válido (9 dígitos).
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="form-group mb-3">
+                                <label for="contrasena" class="form-label">Contraseña:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" 
+                                           id="contrasena"
+                                           name="contrasena"
+                                           class="form-control" 
+                                           required
+                                           minlength="8"
+                                           placeholder="Ingresa tu contraseña">
+                                    <button class="btn btn-outline-secondary" type="button" id="mostrarContrasena">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">
+                                        La contraseña debe tener al menos 8 caracteres.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div class="form-group mb-3">
+                                <label for="confirmarContrasena" class="form-label">Confirmar Contraseña:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" 
+                                           id="confirmarContrasena"
+                                           class="form-control" 
+                                           required
+                                           minlength="8"
+                                           placeholder="Confirma tu contraseña">
+                                    <button class="btn btn-outline-secondary" type="button" id="mostrarConfirmarContrasena">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">
+                                        Las contraseñas no coinciden.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Foto -->
+                            <div class="form-group mb-3">
+                                <label for="foto" class="form-label">Foto de Perfil:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-image"></i>
+                                    </span>
+                                    <input type="file" 
+                                           id="foto"
+                                           name="foto"
+                                           class="form-control" 
+                                           accept="image/*">
+                                    <div class="invalid-feedback">
+                                        Por favor, selecciona una imagen válida.
+                                    </div>
+                                </div>
+                                <div id="previewFoto" class="mt-2 text-center d-none">
+                                    <img src="" alt="Vista previa" class="img-thumbnail" style="max-width: 200px;">
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-user-plus me-2"></i>Registrarse
+                                </button>
+                                <a href="${pageContext.request.contextPath}/acceso" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Volver al Inicio de Sesión
+                                </a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -143,46 +181,12 @@
 
     <!-- Footer -->
     <footer class="container-fluid py-3 text-center mt-auto">
-        <p>&copy; <%= Year.now() %> EnvioGo - Todos los derechos reservados</p>
+        <p>&copy; <%=Year.now()%> Sistema de Gestión de Almacén - Todos los derechos reservados</p>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
+    <!-- Script de validación -->
     <script src="${pageContext.request.contextPath}/js/registro.js"></script>
-    
-    <script>
-        function handleCredentialResponse(response) {
-            fetch('${pageContext.request.contextPath}/GoogleRegistroServlet', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'idToken=' + response.credential
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        if (text.includes("Ya existe una cuenta de Google")) {
-                            // Si ya existe cuenta de Google, redirigir al login
-                            window.location.href = '${pageContext.request.contextPath}/acceso';
-                        } else {
-                            throw new Error(text);
-                        }
-                    });
-                }
-                return response.text();
-            })
-            .then(data => {
-                if (data === "Registro exitoso") {
-                    window.location.href = '${pageContext.request.contextPath}/inicio';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert(error.message || 'Error al registrarse con Google');
-            });
-        }
-    </script>
 </body>
 </html>

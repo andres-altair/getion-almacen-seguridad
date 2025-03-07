@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Base64;
 
 import com.andres.gestionalmacen.dtos.CrearUsuDto;
+import com.andres.gestionalmacen.dtos.UsuarioDto;
 import com.andres.gestionalmacen.servicios.UsuarioServicio;
 import com.andres.gestionalmacen.utilidades.EmailUtil;
 import com.andres.gestionalmacen.utilidades.EncriptarUtil;
@@ -21,45 +22,54 @@ import com.andres.gestionalmacen.utilidades.ImagenUtil;
 @WebServlet("/registro")
 @MultipartConfig
 public class RegistroServlet extends HttpServlet {
-    private final UsuarioServicio usuarioServicio;
+    private final UsuarioServicio servicioUsuario;
     
     public RegistroServlet() {
-        this.usuarioServicio = new UsuarioServicio();
+        this.servicioUsuario = new UsuarioServicio();
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta)
             throws ServletException, IOException {
         GestorRegistros.sistemaInfo("Acceso a página de registro");
-        request.getRequestDispatcher("/registro.jsp").forward(request, response);
+        peticion.getRequestDispatcher("/registro.jsp").forward(peticion, respuesta);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta)
             throws ServletException, IOException {
         try {
             // Obtener datos del formulario
-            String nombreCompleto = request.getParameter("nombreCompleto");
-            String correoElectronico = request.getParameter("correoElectronico");
-            String movil = request.getParameter("movil");
-            String contrasena = request.getParameter("contrasena");
-            Long rolId = 4L;
+            String nombreCompleto = peticion.getParameter("nombreCompleto");
+            String correoElectronico = peticion.getParameter("correoElectronico");
+            String movil = peticion.getParameter("movil");
+            String contrasena = peticion.getParameter("contrasena");
+            Long rolId = 4L; // Usuario normal
+
+            // Verificar si el usuario ya existe
+            UsuarioDto correoExistente = servicioUsuario.buscarPorCorreo(correoElectronico);
+            if (correoExistente != null ) {
+                GestorRegistros.sistemaWarning("Intento de registro con correo existente: " + correoElectronico);
+                peticion.getSession().setAttribute("error", "Ya existe una cuenta con ese correo electrónico.");
+                respuesta.sendRedirect(peticion.getContextPath() + "/registro");
+                return;
+            }
 
             String contrasenaEncriptada = EncriptarUtil.contraseñaHash(contrasena);
 
             // Procesar la foto si existe
-            Part fotoPart = request.getPart("foto");
-            byte[] fotoBytes = null;
-            if (fotoPart != null && fotoPart.getSize() > 0) {
-                fotoBytes = fotoPart.getInputStream().readAllBytes();
+            Part parteFoto = peticion.getPart("foto");
+            byte[] bytesFoto = null;
+            if (parteFoto != null && parteFoto.getSize() > 0) {
+                bytesFoto = parteFoto.getInputStream().readAllBytes();
                 try {
-                    String nombreArchivo = fotoPart.getSubmittedFileName();
-                    ImagenUtil.verificarImagen(fotoBytes, nombreArchivo);
-                } catch (IllegalArgumentException e) {
-                    GestorRegistros.sistemaWarning("Error al procesar foto para usuario " + correoElectronico + ": " + e.getMessage());
-                    request.getSession().setAttribute("error", 
+                    String nombreArchivo = parteFoto.getSubmittedFileName();
+                    ImagenUtil.verificarImagen(bytesFoto, nombreArchivo);
+                } catch (IllegalArgumentException error) {
+                    GestorRegistros.sistemaWarning("Error al procesar foto para usuario " + correoElectronico + ": " + error.getMessage());
+                    peticion.getSession().setAttribute("error", 
                         "La imagen debe tener un formato válido (JPEG, PNG, GIF, BMP, WEBP) y la extensión debe coincidir con el tipo de archivo.");
-                    response.sendRedirect(request.getContextPath() + "/registro");
+                    respuesta.sendRedirect(peticion.getContextPath() + "/registro");
                     return;
                 }
             }
@@ -71,25 +81,26 @@ public class RegistroServlet extends HttpServlet {
             nuevoUsuario.setCorreoElectronico(correoElectronico);
             nuevoUsuario.setContrasena(contrasenaEncriptada);
             nuevoUsuario.setRolId(rolId);
-            nuevoUsuario.setFoto(fotoBytes);
+            nuevoUsuario.setFoto(bytesFoto);
             nuevoUsuario.setCorreoConfirmado(false); // Por defecto, no está confirmado
             nuevoUsuario.setGoogle(false); // Los usuarios registrados no son de Google
 
             // Guardar el usuario
-            usuarioServicio.crearUsuario(nuevoUsuario);
+            servicioUsuario.crearUsuario(nuevoUsuario);
 
             // Generar y enviar confirmación por correo
-            String token = EmailUtil.generarToken(correoElectronico);
-            EmailUtil.enviarCorreoConfirmacion(correoElectronico, token);
+            String tokenConfirmacion = EmailUtil.generarToken(correoElectronico);
+            EmailUtil.enviarCorreoConfirmacion(correoElectronico, tokenConfirmacion);
             
             // Redirigir con mensaje de éxito
-            request.getSession().setAttribute("mensaje", "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.");
-            response.sendRedirect(request.getContextPath() + "/acceso");
+            peticion.getSession().setAttribute("mensaje", 
+                "Te hemos enviado un correo de confirmación. Por favor, revisa tu bandeja de entrada.");
+            respuesta.sendRedirect(peticion.getContextPath() + "/acceso");
 
-        } catch (Exception e) {
-            GestorRegistros.sistemaError("Error en el registro de usuario - Error: " + e.getMessage());
-            request.getSession().setAttribute("error", "Error en el registro: " + e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/registro");
+        } catch (Exception error) {
+            GestorRegistros.sistemaError("Error en el registro de usuario - Error: " + error.getMessage());
+            peticion.getSession().setAttribute("error", "Error en el registro: " + error.getMessage());
+            respuesta.sendRedirect(peticion.getContextPath() + "/registro");
         }
     }
 }
