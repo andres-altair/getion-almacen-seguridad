@@ -217,3 +217,22 @@
 2025-03-07 21:07:44 [http-nio-8080-exec-46] INFO  - Usuario creado exitosamente: 6666673@gmail.com
 2025-03-07 21:07:44 [http-nio-8080-exec-46] INFO  - Acceso a la gestión de usuarios
 2025-03-07 21:07:50 [http-nio-8080-exec-47] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:08:52 [http-nio-8080-exec-43] INFO  - Cierre de sesión exitoso
+2025-03-07 21:12:07 [http-nio-8080-exec-42] INFO  - Acceso exitoso al sistema
+2025-03-07 21:12:07 [http-nio-8080-exec-44] INFO  - Acceso al panel de administración
+2025-03-07 21:12:08 [http-nio-8080-exec-47] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:12:13 [http-nio-8080-exec-48] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:13:30 [http-nio-8080-exec-49] INFO  - Iniciando creación de usuario: 222@222.com con rol: 2
+2025-03-07 21:13:31 [http-nio-8080-exec-49] INFO  - Usuario creado exitosamente: 222@222.com
+2025-03-07 21:13:31 [http-nio-8080-exec-49] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:13:36 [http-nio-8080-exec-50] INFO  - Acceso a la gestión de usuarios
+2025-03-07 21:13:38 [http-nio-8080-exec-42] INFO  - Cierre de sesión exitoso
+2025-03-07 22:12:05 [http-nio-8080-exec-50] INFO  - Acceso exitoso al sistema
+2025-03-07 22:12:05 [http-nio-8080-exec-43] INFO  - Acceso al panel de administración
+2025-03-07 22:12:06 [http-nio-8080-exec-48] INFO  - Acceso a la gestión de usuarios
+2025-03-07 22:12:12 [http-nio-8080-exec-49] INFO  - Acceso a la gestión de usuarios
+2025-03-07 22:13:14 [http-nio-8080-exec-46] INFO  - Iniciando creación de usuario: 333@333.com con rol: 3
+2025-03-07 22:13:15 [http-nio-8080-exec-46] INFO  - Usuario creado exitosamente: 333@333.com
+2025-03-07 22:13:15 [http-nio-8080-exec-46] INFO  - Acceso a la gestión de usuarios
+2025-03-07 22:13:20 [http-nio-8080-exec-44] INFO  - Acceso a la gestión de usuarios
+2025-03-07 22:13:21 [http-nio-8080-exec-50] INFO  - Cierre de sesión exitoso

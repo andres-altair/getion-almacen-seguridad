@@ -1,0 +1,2 @@
+2025-03-07 22:13:27 [http-nio-8080-exec-41] INFO  - Acceso exitoso al sistema
+2025-03-07 22:13:27 [http-nio-8080-exec-49] INFO  - Panel de operario cargado exitosamente

@@ -23,3 +23,5 @@
 2025-03-07 20:48:11 [http-nio-8080-exec-23] INFO  - Cierre de sesión exitoso
 2025-03-07 21:06:27 [http-nio-8080-exec-37] INFO  - Usuario de Google autenticado correctamente
 2025-03-07 21:06:29 [http-nio-8080-exec-42] INFO  - Cierre de sesión exitoso
+2025-03-07 21:09:12 [http-nio-8080-exec-47] INFO  - Usuario de Google autenticado correctamente
+2025-03-07 21:09:12 [http-nio-8080-exec-45] INFO  - Cierre de sesión exitoso
