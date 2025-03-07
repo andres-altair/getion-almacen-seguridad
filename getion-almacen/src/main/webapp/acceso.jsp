@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Script de Google -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <!-- Barra de Navegación -->
@@ -62,7 +64,21 @@
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                                 <!-- Botón de Google -->
-                                <div id="g_id_signin" class="d-grid mt-3"></div>
+                                <div id="g_id_onload"
+                                     data-client_id="478375949160-lf7nntvl7hnohvdrt2rjct7miph9n2k3.apps.googleusercontent.com"
+                                     data-context="signin"
+                                     data-callback="manejarRespuestaGoogle"
+                                     data-auto_prompt="false">
+                                </div>
+                                <div class="g_id_signin"
+                                     data-type="standard"
+                                     data-size="large"
+                                     data-theme="outline"
+                                     data-text="sign_in_with"
+                                     data-shape="rectangular"
+                                     data-logo_alignment="left"
+                                     data-width="100%">
+                                </div>
                             </div>
                         </form>
                         <div class="links">

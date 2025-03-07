@@ -38,12 +38,10 @@ public class GestorRegistros {
      */
     public static void inicializar(ServletContext contexto) {
         contextoServlet = contexto;
-        // No necesitamos crear directorios ni archivos
-        // logback.xml se encarga de todo eso
         sistemaInfo("Sistema de logs inicializado");
     }
 
-    // Métodos para logs del sistema - van al archivo SISTEMA_[fecha]_registro.txt
+    // Métodos para logs del sistema
     /**
      * Registra un mensaje de depuración en el sistema.
      * 
@@ -80,31 +78,53 @@ public class GestorRegistros {
         loggerSistema.error(mensaje);
     }
 
-    // Métodos para logs de usuario - van al archivo [userId]_[fecha]_registro.txt
+    // Métodos para logs de usuario
     /**
-     * Verifica si el ID de usuario es válido.
+     * Registra un mensaje de depuración para un usuario.
      * 
-     * @param idUsuario El ID del usuario
-     * @return True si el ID es válido, false de lo contrario
+     * @param mensaje El mensaje a registrar
      */
-    private static boolean isValidUserId(Long idUsuario) {
-        return idUsuario != null && idUsuario > 0;
+    public static void usuarioDebug(String mensaje) {
+        loggerUsuarios.debug(mensaje);
     }
 
     /**
-     * Registra un mensaje de depuración para un usuario específico.
+     * Registra un mensaje de información para un usuario.
      * 
-     * @param idUsuario El ID del usuario
      * @param mensaje El mensaje a registrar
      */
-    public static void debug(Long idUsuario, String mensaje) {
-        if (!isValidUserId(idUsuario)) {
-            sistemaDebug(mensaje);
-            return;
-        }
+    public static void usuarioInfo(String mensaje) {
+        loggerUsuarios.info(mensaje);
+    }
+
+    /**
+     * Registra un mensaje de advertencia para un usuario.
+     * 
+     * @param mensaje El mensaje a registrar
+     */
+    public static void usuarioWarning(String mensaje) {
+        loggerUsuarios.warn(mensaje);
+    }
+
+    /**
+     * Registra un mensaje de error para un usuario.
+     * 
+     * @param mensaje El mensaje a registrar
+     */
+    public static void usuarioError(String mensaje) {
+        loggerUsuarios.error(mensaje);
+    }
+
+    // Métodos para logs de usuario con ID específico
+    /**
+     * Registra un mensaje de depuración para un usuario específico.
+     * 
+     * @param userId El ID del usuario
+     * @param mensaje El mensaje a registrar
+     */
+    public static void debug(Long userId, String mensaje) {
         try {
-            // Usar userId como discriminador para el SiftingAppender
-            MDC.put("userId", String.valueOf(idUsuario));
+            MDC.put("userId", userId.toString());
             loggerUsuarios.debug(mensaje);
         } finally {
             MDC.remove("userId");
@@ -114,17 +134,12 @@ public class GestorRegistros {
     /**
      * Registra un mensaje de información para un usuario específico.
      * 
-     * @param idUsuario El ID del usuario
+     * @param userId El ID del usuario
      * @param mensaje El mensaje a registrar
      */
-    public static void info(Long idUsuario, String mensaje) {
-        if (!isValidUserId(idUsuario)) {
-            sistemaInfo(mensaje);
-            return;
-        }
+    public static void info(Long userId, String mensaje) {
         try {
-            // Usar userId como discriminador para el SiftingAppender
-            MDC.put("userId", String.valueOf(idUsuario));
+            MDC.put("userId", userId.toString());
             loggerUsuarios.info(mensaje);
         } finally {
             MDC.remove("userId");
@@ -134,17 +149,12 @@ public class GestorRegistros {
     /**
      * Registra un mensaje de advertencia para un usuario específico.
      * 
-     * @param idUsuario El ID del usuario
+     * @param userId El ID del usuario
      * @param mensaje El mensaje a registrar
      */
-    public static void warning(Long idUsuario, String mensaje) {
-        if (!isValidUserId(idUsuario)) {
-            sistemaWarning(mensaje);
-            return;
-        }
+    public static void warning(Long userId, String mensaje) {
         try {
-            // Usar userId como discriminador para el SiftingAppender
-            MDC.put("userId", String.valueOf(idUsuario));
+            MDC.put("userId", userId.toString());
             loggerUsuarios.warn(mensaje);
         } finally {
             MDC.remove("userId");
@@ -154,17 +164,12 @@ public class GestorRegistros {
     /**
      * Registra un mensaje de error para un usuario específico.
      * 
-     * @param idUsuario El ID del usuario
+     * @param userId El ID del usuario
      * @param mensaje El mensaje a registrar
      */
-    public static void error(Long idUsuario, String mensaje) {
-        if (!isValidUserId(idUsuario)) {
-            sistemaError(mensaje);
-            return;
-        }
+    public static void error(Long userId, String mensaje) {
         try {
-            // Usar userId como discriminador para el SiftingAppender
-            MDC.put("userId", String.valueOf(idUsuario));
+            MDC.put("userId", userId.toString());
             loggerUsuarios.error(mensaje);
         } finally {
             MDC.remove("userId");

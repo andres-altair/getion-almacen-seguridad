@@ -3,3 +3,13 @@
 2025-03-06 23:48:09 [http-nio-8080-exec-6] INFO  - Panel de usuario cargado exitosamente
 2025-03-07 00:29:04 [http-nio-8080-exec-10] INFO  - Panel de usuario cargado exitosamente
 2025-03-07 00:44:58 [http-nio-8080-exec-9] INFO  - Panel de usuario cargado exitosamente
+2025-03-07 15:34:11 [http-nio-8080-exec-7] INFO  - Foto de perfil actualizada
+2025-03-07 15:34:12 [http-nio-8080-exec-7] INFO  - Perfil actualizado correctamente
+2025-03-07 15:34:13 [http-nio-8080-exec-7] INFO  - Sesión iniciada correctamente
+2025-03-07 15:34:34 [http-nio-8080-exec-1] INFO  - Foto de perfil actualizada
+2025-03-07 15:34:35 [http-nio-8080-exec-1] INFO  - Perfil actualizado correctamente
+2025-03-07 15:34:35 [http-nio-8080-exec-1] INFO  - Sesión iniciada correctamente
+2025-03-07 15:38:46 [http-nio-8080-exec-4] INFO  - Foto de perfil actualizada
+2025-03-07 15:38:47 [http-nio-8080-exec-4] INFO  - Perfil actualizado correctamente
+2025-03-07 15:38:48 [http-nio-8080-exec-4] INFO  - Sesión iniciada correctamente
+2025-03-07 15:50:48 [http-nio-8080-exec-7] INFO  - Usuario de Google autenticado correctamente

@@ -21,6 +21,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 
+import org.slf4j.MDC;
+
 /**
  * Servlet que maneja la autenticación de usuarios mediante Google Sign-In.
  * Verifica tokens de Google, gestiona usuarios existentes y nuevos, y mantiene
@@ -92,92 +94,46 @@ public class GoogleAccesoServlet extends HttpServlet {
             GoogleIdToken tokenGoogle = verificador.verify(tokenId);
             if (tokenGoogle == null) {
                 GestorRegistros.sistemaWarning("Token de Google inválido");
-                enviarError(respuesta, HttpServletResponse.SC_UNAUTHORIZED, "Token de ID inválido");
+                enviarError(respuesta, HttpServletResponse.SC_UNAUTHORIZED, "Token de Google inválido");
                 return;
             }
-            
-            // Obtener información del usuario
-            GoogleIdToken.Payload datosToken = tokenGoogle.getPayload();
-            String correoElectronico = datosToken.getEmail();
-            
-            GestorRegistros.sistemaInfo("Intento de acceso con Google: " + correoElectronico);
-            
-            // Verificar que el correo esté verificado
-            if (!Boolean.TRUE.equals(datosToken.getEmailVerified())) {
-                GestorRegistros.sistemaWarning("Correo de Google no verificado: " + correoElectronico);
-                enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, "El correo electrónico de Google no está verificado");
-                return;
-            }
-            
-            String nombreCompleto = (String) datosToken.get("name");
-            String urlFoto = (String) datosToken.get("picture");
-            
-            // Verificar si el usuario existe
+
+            GoogleIdToken.Payload payload = tokenGoogle.getPayload();
+            String correoElectronico = payload.getEmail();
+
+            // Buscar usuario por correo
             UsuarioDto usuario = servicioUsuario.buscarPorCorreo(correoElectronico);
             
             if (usuario == null) {
-                GestorRegistros.sistemaWarning("Usuario de Google no encontrado: " + correoElectronico);
+                // Usuario no existe, redirigir a registro
+                GestorRegistros.sistemaInfo("Usuario de Google no encontrado: " + correoElectronico);
                 enviarError(respuesta, HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
                 return;
             }
-            
-            GestorRegistros.sistemaInfo("Usuario de Google encontrado - ID: " + usuario.getId());
-            
-            // Verificar que sea un usuario de Google
-            if (!usuario.isGoogle()) {
-                GestorRegistros.sistemaWarning("Intento de acceso Google para cuenta normal: " + correoElectronico);
-                enviarError(respuesta, HttpServletResponse.SC_BAD_REQUEST, 
-                    "Esta cuenta no fue creada con Google. Por favor, inicie sesión con su correo y contraseña.");
+
+            // Verificar que el usuario sea de tipo Google y tenga rol de usuario (4)
+            if (!usuario.isGoogle() || usuario.getRolId() != 4) {
+                GestorRegistros.sistemaWarning("Intento de acceso con cuenta no Google o rol incorrecto: " + correoElectronico);
+                enviarError(respuesta, HttpServletResponse.SC_FORBIDDEN, "Acceso no permitido");
                 return;
             }
+
+            // Logging con ID de usuario
+            GestorRegistros.info(usuario.getId(), "Usuario de Google autenticado correctamente");
+
+            // Crear sesión
+            HttpSession sesion = peticion.getSession();
+            sesion.setAttribute("usuario", usuario);
             
-            // Crear DTO para actualización
-            CrearUsuDto usuarioActualizar = new CrearUsuDto();
-            usuarioActualizar.setId(usuario.getId());
-            usuarioActualizar.setNombreCompleto(nombreCompleto);
-            usuarioActualizar.setCorreoElectronico(correoElectronico);
-            usuarioActualizar.setGoogle(true);
-            usuarioActualizar.setCorreoConfirmado(true);
-            usuarioActualizar.setRolId(usuario.getRolId());
-            usuarioActualizar.setMovil(usuario.getMovil());
-            
-            // Actualizar foto si hay una nueva
-            if (urlFoto != null && !urlFoto.isEmpty()) {
-                try {
-                    byte[] bytesFoto = descargarFoto(urlFoto);
-                    usuarioActualizar.setFoto(bytesFoto);
-                    GestorRegistros.info(usuario.getId(), "Foto de perfil actualizada");
-                } catch (Exception error) {
-                    GestorRegistros.warning(usuario.getId(), "Error al actualizar foto de perfil: " + error.getMessage());
-                }
-            }
-            
-            try {
-                // Actualizar usuario
-                CrearUsuDto usuarioActualizado = servicioUsuario.actualizarUsuario(usuario.getId(), usuarioActualizar);
-                GestorRegistros.info(usuario.getId(), "Perfil actualizado correctamente");
-                
-                // Obtener usuario actualizado completo
-                UsuarioDto usuarioCompleto = servicioUsuario.buscarPorCorreo(correoElectronico);
-                
-                // Establecer el usuario en la sesión
-                HttpSession sesion = peticion.getSession();
-                sesion.setAttribute("usuario", usuarioCompleto);
-                sesion.setAttribute("mensaje", "¡Bienvenido de nuevo!");
-                GestorRegistros.info(usuario.getId(), "Sesión iniciada correctamente");
-                
-                // Enviar respuesta exitosa
-                respuesta.setStatus(HttpServletResponse.SC_OK);
-                respuesta.getWriter().write("Inicio de sesión exitoso");
-                
-            } catch (Exception error) {
-                GestorRegistros.error(usuario.getId(), "Error al actualizar perfil: " + error.getMessage());
-                enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + error.getMessage());
-            }
-            
-        } catch (Exception error) {
-            GestorRegistros.sistemaError("Error en autenticación Google: " + error.getMessage());
-            enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al iniciar sesión: " + error.getMessage());
+            GestorRegistros.sistemaInfo("Acceso exitoso con Google para: " + correoElectronico);
+            respuesta.getWriter().write("OK");
+
+        } catch (Exception e) {
+            GestorRegistros.sistemaError("Error en autenticación Google: " + e.getMessage());
+            enviarError(respuesta, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error en autenticación");
+        } finally {
+            // Limpiar MDC
+            MDC.remove("userId");
         }
     }
     

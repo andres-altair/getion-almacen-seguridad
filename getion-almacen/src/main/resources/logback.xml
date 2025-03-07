@@ -45,7 +45,8 @@
                 <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
                     <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
                         <expression>
-                            return !("unknown".equals(userId) || "undefined".equals(userId));
+                            String userId = mdc.get("userId");
+                            return userId != null &amp;&amp; !userId.equals("unknown") &amp;&amp; !userId.equals("undefined");
                         </expression>
                     </evaluator>
                     <OnMismatch>DENY</OnMismatch>
